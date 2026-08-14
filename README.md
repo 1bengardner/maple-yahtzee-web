@@ -1,3 +1,7 @@
+This is a web adaptation of *Maple Yahtzee*. Original README.md below.
+
+---
+
 # Maple Yahtzee
 
 ![image](https://user-images.githubusercontent.com/6226898/61098573-78e0e900-a42d-11e9-99f7-a794ed74429e.png)

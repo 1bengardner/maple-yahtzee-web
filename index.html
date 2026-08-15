@@ -134,6 +134,20 @@
     #mainframe {
       border: 7px solid peachpuff;
       border-radius: 8px;
+      transition: transform 0.5s cubic-bezier(0, 0, 0.2, 1);
+    }
+    #mainframe.loading {
+      filter: contrast(0.5);
+      animation: spin 2s ease infinite;
+    }
+    
+    @keyframes spin {
+      from {
+        transform: rotate3d(1, 1, 1, 0deg);
+      }
+      to {
+        transform: rotate3d(3, 8, 10, 360deg);
+      }
     }
   </style>
 </head>
@@ -201,10 +215,15 @@
   </div>
   <script>
     function showLoading() {
-      document.getElementById("mainframe").style.filter = "contrast(0.5)";
+      document.getElementById("mainframe").classList.add("loading");
     }
     function doneLoading() {
-      document.getElementById("mainframe").style.removeProperty("filter");
+      const mf = document.getElementById("mainframe");
+      requestAnimationFrame(() => {
+        mf.style.transform = getComputedStyle(mf).transform;
+        mf.classList.remove("loading");
+        requestAnimationFrame(() => { mf.style.transform = "rotate3d(0, 0, 0, 0deg)"; });
+      });
     }
     function prepareYahtzee() {
       const buttons = [

@@ -378,6 +378,8 @@ def resetGame():
     subTotal=0
     bonusYahtzee=False
     subTotalBonus=False
+    yahtzeeCount=0
+    usedYahtzee=False
 
     yobject.rollButton.setState("normal")
     yobject.onesButton.setState("normal")
@@ -400,9 +402,6 @@ def resetGame():
     yobject.subTotalLabel.setText("Sub Total: "+str(subTotal), fg="black")
     
     diceReset()
-    
-    yahtzeeCount=0
-    usedYahtzee=False
 
 #main
 rollCount = 0

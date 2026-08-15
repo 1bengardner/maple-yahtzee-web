@@ -9,7 +9,7 @@
       font-family: MS Sans Serif, sans-serif;
       font-size: 11px;
     }
-    button, .hold {
+    button, label.hold {
       border: 2px outset;
     }
     button:active:not(:disabled), input.hold:checked + .hold {
@@ -42,15 +42,17 @@
       background-color: lightgray;
     }
     input.hold {
+      appearance: none;
       position: absolute;
-      visibility: hidden;
+      inset: 0;
     }
-    .hold {
+    label.hold {
       padding: 8px;
       color: whitesmoke;
       background-color: firebrick;
       text-transform: uppercase;
       text-align: center;
+      flex: 1;
     }
     input.hold:checked + .hold {
       background-color: salmon;
@@ -63,7 +65,13 @@
       background-color: firebrick;
       width: 128px;
       height: 36px;
-      font-weight: bold;
+    }
+    .container {
+      display: flex;
+      position: relative;
+    }
+    #rollButton {
+      color: whitesmoke;
     }
     #selectButton {
       background-color: yellow;
@@ -156,11 +164,11 @@
       <img id="die4" class="die" src="cards.gif">
       <img id="die5" class="die" src="cards.gif">
       
-      <input type="checkbox" id="dieHold1" class="hold"></button><label for="dieHold1" class="hold">Hold</label>
-      <input type="checkbox" id="dieHold2" class="hold"></button><label for="dieHold2" class="hold">Hold</label>
-      <input type="checkbox" id="dieHold3" class="hold"></button><label for="dieHold3" class="hold">Hold</label>
-      <input type="checkbox" id="dieHold4" class="hold"></button><label for="dieHold4" class="hold">Hold</label>
-      <input type="checkbox" id="dieHold5" class="hold"></button><label for="dieHold5" class="hold">Hold</label>
+      <span class="container"><input type="checkbox" id="dieHold1" class="hold"></button><label for="dieHold1" class="hold">Hold</label></span>
+      <span class="container"><input type="checkbox" id="dieHold2" class="hold"></button><label for="dieHold2" class="hold">Hold</label></span>
+      <span class="container"><input type="checkbox" id="dieHold3" class="hold"></button><label for="dieHold3" class="hold">Hold</label></span>
+      <span class="container"><input type="checkbox" id="dieHold4" class="hold"></button><label for="dieHold4" class="hold">Hold</label></span>
+      <span class="container"><input type="checkbox" id="dieHold5" class="hold"></button><label for="dieHold5" class="hold">Hold</label></span>
       
       <div style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr 1fr; place-items: center; margin-top: 8px; row-gap: 8px;">
         <fieldset>
@@ -303,7 +311,7 @@
     }
     function attachHandlers() {
       document.getElementById("quitButton").addEventListener("click", () => {
-        window.location = "https://yaouw.com";
+        window.location = "/";
       });
       document.getElementById("rollButton").addEventListener("click", () => {
         pyodide.globals.get("roll")();

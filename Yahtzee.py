@@ -2,18 +2,8 @@ from js import yobject
 import random
 
 def gameOver():
-    # top = Toplevel(bg="orange")
-    # top.title("Game Over")
-    # topFrame = Frame(top, bg="orange", relief="ridge", bd=5)
-    # gameOverTitle = Label(topFrame, text="Game Over", font=("arial", 20), bg="orange")
-    # gameOverText = Label(topFrame, text="You finished the game with "+str(totalScore)+" points and "+str(yahtzeeCount)+" yahtzees.", bg="orange")
-    # okButton = Button(topFrame, text="OK", bg="yellow", command=top.destroy)
-    # topFrame.grid()
-    # gameOverTitle.grid(row=1, column=1, pady=10)
-    # gameOverText.grid(row=2, column=1, pady=5, padx=10)
-    # okButton.grid(row=3, column=1, ipadx=20, pady=20)
-    yobject.gameOver("You finished the game with "+str(totalScore)+" points and "+str(yahtzeeCount)+" yahtzees.")
-    resetGame()
+    yobject.rollButton.setState("disabled")
+    yobject.gameOver(totalScore, yahtzeeCount, subTotalBonus)
 
 def diceReset():
     global rollCount

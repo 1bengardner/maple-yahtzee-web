@@ -57,7 +57,7 @@ input.hold:checked + .hold {
   background-color: crimson;
 }
 .action {
-  color: sandybrown;
+  color: peachpuff;
   background-color: firebrick;
   width: 128px;
   height: 36px;

@@ -1,3 +1,5 @@
+import * as modal from "./modal.js";
+
 function showLoading() {
   document.getElementById("mainframe").classList.add("loading");
 }
@@ -88,6 +90,15 @@ function prepareYahtzee() {
       }
     );
   }
+  function gameOver(score, yahtzeeCount, gotBonus) {
+    modal.gameOver(document.body, () => document.getElementById("resetButton").click(), {
+      score,
+      yahtzeeCount,
+      gotBonus,
+    });
+    // TODO Save achievements
+    // saveAchievements(score, yahtzeeCount, gotBonus);
+  }
   const yobject = {
     photoList: ["one.gif", "two.gif", "three.gif", "four.gif", "five.gif", "six.gif", "sel1.gif", "sel2.gif", "sel3.gif", "sel4.gif", "sel5.gif", "sel6.gif", "sel7.gif", "sel8.gif", "sel9.gif", "sel10.gif", "sel11.gif", "sel12.gif", "sel13.gif", "yahtzee.gif", "cards.gif"],
     onesButton: document.getElementById("onesButton"),
@@ -122,7 +133,7 @@ function prepareYahtzee() {
     dieHold3: document.getElementById("dieHold3"),
     dieHold4: document.getElementById("dieHold4"),
     dieHold5: document.getElementById("dieHold5"),
-    gameOver: (text) => alert(text),
+    gameOver,
   };
   return yobject;
 }
@@ -166,7 +177,7 @@ function attachHandlers() {
     pyodide.globals.get(id.replace("Button", ""))();
   }));
 }
-var yobject = prepareYahtzee();
+globalThis.yobject = prepareYahtzee();
 var pyodide;
 showLoading();
 runYahtzee().then(doneLoading);

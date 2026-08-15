@@ -290,6 +290,24 @@
       for (const elem of checkboxes) {
         elem.deselect = () => elem.checked = false;
       }
+      const flashyThings = [
+        "subTotalLabel",
+        "yahtzeeButton",
+      ].map(id => document.getElementById(id));
+      for (const elem of flashyThings) {
+        elem.flash = () => elem.animate(
+          [
+            { outline: "none" },
+            { outline: "1px solid red" },
+            { outline: "1px solid red" },
+          ], 
+          {
+            duration: 120,
+            iterations: 14,
+            easing: "steps(2)",
+          }
+        );
+      }
       const yobject = {
         photoList: ["one.gif", "two.gif", "three.gif", "four.gif", "five.gif", "six.gif", "sel1.gif", "sel2.gif", "sel3.gif", "sel4.gif", "sel5.gif", "sel6.gif", "sel7.gif", "sel8.gif", "sel9.gif", "sel10.gif", "sel11.gif", "sel12.gif", "sel13.gif", "yahtzee.gif", "cards.gif"],
         onesButton: document.getElementById("onesButton"),

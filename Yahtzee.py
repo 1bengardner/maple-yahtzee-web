@@ -92,8 +92,7 @@ def select():
         if subTotal >= 63 and subTotalBonus == False:
             totalScore += 35
             subTotalBonus = True
-            # FIXME
-            # subTotalLabel.config(fg="red")
+            yobject.subTotalLabel.flash();
         yobject.yahtzeeCountLabel.setText("Yahtzees: "+str(yahtzeeCount))
         yobject.subTotalLabel.setText("Sub Total: "+str(subTotal))
         yobject.scoreLabel.setText("SCORE "+str(totalScore))
@@ -349,9 +348,7 @@ def roll():
         die5value=number
     if die1value == die2value == die3value == die4value == die5value:
         if yahtzeeCount == 0:
-            # FIXME
-            pass
-            # yahtzeeButton.flash()
+            yobject.yahtzeeButton.flash()
         else:
             bonusYahtzee = True
     rollCount += 1

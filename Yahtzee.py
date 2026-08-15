@@ -361,6 +361,7 @@ def resetGame():
     global subTotal
     global bonusYahtzee
     global subTotalBonus
+    global usedYahtzee
     rollCount=0
     potentialScore=0
     totalScore=0

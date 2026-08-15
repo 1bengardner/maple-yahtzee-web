@@ -1,0 +1,146 @@
+body {
+  margin: 8px;
+}
+body, button, select {
+  font-family: MS Sans Serif, sans-serif;
+  font-size: 11px;
+}
+button, label.hold {
+  border: 2px outset;
+}
+button:active:not(:disabled), input.hold:checked + .hold {
+  border: 2px inset;
+}
+button:disabled {
+  filter: contrast(0.5);
+}
+ol, ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+fieldset {
+  padding-block: 0;
+}
+.sel {
+  width: 44px;
+  height: 44px;
+}
+.die {
+  width: 110px;
+  height: 110px;
+  border: 2px inset;
+  object-fit: none;
+}
+.die:nth-child(odd) {
+  background-color: whitesmoke;
+}
+.die:nth-child(even) {
+  background-color: lightgray;
+}
+input.hold {
+  appearance: none;
+  position: absolute;
+  inset: 0;
+}
+label.hold {
+  padding: 8px;
+  color: whitesmoke;
+  background-color: firebrick;
+  text-transform: uppercase;
+  text-align: center;
+  flex: 1;
+}
+input.hold:checked + .hold {
+  background-color: salmon;
+}
+.action:active:not(:disabled), input.hold:active + .hold {
+  background-color: crimson;
+}
+.action {
+  color: sandybrown;
+  background-color: firebrick;
+  width: 128px;
+  height: 36px;
+}
+.container {
+  display: flex;
+  position: relative;
+}
+#rollButton {
+  color: whitesmoke;
+}
+#selectButton {
+  background-color: yellow;
+}
+#selectButton:active:not(:disabled) {
+  background-color: gold;
+}
+#onesButton {
+  background-image: url("sel1.gif");
+}
+#twosButton {
+  background-image: url("sel2.gif");
+}
+#threesButton {
+  background-image: url("sel3.gif");
+}
+#foursButton {
+  background-image: url("sel4.gif");
+}
+#fivesButton {
+  background-image: url("sel5.gif");
+}
+#sixesButton {
+  background-image: url("sel6.gif");
+}
+#threeOfAKindButton {
+  background-image: url("sel7.gif");
+}
+#fourOfAKindButton {
+  background-image: url("sel8.gif");
+}
+#fullHouseButton {
+  background-image: url("sel9.gif");
+}
+#smallStraightButton {
+  background-image: url("sel10.gif");
+}
+#largeStraightButton {
+  background-image: url("sel11.gif");
+}
+#chanceButton {
+  background-image: url("sel12.gif");
+}
+#yahtzeeButton {
+  width: 84px;
+  background-image: url("sel13.gif");
+}
+#yahtzeeButton:active:not(:disabled) {
+  border-color: red;
+}
+#scoreLabel {
+  text-transform: uppercase;
+  font-size: 28px;
+  text-align: center;
+}
+#rollButton {
+  text-transform: uppercase;
+}
+#mainframe {
+  border: 7px solid peachpuff;
+  border-radius: 8px;
+  transition: transform 0.5s cubic-bezier(0, 0, 0.2, 1);
+}
+#mainframe.loading {
+  filter: contrast(0.5);
+  animation: spin 2s ease infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate3d(1, 1, 1, 0deg);
+  }
+  to {
+    transform: rotate3d(3, 8, 10, 360deg);
+  }
+}

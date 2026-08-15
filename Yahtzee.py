@@ -51,6 +51,7 @@ def select():
     global subTotal
     global yahtzeeCount
     global subTotalBonus
+    global usedYahtzee
     if rollUsed != 0:
         if rollUsed == 1:
             yobject.onesButton.setState("disabled")
@@ -84,6 +85,7 @@ def select():
             yobject.chanceButton.setState("disabled")
         elif rollUsed == 13:
             yobject.yahtzeeButton.setState("disabled")
+            usedYahtzee = True
         selectionCount += 1
         totalScore += potentialScore
         if bonusYahtzee:
@@ -348,7 +350,8 @@ def roll():
         die5value=number
     if die1value == die2value == die3value == die4value == die5value:
         if yahtzeeCount == 0:
-            yobject.yahtzeeButton.flash()
+            if not usedYahtzee:
+                yobject.yahtzeeButton.flash()
         else:
             bonusYahtzee = True
     rollCount += 1
@@ -399,6 +402,7 @@ def resetGame():
     diceReset()
     
     yahtzeeCount=0
+    usedYahtzee=False
 
 #main
 rollCount = 0
@@ -416,5 +420,6 @@ die2value = 0
 die3value = 0
 die4value = 0
 die5value = 0
+usedYahtzee = False
 
 diceReset()

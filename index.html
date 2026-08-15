@@ -347,7 +347,10 @@
       return yobject;
     }
     async function runYahtzee() {
+      const oldTitle = document.title;
+      document.title = "Loading…";
       pyodide = await loadPyodide();
+      document.title = oldTitle;
       await pyodide.runPython(await (await fetch("Yahtzee.py")).text());
       attachHandlers();
     }

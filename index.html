@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Maple Yahtzee!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script src="https://cdn.jsdelivr.net/npm/pyodide@314.0.3/pyodide.min.js"></script>
   <style>
@@ -136,8 +137,8 @@
     }
   </style>
 </head>
-<body bgcolor="darkgreen" style="background-image: url('extras/bliss.png'); background-size: cover; background-repeat: no-repeat; image-rendering: pixelated;">
-  <div id="mainframe" style="background-color: beige; display: grid; grid-auto-rows: 1fr auto; width: 570px; margin: auto;">
+<body bgcolor="black" style="background-image: url('extras/bliss.png'); background-size: cover; background-repeat: no-repeat; image-rendering: pixelated;">
+  <div id="mainframe" style="background-color: beige; display: grid; grid-auto-rows: 1fr auto; width: 570px; margin: auto; image-rendering: auto;">
     <img src="yahtzee.gif">
     <div id="selectionFrame" style="grid-column: 2; background-color: whitesmoke; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr auto; place-items: center; border: 4px ridge; margin: auto; margin-right: 8px;">
       <button id="onesButton" class="sel"></button>

@@ -397,6 +397,8 @@ def resetGame():
     yobject.subTotalLabel.setText("Sub Total: "+str(subTotal), fg="black")
     
     diceReset()
+    
+    yahtzeeCount=0
 
 #main
 rollCount = 0

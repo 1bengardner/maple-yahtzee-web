@@ -103,35 +103,35 @@ function share(score, yahtzeeCount) {
 
 export function gameOver(parent, playAgain, { score, yahtzeeCount, gotBonus }) {
   const modal = createNodeFromHtml(`
-<div id="gameover" class="modal-overlay">
-  <div class="modal">
-    <button class="close">❌</button>
-    <div class="icon">${createIcon(score)}</div>
+    <div id="gameover" class="modal-overlay">
+      <div class="modal">
+        <button class="close">❌</button>
+        <div class="icon">${createIcon(score)}</div>
 
-    <h1>Game Over</h1>
-    <div class="subtitle">
-      ${createDescriptionString(score, yahtzeeCount, gotBonus)}
-    </div>
+        <h1>Game Over</h1>
+        <div class="subtitle">
+          ${createDescriptionString(score, yahtzeeCount, gotBonus)}
+        </div>
 
-    <div class="stats">
-      <div class="stat">
-        <span class="value">${score}</span>
-        <span class="content">Score</span>
+        <div class="stats">
+          <div class="stat">
+            <span class="value">${score}</span>
+            <span class="content">Score</span>
+          </div>
+
+          ${gotBonus ? createStatHtml("✓", "Bonus") : ""}
+
+          ${yahtzeeCount > 0 ? createStatHtml(yahtzeeCount, yahtzeeCount == 1 ? "Yahtzee" : "Yahtzees") : ""}
+        </div>
+
+        ${navigator.canShare ? createShareHtml() : ""}
+
+        <button id="play-again" class="secondary">
+          Play Again
+        </button>
       </div>
-
-      ${gotBonus ? createStatHtml("✓", "Bonus") : ""}
-
-      ${yahtzeeCount > 0 ? createStatHtml(yahtzeeCount, yahtzeeCount == 1 ? "Yahtzee" : "Yahtzees") : ""}
     </div>
-
-    ${navigator.canShare ? createShareHtml() : ""}
-
-    <button id="play-again" class="secondary">
-      Play Again
-    </button>
-  </div>
-</div>
-`);
+  `);
   parent.appendChild(modal);
   
   document.getElementById("play-again").addEventListener("click", () => {

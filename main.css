@@ -1,4 +1,5 @@
 body {
+  touch-action: manipulation;
   margin: 8px;
 }
 body, button, select {

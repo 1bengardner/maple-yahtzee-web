@@ -96,8 +96,19 @@ function prepareYahtzee() {
       yahtzeeCount,
       gotBonus,
     });
-    // TODO Save achievements
-    // saveAchievements(score, yahtzeeCount, gotBonus);
+    saveHistory(score, yahtzeeCount, gotBonus);
+  }
+  function saveHistory(score, yahtzeeCount, gotBonus) {
+    const key = "yahtzee/history";
+    const saved = JSON.parse(localStorage.getItem(key));
+    const history = Array.isArray(saved) ? saved : [];
+    history.unshift({
+      t: Date.now(),
+      p: score,
+      y: yahtzeeCount,
+      s: gotBonus,
+    });
+    localStorage.setItem(key, JSON.stringify(history));
   }
   const yobject = {
     photoList: ["one.gif", "two.gif", "three.gif", "four.gif", "five.gif", "six.gif", "sel1.gif", "sel2.gif", "sel3.gif", "sel4.gif", "sel5.gif", "sel6.gif", "sel7.gif", "sel8.gif", "sel9.gif", "sel10.gif", "sel11.gif", "sel12.gif", "sel13.gif", "yahtzee.gif", "cards.gif"],

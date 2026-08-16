@@ -94,7 +94,7 @@ function createShareHtml() {
 
 function share(score, yahtzeeCount) {
   const yahtzeeString = yahtzeeCount > 0 ? `, including ${yahtzeeCount == 1 ? "a" : yahtzeeCount} ${yahtzeeCount == 1 ? "yahtzee" : "yahtzees"}` : "";
-  const body = `${createShareEmoji(score)} I got ${score} POINTS in Maple Yahtzee${yahtzeeString}!\u00A0🍁\n\nhttps://1bengardner.github.io/maple-yahtzee-web/`.trim();
+  const body = `${createShareEmoji(score)} I got ${score} POINTS in Maple Yahtzee${yahtzeeString}!\u00A0🍁\n\nhttps://bengardner.ca/games/yahtzee/`.trim();
   navigator.share({
     title: "Maple Yahtzee!",
     text: body,

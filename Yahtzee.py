@@ -93,6 +93,7 @@ def select():
     
     usedSelections.append(rollUsed)
     diceReset()
+    yobject.bonusYahtzee(False)
     if selectionCount == 13:
         gameOver()
 
@@ -218,7 +219,8 @@ or (die1value == die4value == die5value)\
 or (die2value == die3value == die4value)\
 or (die2value == die3value == die5value)\
 or (die2value == die4value == die5value)\
-or (die3value == die4value == die5value):
+or (die3value == die4value == die5value)\
+or bonusYahtzee:
         potentialScore = die1value + die2value + die3value + die4value + die5value
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 7
@@ -232,7 +234,8 @@ def fourOfAKind():
 or (die1value == die2value == die3value == die5value)\
 or (die1value == die2value == die4value == die5value)\
 or (die1value == die3value == die4value == die5value)\
-or (die2value == die3value == die4value == die5value):
+or (die2value == die3value == die4value == die5value)\
+or bonusYahtzee:
         potentialScore = die1value + die2value + die3value + die4value + die5value
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 8
@@ -252,7 +255,8 @@ or ((die2value == die5value) and (die1value == die4value == die3value))\
 or ((die3value == die4value) and (die1value == die2value == die5value))\
 or ((die3value == die5value) and (die1value == die2value == die4value))\
 or ((die4value == die5value) and (die1value == die2value == die3value)))\
-and ((die1value == die2value == die3value == die4value == die5value) == False):
+and ((die1value == die2value == die3value == die4value == die5value) == False)\
+or bonusYahtzee:
         potentialScore = 25
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 9
@@ -273,7 +277,8 @@ and ((die1value == 5) or (die2value == 5) or (die3value == 5) or (die4value == 5
 or (((die1value == 3) or (die2value == 3) or (die3value == 3) or (die4value == 3) or (die5value == 3))\
 and ((die1value == 4) or (die2value == 4) or (die3value == 4) or (die4value == 4) or (die5value == 4))\
 and ((die1value == 5) or (die2value == 5) or (die3value == 5) or (die4value == 5) or (die5value == 5))\
-and ((die1value == 6) or (die2value == 6) or (die3value == 6) or (die4value == 6) or (die5value == 6))):
+and ((die1value == 6) or (die2value == 6) or (die3value == 6) or (die4value == 6) or (die5value == 6)))\
+or bonusYahtzee:
         potentialScore = 30
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 10
@@ -292,7 +297,8 @@ or (((die1value == 2) or (die2value == 2) or (die3value == 2) or (die4value == 2
 and ((die1value == 3) or (die2value == 3) or (die3value == 3) or (die4value == 3) or (die5value == 3))\
 and ((die1value == 4) or (die2value == 4) or (die3value == 4) or (die4value == 4) or (die5value == 4))\
 and ((die1value == 5) or (die2value == 5) or (die3value == 5) or (die4value == 5) or (die5value == 5))\
-and ((die1value == 6) or (die2value == 6) or (die3value == 6) or (die4value == 6) or (die5value == 6))):
+and ((die1value == 6) or (die2value == 6) or (die3value == 6) or (die4value == 6) or (die5value == 6)))\
+or bonusYahtzee:
         potentialScore = 40
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 11
@@ -330,6 +336,7 @@ def roll():
     potentialScore = 0
     rollUsed = 0
     bonusYahtzee = False
+    yobject.bonusYahtzee(False)
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     if yobject.dieHold1.checked == False or die1value == 0:
         number = random.randrange(1,7)
@@ -357,10 +364,11 @@ def roll():
                 yobject.yahtzeeButton.flash()
         else:
             bonusYahtzee = True
+            yobject.bonusYahtzee(True)
     rollCount += 1
     yobject.rollCountLabel.setText("Rolls Made: "+str(rollCount))
     rollDisable()
-    restoreSelections()
+    showAvailableSelections()
 
 def rollDisable():
     if rollCount == 3:
@@ -382,7 +390,8 @@ def selectionDisable():
     yobject.yahtzeeButton.setState("disabled")
     yobject.selectButton.setState("disabled")
 
-def restoreSelections():
+def showAvailableSelections():
+    yobject.selectButton.setState("disabled")
     buttons = [
         yobject.onesButton,
         yobject.twosButton,
@@ -400,7 +409,19 @@ def restoreSelections():
     ]
     for selection in range(1, 13 + 1):
         buttons[selection - 1].setState("disabled" if selection in usedSelections else "normal")
-    yobject.selectButton.setState("disabled")
+
+    if not bonusYahtzee:
+        return
+    if die1value not in usedSelections:
+        for button in buttons:
+            if button != buttons[die1value - 1]:
+                button.setState("disabled")
+    elif any(selection not in usedSelections for selection in range(7, 14)):
+        for i in range(0, 6):
+            buttons[i].setState("disabled")
+    else:
+        for i in range(6, 13):
+            buttons[i].setState("disabled")
 
 def resetGame():
     global rollCount
@@ -418,6 +439,7 @@ def resetGame():
     selectionCount=0
     subTotal=0
     bonusYahtzee=False
+    yobject.bonusYahtzee(False)
     subTotalBonus=False
     yahtzeeCount=0
     usedYahtzee=False

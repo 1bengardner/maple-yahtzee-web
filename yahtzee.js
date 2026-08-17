@@ -1,5 +1,11 @@
 import * as modal from "./modal.js";
 
+function createNodeFromHtml(html) {
+  const template = document.createElement("template");
+  template.innerHTML = html.trim();
+  return template.content.firstElementChild;
+}
+
 function showLoading() {
   document.getElementById("mainframe").classList.add("loading");
 }
@@ -121,6 +127,19 @@ function prepareYahtzee() {
     });
     localStorage.setItem(key, JSON.stringify(history));
   }
+  function bonusYahtzee(on) {
+    const target = document.getElementById("scoreLabel");
+    if (on) {
+      target.before(createNodeFromHtml(`
+        <div id="bonusYahtzee">
+          <div style="font-style: italic;">Bonus Yahtzee!</div>
+          <div>Joker Rules apply</div>
+        </div>
+      `.trim()));
+    } else if (target.previousElementSibling) {
+      target.previousElementSibling.remove();
+    }
+  }
   const yobject = {
     photoList: ["one.gif", "two.gif", "three.gif", "four.gif", "five.gif", "six.gif", "sel1.gif", "sel2.gif", "sel3.gif", "sel4.gif", "sel5.gif", "sel6.gif", "sel7.gif", "sel8.gif", "sel9.gif", "sel10.gif", "sel11.gif", "sel12.gif", "sel13.gif", "yahtzee.gif", "cards.gif"],
     onesButton: document.getElementById("onesButton").previousElementSibling,
@@ -156,6 +175,7 @@ function prepareYahtzee() {
     dieHold4: document.getElementById("dieHold4"),
     dieHold5: document.getElementById("dieHold5"),
     gameOver,
+    bonusYahtzee,
   };
   return yobject;
 }

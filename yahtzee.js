@@ -66,7 +66,19 @@ function prepareYahtzee() {
     "die5",
   ].map(id => document.getElementById(id));
   for (const elem of images) {
-    elem.setImage = image => elem.src = image;
+    elem.setImage = image => {
+      elem.src = image;
+      elem.animate(
+        [
+          { filter: "saturate(2)" },
+          { filter: "none" },
+        ], 
+        {
+          duration: 777,
+          easing: "ease-in-out",
+        }
+      );
+    }
   }
   const labels = [
     "rollScore",

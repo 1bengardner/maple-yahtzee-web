@@ -16,20 +16,20 @@
   <div id="mainframe" style="background-color: beige; display: grid; grid-auto-rows: 1fr auto; width: 570px; margin: auto; image-rendering: auto;">
     <img src="yahtzee.gif">
     <div id="selectionFrame" style="grid-column: 2; background-color: whitesmoke; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr auto; place-items: center; border: 4px ridge; margin: auto; margin-right: 8px;">
-      <button id="onesButton" class="sel"></button>
-      <button id="twosButton" class="sel"></button>
-      <button id="threesButton" class="sel"></button>
-      <button id="foursButton" class="sel"></button>
-      <button id="fivesButton" class="sel"></button>
-      <button id="sixesButton" class="sel"></button>
+      <span class="container"><input type="radio" name="selection" id="sel1" class="hidden"></input><label for="sel1" id="onesButton" class="sel"></label></span>
+      <span class="container"><input type="radio" name="selection" id="sel2" class="hidden"></input><label for="sel2" id="twosButton" class="sel"></label></span>
+      <span class="container"><input type="radio" name="selection" id="sel3" class="hidden"></input><label for="sel3" id="threesButton" class="sel"></label></span>
+      <span class="container"><input type="radio" name="selection" id="sel4" class="hidden"></input><label for="sel4" id="foursButton" class="sel"></label></span>
+      <span class="container"><input type="radio" name="selection" id="sel5" class="hidden"></input><label for="sel5" id="fivesButton" class="sel"></label></span>
+      <span class="container"><input type="radio" name="selection" id="sel6" class="hidden"></input><label for="sel6" id="sixesButton" class="sel"></label></span>
       <span id="rollScore">Roll Value: 0</span>
-      <button id="threeOfAKindButton" class="sel"></button>
-      <button id="fourOfAKindButton" class="sel"></button>
-      <button id="fullHouseButton" class="sel"></button>
-      <button id="smallStraightButton" class="sel"></button>
-      <button id="largeStraightButton" class="sel"></button>
-      <button id="chanceButton" class="sel"></button>
-      <button id="yahtzeeButton" class="sel"></button>
+      <span class="container"><input type="radio" name="selection" id="sel7" class="hidden"></input><label for="sel7" id="threeOfAKindButton" class="sel"></label></span>
+      <span class="container"><input type="radio" name="selection" id="sel8" class="hidden"></input><label for="sel8" id="fourOfAKindButton" class="sel"></label></span>
+      <span class="container"><input type="radio" name="selection" id="sel9" class="hidden"></input><label for="sel9" id="fullHouseButton" class="sel"></label></span>
+      <span class="container"><input type="radio" name="selection" id="sel10" class="hidden"></input><label for="sel10" id="smallStraightButton" class="sel"></label></span>
+      <span class="container"><input type="radio" name="selection" id="sel11" class="hidden"></input><label for="sel11" id="largeStraightButton" class="sel"></label></span>
+      <span class="container"><input type="radio" name="selection" id="sel12" class="hidden"></input><label for="sel12" id="chanceButton" class="sel"></label></span>
+      <span class="container"><input type="radio" name="selection" id="sel13" class="hidden"></input><label for="sel13" id="yahtzeeButton" class="sel"></label></span>
     </div>
     <button id="selectButton" style="grid-column: 3; height: 96px; margin: auto; margin-left: 0;">Select</button>
     
@@ -40,11 +40,11 @@
       <img id="die4" class="die" src="cards.gif">
       <img id="die5" class="die" src="cards.gif">
       
-      <span class="container"><input type="checkbox" id="dieHold1" class="hold"></button><label for="dieHold1" class="hold">Hold</label></span>
-      <span class="container"><input type="checkbox" id="dieHold2" class="hold"></button><label for="dieHold2" class="hold">Hold</label></span>
-      <span class="container"><input type="checkbox" id="dieHold3" class="hold"></button><label for="dieHold3" class="hold">Hold</label></span>
-      <span class="container"><input type="checkbox" id="dieHold4" class="hold"></button><label for="dieHold4" class="hold">Hold</label></span>
-      <span class="container"><input type="checkbox" id="dieHold5" class="hold"></button><label for="dieHold5" class="hold">Hold</label></span>
+      <span class="container"><input type="checkbox" id="dieHold1" class="hidden"></input><label for="dieHold1" class="hold">Hold</label></span>
+      <span class="container"><input type="checkbox" id="dieHold2" class="hidden"></input><label for="dieHold2" class="hold">Hold</label></span>
+      <span class="container"><input type="checkbox" id="dieHold3" class="hidden"></input><label for="dieHold3" class="hold">Hold</label></span>
+      <span class="container"><input type="checkbox" id="dieHold4" class="hidden"></input><label for="dieHold4" class="hold">Hold</label></span>
+      <span class="container"><input type="checkbox" id="dieHold5" class="hidden"></input><label for="dieHold5" class="hold">Hold</label></span>
       
       <div style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr 1fr; place-items: center; margin-top: 8px; row-gap: 8px;">
         <fieldset>

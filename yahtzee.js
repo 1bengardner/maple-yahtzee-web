@@ -12,7 +12,13 @@ function doneLoading() {
   });
 }
 function prepareYahtzee() {
-  const buttons = [
+  const stateful = [
+    "selectButton",
+    "quitButton",
+    "rollButton",
+    "resetButton",
+  ].map(id => document.getElementById(id));
+  stateful.push(...[
     "onesButton",
     "twosButton",
     "threesButton",
@@ -26,17 +32,13 @@ function prepareYahtzee() {
     "largeStraightButton",
     "chanceButton",
     "yahtzeeButton",
-    "selectButton",
-    "quitButton",
-    "rollButton",
-    "resetButton",
-  ].map(id => document.getElementById(id));
-  for (const b of buttons) {
-    b.setState = state => {
+  ].map(id => document.getElementById(id).previousElementSibling));
+  for (const elem of stateful) {
+    elem.setState = state => {
       if (state === "normal") {
-        b.disabled = false;
+        elem.disabled = false;
       } else if (state === "disabled") {
-        b.disabled = true;
+        elem.disabled = true;
       } else {
         console.log(`${b.id}.setState called with invalid argument "${state}"`)
       }
@@ -49,8 +51,8 @@ function prepareYahtzee() {
     "die4",
     "die5",
   ].map(id => document.getElementById(id));
-  for (const i of images) {
-    i.setImage = image => i.src = image;
+  for (const elem of images) {
+    elem.setImage = image => elem.src = image;
   }
   const labels = [
     "rollScore",
@@ -113,19 +115,19 @@ function prepareYahtzee() {
   }
   const yobject = {
     photoList: ["one.gif", "two.gif", "three.gif", "four.gif", "five.gif", "six.gif", "sel1.gif", "sel2.gif", "sel3.gif", "sel4.gif", "sel5.gif", "sel6.gif", "sel7.gif", "sel8.gif", "sel9.gif", "sel10.gif", "sel11.gif", "sel12.gif", "sel13.gif", "yahtzee.gif", "cards.gif"],
-    onesButton: document.getElementById("onesButton"),
-    twosButton: document.getElementById("twosButton"),
-    threesButton: document.getElementById("threesButton"),
-    foursButton: document.getElementById("foursButton"),
-    fivesButton: document.getElementById("fivesButton"),
-    sixesButton: document.getElementById("sixesButton"),
-    threeOfAKindButton: document.getElementById("threeOfAKindButton"),
-    fourOfAKindButton: document.getElementById("fourOfAKindButton"),
-    fullHouseButton: document.getElementById("fullHouseButton"),
-    smallStraightButton: document.getElementById("smallStraightButton"),
-    largeStraightButton: document.getElementById("largeStraightButton"),
-    chanceButton: document.getElementById("chanceButton"),
-    yahtzeeButton: document.getElementById("yahtzeeButton"),
+    onesButton: document.getElementById("onesButton").previousElementSibling,
+    twosButton: document.getElementById("twosButton").previousElementSibling,
+    threesButton: document.getElementById("threesButton").previousElementSibling,
+    foursButton: document.getElementById("foursButton").previousElementSibling,
+    fivesButton: document.getElementById("fivesButton").previousElementSibling,
+    sixesButton: document.getElementById("sixesButton").previousElementSibling,
+    threeOfAKindButton: document.getElementById("threeOfAKindButton").previousElementSibling,
+    fourOfAKindButton: document.getElementById("fourOfAKindButton").previousElementSibling,
+    fullHouseButton: document.getElementById("fullHouseButton").previousElementSibling,
+    smallStraightButton: document.getElementById("smallStraightButton").previousElementSibling,
+    largeStraightButton: document.getElementById("largeStraightButton").previousElementSibling,
+    chanceButton: document.getElementById("chanceButton").previousElementSibling,
+    yahtzeeButton: document.getElementById("yahtzeeButton").previousElementSibling,
     selectButton: document.getElementById("selectButton"),
     quitButton: document.getElementById("quitButton"),
     rollButton: document.getElementById("rollButton"),
@@ -185,7 +187,7 @@ function attachHandlers() {
     "largeStraightButton",
     "chanceButton",
     "yahtzeeButton",
-  ].forEach(id => document.getElementById(id).addEventListener("click", () => {
+  ].forEach(id => document.getElementById(id).previousElementSibling.addEventListener("click", () => {
     pyodide.globals.get(id.replace("Button", ""))();
   }));
 }

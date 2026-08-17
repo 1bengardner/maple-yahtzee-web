@@ -6,13 +6,13 @@ body, button, select {
   font-family: MS Sans Serif, sans-serif;
   font-size: 11px;
 }
-button, label.hold {
+button, input.hidden + label {
   border: 2px outset;
 }
-button:active:not(:disabled), input.hold:checked + .hold {
+button:active:not(:disabled), input.hidden:checked + label {
   border: 2px inset;
 }
-button:disabled {
+button:disabled, input.hidden:disabled + label {
   filter: contrast(0.5);
 }
 ol, ul {
@@ -23,8 +23,8 @@ fieldset {
   padding-block: 0;
 }
 .sel {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
 }
 .die {
   width: 110px;
@@ -38,7 +38,7 @@ fieldset {
 .die:nth-child(even) {
   background-color: lightgray;
 }
-input.hold {
+input.hidden {
   appearance: none;
   position: absolute;
   inset: 0;
@@ -51,11 +51,14 @@ label.hold {
   text-align: center;
   flex: 1;
 }
-input.hold:checked + .hold {
+input:checked + label.hold {
   background-color: salmon;
 }
-.action:active:not(:disabled), input.hold:active + .hold {
+.action:active:not(:disabled), input:active + label.hold {
   background-color: crimson;
+}
+input.hidden:active + label.sel {
+  border-color: silver;
 }
 .action {
   color: peachpuff;
@@ -113,7 +116,7 @@ input.hold:checked + .hold {
   background-image: url("sel12.gif");
 }
 #yahtzeeButton {
-  width: 84px;
+  width: 80px;
   background-image: url("sel13.gif");
 }
 #yahtzeeButton:active:not(:disabled) {

@@ -85,6 +85,7 @@ def select():
             totalScore += 35
             subTotalBonus = True
             yobject.subTotalLabel.flash();
+            yobject.subTotalLabel.setEmphasis(True);
         yobject.yahtzeeCountLabel.setText("Yahtzees: "+str(yahtzeeCount))
         yobject.subTotalLabel.setText("Sub Total: "+str(subTotal))
         yobject.scoreLabel.setText("SCORE "+str(totalScore))
@@ -390,7 +391,8 @@ def resetGame():
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     yobject.scoreLabel.setText("SCORE "+str(totalScore))
     yobject.yahtzeeCountLabel.setText("Yahtzees: "+str(yahtzeeCount))
-    yobject.subTotalLabel.setText("Sub Total: "+str(subTotal), fg="black")
+    yobject.subTotalLabel.setText("Sub Total: "+str(subTotal))
+    yobject.subTotalLabel.setEmphasis(False);
     
     diceReset()
 

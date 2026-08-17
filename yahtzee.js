@@ -90,6 +90,7 @@ function prepareYahtzee() {
       }
     );
   }
+  document.getElementById("subTotalLabel").setEmphasis = function(on) { this.style.fontStyle = on ? "italic" : "" };
   function gameOver(score, yahtzeeCount, gotBonus) {
     modal.gameOver(document.body, () => document.getElementById("resetButton").click(), {
       score,

@@ -12,8 +12,11 @@ button, input.hidden + label {
 button:active:not(:disabled), input.hidden:checked + label {
   border: 2px inset;
 }
-button:disabled, input.hidden:disabled + label {
+button:disabled, input.hidden:disabled + label, #mainframe.loading {
   filter: contrast(0.5);
+}
+button.used:disabled, input.hidden.used:disabled + label {
+  filter: contrast(0.25);
 }
 ol, ul {
   list-style-type: none;
@@ -54,10 +57,10 @@ label.hold {
 input:checked + label.hold {
   background-color: salmon;
 }
-.action:active:not(:disabled), input:active + label.hold {
+.action:active:not(:disabled), input:active:not(:disabled) + label.hold {
   background-color: crimson;
 }
-input.hidden:active + label.sel {
+input.hidden:active:not(:disabled) + label.sel {
   border-color: silver;
 }
 .action {
@@ -119,9 +122,6 @@ input.hidden:active + label.sel {
   width: 80px;
   background-image: url("sel13.gif");
 }
-#yahtzeeButton:active:not(:disabled) {
-  border-color: red;
-}
 #scoreLabel {
   text-transform: uppercase;
   font-size: 28px;
@@ -136,7 +136,6 @@ input.hidden:active + label.sel {
   transition: transform 0.5s cubic-bezier(0, 0, 0.2, 1);
 }
 #mainframe.loading {
-  filter: contrast(0.5);
   animation: spin 2s ease infinite;
 }
 

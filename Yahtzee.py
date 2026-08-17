@@ -31,9 +31,9 @@ def diceReset():
     yobject.dieHold4.deselect()
     yobject.dieHold5.deselect()
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
-    yobject.selectButton.setState("disabled")
     yobject.rollButton.setState("normal")
     yobject.rollCountLabel.setText("Rolls Made: "+str(rollCount))
+    selectionDisable()
 
 def select():
     global totalScore
@@ -42,59 +42,59 @@ def select():
     global yahtzeeCount
     global subTotalBonus
     global usedYahtzee
-    if rollUsed != 0:
-        if rollUsed == 1:
-            yobject.onesButton.setState("disabled")
-            subTotal += potentialScore
-        elif rollUsed == 2:
-            yobject.twosButton.setState("disabled")
-            subTotal += potentialScore
-        elif rollUsed == 3:
-            yobject.threesButton.setState("disabled")
-            subTotal += potentialScore
-        elif rollUsed == 4:
-            yobject.foursButton.setState("disabled")
-            subTotal += potentialScore
-        elif rollUsed == 5:
-            yobject.fivesButton.setState("disabled")
-            subTotal += potentialScore
-        elif rollUsed == 6:
-            yobject.sixesButton.setState("disabled")
-            subTotal += potentialScore
-        elif rollUsed == 7:
-            yobject.threeOfAKindButton.setState("disabled")
-        elif rollUsed == 8:
-            yobject.fourOfAKindButton.setState("disabled")
-        elif rollUsed == 9:
-            yobject.fullHouseButton.setState("disabled")
-        elif rollUsed == 10:
-            yobject.smallStraightButton.setState("disabled")
-        elif rollUsed == 11:
-            yobject.largeStraightButton.setState("disabled")
-        elif rollUsed == 12:
-            yobject.chanceButton.setState("disabled")
-        elif rollUsed == 13:
-            yobject.yahtzeeButton.setState("disabled")
-            usedYahtzee = True
-        selectionCount += 1
-        totalScore += potentialScore
-        if bonusYahtzee:
-            totalScore += 100
-            yahtzeeCount += 1
-        if subTotal >= 63 and subTotalBonus == False:
-            totalScore += 35
-            subTotalBonus = True
-            yobject.subTotalLabel.flash();
-            yobject.subTotalLabel.setEmphasis(True);
-        yobject.yahtzeeCountLabel.setText("Yahtzees: "+str(yahtzeeCount))
-        yobject.subTotalLabel.setText("Sub Total: "+str(subTotal))
-        yobject.scoreLabel.setText("SCORE "+str(totalScore))
-        
-        diceReset()
-        if selectionCount == 13:
-            gameOver()
-    else:
-        pass
+    if rollUsed == 0:
+        return
+    if rollUsed == 1:
+        yobject.onesButton.setState("used")
+        subTotal += potentialScore
+    elif rollUsed == 2:
+        yobject.twosButton.setState("used")
+        subTotal += potentialScore
+    elif rollUsed == 3:
+        yobject.threesButton.setState("used")
+        subTotal += potentialScore
+    elif rollUsed == 4:
+        yobject.foursButton.setState("used")
+        subTotal += potentialScore
+    elif rollUsed == 5:
+        yobject.fivesButton.setState("used")
+        subTotal += potentialScore
+    elif rollUsed == 6:
+        yobject.sixesButton.setState("used")
+        subTotal += potentialScore
+    elif rollUsed == 7:
+        yobject.threeOfAKindButton.setState("used")
+    elif rollUsed == 8:
+        yobject.fourOfAKindButton.setState("used")
+    elif rollUsed == 9:
+        yobject.fullHouseButton.setState("used")
+    elif rollUsed == 10:
+        yobject.smallStraightButton.setState("used")
+    elif rollUsed == 11:
+        yobject.largeStraightButton.setState("used")
+    elif rollUsed == 12:
+        yobject.chanceButton.setState("used")
+    elif rollUsed == 13:
+        yobject.yahtzeeButton.setState("used")
+        usedYahtzee = True
+    selectionCount += 1
+    totalScore += potentialScore
+    if bonusYahtzee:
+        totalScore += 100
+        yahtzeeCount += 1
+    if subTotal >= 63 and subTotalBonus == False:
+        totalScore += 35
+        subTotalBonus = True
+        yobject.subTotalLabel.flash();
+        yobject.subTotalLabel.setEmphasis(True);
+    yobject.yahtzeeCountLabel.setText("Yahtzees: "+str(yahtzeeCount))
+    yobject.subTotalLabel.setText("Sub Total: "+str(subTotal))
+    yobject.scoreLabel.setText("SCORE "+str(totalScore))
+    
+    usedSelections.append(rollUsed)
+    diceReset()
+    if selectionCount == 13:
+        gameOver()
 
 
 def ones():
@@ -113,6 +113,7 @@ def ones():
         potentialScore += 1
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 1
+    yobject.selectButton.setState("normal")
 
 def twos():
     global rollUsed
@@ -130,6 +131,7 @@ def twos():
         potentialScore += 2
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 2
+    yobject.selectButton.setState("normal")
 
 def threes():
     global rollUsed
@@ -147,6 +149,7 @@ def threes():
         potentialScore += 3
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 3
+    yobject.selectButton.setState("normal")
 
 def fours():
     global rollUsed
@@ -164,6 +167,7 @@ def fours():
         potentialScore += 4
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 4
+    yobject.selectButton.setState("normal")
 
 def fives():
     global rollUsed
@@ -181,6 +185,7 @@ def fives():
         potentialScore += 5
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 5
+    yobject.selectButton.setState("normal")
 
 def sixes():
     global rollUsed
@@ -198,6 +203,7 @@ def sixes():
         potentialScore += 6
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 6
+    yobject.selectButton.setState("normal")
 
 def threeOfAKind():
     global rollUsed
@@ -216,6 +222,7 @@ or (die3value == die4value == die5value):
         potentialScore = die1value + die2value + die3value + die4value + die5value
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 7
+    yobject.selectButton.setState("normal")
 
 def fourOfAKind():
     global rollUsed
@@ -229,6 +236,7 @@ or (die2value == die3value == die4value == die5value):
         potentialScore = die1value + die2value + die3value + die4value + die5value
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 8
+    yobject.selectButton.setState("normal")
 
 def fullHouse():
     global rollUsed
@@ -248,6 +256,7 @@ and ((die1value == die2value == die3value == die4value == die5value) == False):
         potentialScore = 25
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 9
+    yobject.selectButton.setState("normal")
 
 def smallStraight():
     global rollUsed
@@ -268,6 +277,7 @@ and ((die1value == 6) or (die2value == 6) or (die3value == 6) or (die4value == 6
         potentialScore = 30
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 10
+    yobject.selectButton.setState("normal")
 
 def largeStraight():
     global rollUsed
@@ -286,6 +296,7 @@ and ((die1value == 6) or (die2value == 6) or (die3value == 6) or (die4value == 6
         potentialScore = 40
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 11
+    yobject.selectButton.setState("normal")
 
 def chance():
     global rollUsed
@@ -293,6 +304,7 @@ def chance():
     potentialScore = die1value + die2value + die3value + die4value + die5value
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 12
+    yobject.selectButton.setState("normal")
 
 def yahtzee():
     global rollUsed
@@ -304,6 +316,7 @@ def yahtzee():
         yahtzeeCount += 1
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 13
+    yobject.selectButton.setState("normal")
 
 def roll():
     global rollCount
@@ -318,7 +331,6 @@ def roll():
     rollUsed = 0
     bonusYahtzee = False
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
-    yobject.selectButton.setState("normal")
     if yobject.dieHold1.checked == False or die1value == 0:
         number = random.randrange(1,7)
         yobject.die1.setImage(yobject.photoList[number-1])
@@ -348,10 +360,47 @@ def roll():
     rollCount += 1
     yobject.rollCountLabel.setText("Rolls Made: "+str(rollCount))
     rollDisable()
+    restoreSelections()
 
 def rollDisable():
     if rollCount == 3:
         yobject.rollButton.setState("disabled")
+
+def selectionDisable():
+    yobject.onesButton.setState("disabled")
+    yobject.twosButton.setState("disabled")
+    yobject.threesButton.setState("disabled")
+    yobject.foursButton.setState("disabled")
+    yobject.fivesButton.setState("disabled")
+    yobject.sixesButton.setState("disabled")
+    yobject.threeOfAKindButton.setState("disabled")
+    yobject.fourOfAKindButton.setState("disabled")
+    yobject.fullHouseButton.setState("disabled")
+    yobject.smallStraightButton.setState("disabled")
+    yobject.largeStraightButton.setState("disabled")
+    yobject.chanceButton.setState("disabled")
+    yobject.yahtzeeButton.setState("disabled")
+    yobject.selectButton.setState("disabled")
+
+def restoreSelections():
+    buttons = [
+        yobject.onesButton,
+        yobject.twosButton,
+        yobject.threesButton,
+        yobject.foursButton,
+        yobject.fivesButton,
+        yobject.sixesButton,
+        yobject.threeOfAKindButton,
+        yobject.fourOfAKindButton,
+        yobject.fullHouseButton,
+        yobject.smallStraightButton,
+        yobject.largeStraightButton,
+        yobject.chanceButton,
+        yobject.yahtzeeButton,
+    ]
+    for selection in range(1, 13 + 1):
+        buttons[selection - 1].setState("disabled" if selection in usedSelections else "normal")
+    yobject.selectButton.setState("disabled")
 
 def resetGame():
     global rollCount
@@ -372,21 +421,7 @@ def resetGame():
     subTotalBonus=False
     yahtzeeCount=0
     usedYahtzee=False
-
-    yobject.rollButton.setState("normal")
-    yobject.onesButton.setState("normal")
-    yobject.twosButton.setState("normal")
-    yobject.threesButton.setState("normal")
-    yobject.foursButton.setState("normal")
-    yobject.fivesButton.setState("normal")
-    yobject.sixesButton.setState("normal")
-    yobject.threeOfAKindButton.setState("normal")
-    yobject.fourOfAKindButton.setState("normal")
-    yobject.fullHouseButton.setState("normal")
-    yobject.smallStraightButton.setState("normal")
-    yobject.largeStraightButton.setState("normal")
-    yobject.chanceButton.setState("normal")
-    yobject.yahtzeeButton.setState("normal")
+    usedSelections.clear()
 
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     yobject.scoreLabel.setText("SCORE "+str(totalScore))
@@ -413,5 +448,6 @@ die3value = 0
 die4value = 0
 die5value = 0
 usedYahtzee = False
+usedSelections = []
 
 diceReset()

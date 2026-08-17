@@ -37,10 +37,18 @@ function prepareYahtzee() {
     elem.setState = state => {
       if (state === "normal") {
         elem.disabled = false;
+        elem.classList.remove("used");
       } else if (state === "disabled") {
         elem.disabled = true;
+      } else if (state === "used") {
+        elem.disabled = true;
+        elem.classList.add("used");
       } else {
         console.log(`${b.id}.setState called with invalid argument "${state}"`)
+        return;
+      }
+      if (elem.checked) {
+        elem.checked = false;
       }
     };
   }
@@ -75,15 +83,15 @@ function prepareYahtzee() {
     elem.deselect = () => elem.checked = false;
   }
   const flashyThings = [
-    "subTotalLabel",
-    "yahtzeeButton",
-  ].map(id => document.getElementById(id));
+    document.getElementById("subTotalLabel"),
+    document.getElementById("yahtzeeButton").previousElementSibling,
+  ];
   for (const elem of flashyThings) {
     elem.flash = () => elem.animate(
       [
         { outline: "none" },
-        { outline: "1px solid red" },
-        { outline: "1px solid red" },
+        { outline: "2px solid red" },
+        { outline: "2px solid red" },
       ], 
       {
         duration: 120,

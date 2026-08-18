@@ -3,7 +3,7 @@ body {
   margin: 8px;
 }
 body, button, select {
-  font-family: MS Sans Serif, sans-serif, Noto Emoji;
+  font-family: MS Sans Serif, sans-serif, Segoe UI Symbol, Twemoji Mozilla, Apple Color Emoji, Noto Color Emoji, Noto Emoji;
   font-size: 11px;
 }
 button, input.hidden + label {

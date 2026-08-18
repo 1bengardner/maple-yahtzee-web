@@ -3,7 +3,7 @@ body {
   margin: 8px;
 }
 body, button, select {
-  font-family: MS Sans Serif, sans-serif;
+  font-family: MS Sans Serif, sans-serif, Noto Emoji;
   font-size: 11px;
 }
 button, input.hidden + label {

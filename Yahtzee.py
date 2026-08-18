@@ -42,7 +42,7 @@ def select():
     global yahtzeeCount
     global subTotalBonus
     global usedYahtzee
-    if rollUsed == 0:
+    if rollUsed == 0 or rollUsed in usedSelections:
         return
     if rollUsed == 1:
         yobject.onesButton.setState("used")
@@ -333,6 +333,8 @@ def roll():
     global die3value
     global die4value
     global die5value
+    if rollCount == 3:
+        return
     potentialScore = 0
     rollUsed = 0
     bonusYahtzee = False

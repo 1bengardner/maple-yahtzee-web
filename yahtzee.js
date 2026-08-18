@@ -231,6 +231,15 @@ function attachHandlers() {
     pyodide.globals.get(id.replace("Button", ""))();
   }));
 }
+function attachZoomHandler() {
+  const target = "0.8";
+  document.querySelector(".zoom").addEventListener("click", function() {
+    this.classList.add("stay");
+    document.getElementById("mainframe").style.transformOrigin = "top";
+    document.getElementById("mainframe").style.scale = document.getElementById("mainframe").style.scale == target ? "" : target;
+  });
+}
+attachZoomHandler();
 globalThis.yobject = prepareYahtzee();
 var pyodide;
 showLoading();

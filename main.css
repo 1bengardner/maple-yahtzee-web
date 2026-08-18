@@ -73,6 +73,20 @@ input.hidden:active:not(:disabled) + label.sel {
   display: flex;
   position: relative;
 }
+.zoom {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+@media (min-height: 500px) {
+  .zoom:not(.stay) {
+    display: none;
+  }
+}
 #rollButton {
   color: whitesmoke;
 }

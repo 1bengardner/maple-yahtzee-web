@@ -70,8 +70,13 @@ function prepareYahtzee() {
       elem.src = image;
       elem.animate(
         [
-          { filter: "saturate(2)" },
-          { filter: "none" },
+          {
+            backgroundColor: "floralwhite",
+            filter: "saturate(1.5)",
+          }, {
+            backgroundColor: "yaouw",
+            filter: "saturate(1)",
+          },
         ], 
         {
           duration: 777,

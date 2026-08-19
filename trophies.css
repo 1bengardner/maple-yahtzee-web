@@ -1,0 +1,61 @@
+.trophy.snail:hover .trophy-icon {
+  color: #77a3d7;
+}
+
+.trophy.shroom:hover .trophy-icon {
+  color: #ed9059;
+}
+
+.trophy.pig:hover .trophy-icon {
+  color: #f5adad;
+}
+
+.trophy.root:hover .trophy-icon {
+  color: #dbc78e;
+}
+
+.trophy.panda:hover .trophy-icon {
+  color: #b5a3a3;
+}
+
+.trophy.leaf:hover .trophy-icon {
+  color: #8ebd96;
+}
+.trophy.leaf {
+  background-color: #d5edc3;
+}
+
+.trophy.mega:hover .trophy-icon {
+  color: #eb5757;
+}
+.trophy.mega {
+  background-color: #d4e0ed;
+}
+
+.trophy.smega:hover .trophy-icon {
+  color: #c5a91e;
+}
+.trophy.smega {
+  background-color: #f3ddec;
+}
+
+.trophy.explosion:hover .trophy-icon {
+  color: #eb653e;
+}
+.trophy.explosion {
+  background-color: #f9d4bc;
+}
+
+.trophy.yaouw .trophy-icon {
+  color: #abb9b3;
+}
+.trophy.yaouw {
+  background-color: #dae7e2;
+}
+
+.trophy.submarine .trophy-icon {
+  color: #c7c782;
+}
+.trophy.submarine {
+  background-color: #ebebb5;
+}

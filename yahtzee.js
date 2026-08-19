@@ -1,5 +1,10 @@
 import * as modal from "./modal.js";
 
+const StorageKeys = {
+  HISTORY: "yahtzee/history",
+  QUALIFIED_FOR_TROPHIES: "yahtzee/unlocked trophies",
+}
+
 function createNodeFromHtml(html) {
   const template = document.createElement("template");
   template.innerHTML = html.trim();
@@ -50,7 +55,7 @@ function prepareYahtzee() {
         elem.disabled = true;
         elem.classList.add("used");
       } else {
-        console.log(`${b.id}.setState called with invalid argument "${state}"`)
+        console.warn(`${b.id}.setState called with invalid argument "${state}"`)
         return;
       }
       if (elem.checked) {
@@ -125,24 +130,32 @@ function prepareYahtzee() {
   }
   document.getElementById("subTotalLabel").setEmphasis = function(on) { this.style.fontStyle = on ? "italic" : "" };
   function gameOver(score, yahtzeeCount, gotBonus) {
-    modal.gameOver(document.body, () => document.getElementById("resetButton").click(), {
-      score,
-      yahtzeeCount,
-      gotBonus,
-    });
+    modal.gameOver(
+      document.body,
+      () => document.getElementById("resetButton").click(), 
+      {
+        score,
+        yahtzeeCount,
+        gotBonus,
+      }
+    );
     saveHistory(score, yahtzeeCount, gotBonus);
+    const qualified = score >= 100 || yahtzeeCount > 0;
+    if (qualified && !document.getElementById("trophies")) {
+      localStorage.setItem(StorageKeys.QUALIFIED_FOR_TROPHIES, "true story");
+      createTrophiesButton();
+    }
   }
   function saveHistory(score, yahtzeeCount, gotBonus) {
-    const key = "yahtzee/history";
-    const saved = JSON.parse(localStorage.getItem(key));
-    const history = Array.isArray(saved) ? saved : [];
-    history.unshift({
+    const saved = JSON.parse(localStorage.getItem(StorageKeys.HISTORY));
+    history = Array.isArray(saved) ? saved : [];
+    history.push({
       t: Date.now(),
       p: score,
       y: yahtzeeCount,
       s: gotBonus,
     });
-    localStorage.setItem(key, JSON.stringify(history));
+    localStorage.setItem(StorageKeys.HISTORY, JSON.stringify(history));
   }
   function bonusYahtzee(on) {
     const target = document.getElementById("scoreLabel");
@@ -244,7 +257,30 @@ function attachZoomHandler() {
     document.getElementById("mainframe").style.scale = document.getElementById("mainframe").style.scale == target ? "" : target;
   });
 }
+function createTrophiesButton() {
+  if (!localStorage.getItem(StorageKeys.QUALIFIED_FOR_TROPHIES)) {
+    return;
+  }
+  const firstSibling = document.getElementById("mainframe");
+  firstSibling.parentNode.append(createNodeFromHtml(`
+    <div style="
+      margin: auto;
+      width: 570px;
+      margin-top: 1em;
+    ">
+      <button id="trophies">Trophies</button>
+    </div>
+  `));
+  attachTrophiesHandler();
+}
+function attachTrophiesHandler() {
+  document.getElementById("trophies").addEventListener("click", () => {
+    modal.trophies(document.body, history);
+  });
+}
 attachZoomHandler();
+let history = JSON.parse(localStorage.getItem(StorageKeys.HISTORY));
+createTrophiesButton();
 globalThis.yobject = prepareYahtzee();
 var pyodide;
 showLoading();

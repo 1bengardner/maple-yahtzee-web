@@ -250,11 +250,13 @@ function attachHandlers() {
   }));
 }
 function attachZoomHandler() {
-  const target = "0.8";
+  const target = document.querySelector("main");
+  const targetValue = "0.8";
   document.querySelector(".zoom").addEventListener("click", function() {
     this.classList.add("stay");
-    document.getElementById("mainframe").style.transformOrigin = "top";
-    document.getElementById("mainframe").style.scale = document.getElementById("mainframe").style.scale == target ? "" : target;
+    target.style.transformOrigin = "top";
+    target.style.scale = target.style.scale == targetValue ? "" : targetValue;
+  });
 }
 function attachHelpHandler() {
   document.querySelector(".help").addEventListener("click", () => {

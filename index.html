@@ -18,7 +18,7 @@
   <script src="https://cdn.jsdelivr.net/npm/pyodide@314.0.3/pyodide.min.js"></script>
 </head>
 <body bgcolor="black" style="background-image: url('extras/bliss.png'); background-size: cover; background-repeat: no-repeat; image-rendering: pixelated;">
-  <div style="position: relative;">
+  <main style="position: relative;">
     <div id="mainframe" style="background-color: beige; display: grid; grid-auto-rows: 1fr auto; width: 570px; margin: auto; image-rendering: auto;">
       <img src="yahtzee.gif">
       <div id="selectionFrame" style="grid-column: 2; background-color: whitesmoke; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr auto; place-items: center; border: 4px ridge; margin: auto; margin-right: 8px;">
@@ -82,11 +82,11 @@
         </div>
       </div>
     </div>
-  </div>
     <div class="auxiliary">
       <button class="zoom" title="Mini Mode">🔍</button>
       <button class="help" title="Help">❓</button>
     </div>
+  </main>
   <script type="module" src="yahtzee.js"></script>
 </body>
 </html>

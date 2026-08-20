@@ -223,6 +223,9 @@ export function trophies(parent, playHistory) {
           <span class="preface">Top score</span>
           ${getTopScore(playHistory)}
         </span>
+        <span class="games-played" title="Games played">
+          <span aria-hidden="true">🕹</span>${playHistory.length}
+        </span>
       </div>`,
     height: "32px",
   };

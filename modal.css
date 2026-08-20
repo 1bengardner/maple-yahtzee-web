@@ -158,6 +158,12 @@ h2 {
   padding: 6px 12px;
   font-style: italic;
   font-size: 18px;
+  margin-right: 12px;
+}
+
+.games-played {
+  display: inline-flex;
+  color: salmon;
 }
 
 .header {

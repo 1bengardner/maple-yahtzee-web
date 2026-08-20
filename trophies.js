@@ -155,6 +155,72 @@ const scoreCriteria = [{
 },];
 
 const yahtzeeCriteria = [{
+  "id": 113,
+  "criteria": {
+    "y": 13,
+  },
+  "details": {
+    "icon": "🔮",
+    "title": "Cassandra",
+    "description": "Get 13 yahtzees in one game.",
+    "glass": "fortune",
+  },
+}, {
+  "id": 112,
+  "criteria": {
+    "y": 12,
+  },
+  "details": {
+    "icon": "🐦‍🔥",
+    "title": "Spirit of the Zodiac",
+    "description": "Get 12 yahtzees in one game.",
+    "glass": "phoenix",
+  },
+}, {
+  "id": 111,
+  "criteria": {
+    "y": 11,
+  },
+  "details": {
+    "icon": "☄",
+    "title": "Make a Wish",
+    "description": "Get 11 yahtzees in one game.",
+    "glass": "comet",
+  },
+}, {
+  "id": 110,
+  "criteria": {
+    "y": 10,
+  },
+  "details": {
+    "icon": "💎",
+    "title": "Lab-Grown",
+    "description": "Get 10 yahtzees in one game.",
+    "glass": "diamond",
+  },
+}, {
+  "id": 109,
+  "criteria": {
+    "y": 9,
+  },
+  "details": {
+    "icon": "🐉",
+    "title": "Long Wang",
+    "description": "Get nine yahtzees in one game.",
+    "glass": "dragon",
+  },
+}, {
+  "id": 108,
+  "criteria": {
+    "y": 8,
+  },
+  "details": {
+    "icon": "🧧",
+    "title": "Red Envelope",
+    "description": "Get eight yahtzees in one game.",
+    "glass": "envelope",
+  },
+}, {
   "id": 107,
   "criteria": {
     "y": 7,
@@ -239,6 +305,7 @@ const totalYahtzeeCriteria = [{
     "icon": "🥞",
     "title": "Stack Stacker",
     "description": "Get 1000 yahtzees.",
+    "glass": "platinum",
   },
 }, {
   "id": 504,
@@ -249,6 +316,7 @@ const totalYahtzeeCriteria = [{
     "icon": "🫛",
     "title": "Pod Pocketer",
     "description": "Get 200 yahtzees.",
+    "glass": "gold",
   },
 }, {
   "id": 503,
@@ -259,6 +327,7 @@ const totalYahtzeeCriteria = [{
     "icon": "🎰",
     "title": "Lotto Lover",
     "description": "Get 100 yahtzees.",
+    "glass": "silver",
   },
 }, {
   "id": 502,
@@ -269,6 +338,7 @@ const totalYahtzeeCriteria = [{
     "icon": "🪤",
     "title": "Cheese Chaser",
     "description": "Get 50 yahtzees.",
+    "glass": "bronze",
   },
 }, {
   "id": 501,
@@ -279,6 +349,7 @@ const totalYahtzeeCriteria = [{
     "icon": "🪎",
     "title": "Treasure Tracker",
     "description": "Get 10 yahtzees.",
+    "glass": "copper",
   },
 },];
 
@@ -291,6 +362,7 @@ const totalBonusYahtzeeCriteria = [{
     "icon": "🌊",
     "title": "Tubular",
     "description": "Get 1000 bonus yahtzees.",
+    "glass": "platinum",
   },
 }, {
   "id": 604,
@@ -301,6 +373,7 @@ const totalBonusYahtzeeCriteria = [{
     "icon": "🌌",
     "title": "Nebular",
     "description": "Get 200 bonus yahtzees.",
+    "glass": "gold",
   },
 }, {
   "id": 603,
@@ -311,6 +384,7 @@ const totalBonusYahtzeeCriteria = [{
     "icon": "🌎",
     "title": "Globular",
     "description": "Get 100 bonus yahtzees.",
+    "glass": "silver",
   },
 }, {
   "id": 602,
@@ -321,6 +395,7 @@ const totalBonusYahtzeeCriteria = [{
     "icon": "🍗",
     "title": "Bonular",
     "description": "Get 50 bonus yahtzees.",
+    "glass": "bronze",
   },
 }, {
   "id": 601,
@@ -331,6 +406,7 @@ const totalBonusYahtzeeCriteria = [{
     "icon": "🃏",
     "title": "Jokular",
     "description": "Get 10 bonus yahtzees.",
+    "glass": "copper",
   },
 },];
 
@@ -343,6 +419,7 @@ const gameCriteria = [{
     "icon": "🍁",
     "title": "True Mapler",
     "description": "Play 1000 games.",
+    "glass": "platinum",
   },
 }, {
   "id": 1004,
@@ -353,6 +430,7 @@ const gameCriteria = [{
     "icon": "💊",
     "title": "Addict",
     "description": "Play 100 games.",
+    "glass": "gold",
   },
 }, {
   "id": 1003,
@@ -363,6 +441,7 @@ const gameCriteria = [{
     "icon": "🥜",
     "title": "Goober",
     "description": "Play 50 games.",
+    "glass": "silver",
   },
 }, {
   "id": 1002,
@@ -373,6 +452,7 @@ const gameCriteria = [{
     "icon": "🌳",
     "title": "Grower",
     "description": "Play 20 games.",
+    "glass": "bronze",
   },
 }, {
   "id": 1001,
@@ -383,6 +463,7 @@ const gameCriteria = [{
     "icon": "🕹",
     "title": "Gamer",
     "description": "Play 10 games.",
+    "glass": "copper",
   },
 },];
 

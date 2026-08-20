@@ -1,3 +1,23 @@
+.trophy.platinum .trophy-icon {
+  outline: 5px solid aliceblue;
+}
+
+.trophy.gold .trophy-icon {
+  outline: 4px solid gold;
+}
+
+.trophy.silver .trophy-icon {
+  outline: 3px solid silver;
+}
+
+.trophy.bronze .trophy-icon {
+  outline: 2px solid darkorange;
+}
+
+.trophy.copper .trophy-icon {
+  outline: 1px solid sandybrown;
+}
+
 .trophy.snail:hover .trophy-icon {
   color: #77a3d7;
 }
@@ -75,24 +95,66 @@
 }
 
 .trophy.bamboo .trophy-icon {
-  color: #959a42;
+  color: #c0ba7c;
 }
 .trophy.bamboo {
-  background-color: #e6f0c2;
+  background-color: #e7efc3;
 }
 
 .trophy.devil .trophy-icon {
-  color: #9f81bb;
+  color: #a690c3;
 }
 .trophy.devil {
-  background-color: #ecdfe5;
+  background-color: #e9e2e5;
 }
 
 .trophy.shuriken .trophy-icon {
   color: #8f8f8f;
 }
 .trophy.shuriken {
-  background-color: #f5e1db;
+  background-color: #fadbd6;
+}
+
+.trophy.envelope .trophy-icon {
+  color: #f6747f;
+}
+.trophy.envelope {
+  background-color: #ffd8c2;
+}
+
+.trophy.dragon .trophy-icon {
+  color: #799358;
+}
+.trophy.dragon {
+  background-color: #dde9c4;
+}
+
+.trophy.diamond .trophy-icon {
+  color: #ccdfe0;
+}
+.trophy.diamond {
+  background-color: #e9edeb;
+}
+
+.trophy.comet .trophy-icon {
+  color: #d8d4b1;
+}
+.trophy.comet {
+  background-color: #ebebcc;
+}
+
+.trophy.phoenix .trophy-icon {
+  color: #ffb699;
+}
+.trophy.phoenix {
+  background-color: #fce9cf;
+}
+
+.trophy.fortune .trophy-icon {
+  color: #9e8ac7;
+}
+.trophy.fortune {
+  background-color: #eeddf4;
 }
 
 .trophy.yaouw .trophy-icon {

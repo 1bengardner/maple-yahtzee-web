@@ -137,6 +137,8 @@ h2 {
 .primary {
   background: gold;
   color: saddlebrown;
+  outline: 1px solid goldenrod;
+  outline-offset: -1px;
 }
 
 .secondary {

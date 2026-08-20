@@ -14,13 +14,26 @@ function createNodeFromHtml(html) {
 function showLoading() {
   document.getElementById("mainframe").classList.add("loading");
 }
-function doneLoading() {
+function finishLoading() {
   const mf = document.getElementById("mainframe");
   requestAnimationFrame(() => {
     mf.style.transform = getComputedStyle(mf).transform;
     mf.classList.remove("loading");
     requestAnimationFrame(() => { mf.style.transform = "rotate3d(0, 0, 0, 0deg)"; });
   });
+}
+function preloadAssets() {
+  for (const src of [
+    "one.gif",
+    "two.gif",
+    "three.gif",
+    "four.gif",
+    "five.gif",
+    "six.gif",
+  ]) {
+    const img = new Image();
+    img.src = src;
+  }
 }
 function prepareYahtzee() {
   const stateful = [
@@ -291,4 +304,5 @@ createTrophiesButton();
 globalThis.yobject = prepareYahtzee();
 var pyodide;
 showLoading();
-runYahtzee().then(doneLoading);
+preloadAssets();
+runYahtzee().then(finishLoading);

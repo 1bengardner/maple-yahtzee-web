@@ -1,4 +1,50 @@
 const scoreCriteria = [{
+  "id": 13,
+  "criteria": {
+    "p": 1576,
+  },
+  "details": {
+    "icon": "🪦",
+    "title": "&ldquo;i cheated&rdquo;",
+    "description": "Achieve an impossible score.",
+  },
+}, {
+  "id": 12,
+  "criteria": {
+    "p": 1575,
+  },
+  "details": {
+    "icon": "☠",
+    "title": "Not Believable",
+    "description": "Achieve the highest possible score.",
+    "glass": "crossbones",
+    "sound": "bones.mp3",
+  },
+}, {
+  "id": 11,
+  "criteria": {
+    "p": 1500,
+  },
+  "details": {
+    "icon": "💀",
+    "title": "Unbelievable",
+    "description": "Achieve a score of 1500.",
+    "glass": "skull",
+    "sound": "bones.mp3",
+  },
+}, {
+  "id": 10,
+  "criteria": {
+    "p": 1000,
+  },
+  "details": {
+    "icon": "🦴",
+    "title": "Big Bonus",
+    "description": "Achieve a score of 1000.",
+    "glass": "bone",
+    "sound": "bones.mp3",
+  },
+}, {
   "id": 9,
   "criteria": {
     "p": 500,
@@ -109,6 +155,39 @@ const scoreCriteria = [{
 },];
 
 const yahtzeeCriteria = [{
+  "id": 107,
+  "criteria": {
+    "y": 7,
+  },
+  "details": {
+    "icon": "💫",
+    "title": "Lucky Seven",
+    "description": "Get seven yahtzees in one game.",
+    "glass": "shuriken",
+  },
+}, {
+  "id": 106,
+  "criteria": {
+    "y": 6,
+  },
+  "details": {
+    "icon": "😈",
+    "title": "Luck of the Devil",
+    "description": "Get six yahtzees in one game.",
+    "glass": "devil",
+  },
+}, {
+  "id": 105,
+  "criteria": {
+    "y": 5,
+  },
+  "details": {
+    "icon": "🎍",
+    "title": "Five Stalks",
+    "description": "Get five yahtzees in one game.",
+    "glass": "bamboo",
+  },
+}, {
   "id": 104,
   "criteria": {
     "y": 4,
@@ -117,6 +196,7 @@ const yahtzeeCriteria = [{
     "icon": "🍀",
     "title": "Four-Leaf",
     "description": "Get four yahtzees in one game.",
+    "glass": "shamrock",
   },
 }, {
   "id": 103,
@@ -150,10 +230,114 @@ const yahtzeeCriteria = [{
   },
 },];
 
+const totalYahtzeeCriteria = [{
+  "id": 505,
+  "criteria": {
+    "totalYahtzees": 1000,
+  },
+  "details": {
+    "icon": "🥞",
+    "title": "Stack Stacker",
+    "description": "Get 1000 yahtzees.",
+  },
+}, {
+  "id": 504,
+  "criteria": {
+    "totalYahtzees": 200,
+  },
+  "details": {
+    "icon": "🫛",
+    "title": "Pod Pocketer",
+    "description": "Get 200 yahtzees.",
+  },
+}, {
+  "id": 503,
+  "criteria": {
+    "totalYahtzees": 100,
+  },
+  "details": {
+    "icon": "🎰",
+    "title": "Lotto Lover",
+    "description": "Get 100 yahtzees.",
+  },
+}, {
+  "id": 502,
+  "criteria": {
+    "totalYahtzees": 50,
+  },
+  "details": {
+    "icon": "🪤",
+    "title": "Cheese Chaser",
+    "description": "Get 50 yahtzees.",
+  },
+}, {
+  "id": 501,
+  "criteria": {
+    "totalYahtzees": 10,
+  },
+  "details": {
+    "icon": "🪎",
+    "title": "Treasure Tracker",
+    "description": "Get 10 yahtzees.",
+  },
+},];
+
+const totalBonusYahtzeeCriteria = [{
+  "id": 605,
+  "criteria": {
+    "totalBonusYahtzees": 1000,
+  },
+  "details": {
+    "icon": "🌊",
+    "title": "Tubular",
+    "description": "Get 1000 bonus yahtzees.",
+  },
+}, {
+  "id": 604,
+  "criteria": {
+    "totalBonusYahtzees": 200,
+  },
+  "details": {
+    "icon": "🌌",
+    "title": "Nebular",
+    "description": "Get 200 bonus yahtzees.",
+  },
+}, {
+  "id": 603,
+  "criteria": {
+    "totalBonusYahtzees": 100,
+  },
+  "details": {
+    "icon": "🌎",
+    "title": "Globular",
+    "description": "Get 100 bonus yahtzees.",
+  },
+}, {
+  "id": 602,
+  "criteria": {
+    "totalBonusYahtzees": 50,
+  },
+  "details": {
+    "icon": "🍗",
+    "title": "Bonular",
+    "description": "Get 50 bonus yahtzees.",
+  },
+}, {
+  "id": 601,
+  "criteria": {
+    "totalBonusYahtzees": 10,
+  },
+  "details": {
+    "icon": "🃏",
+    "title": "Jokular",
+    "description": "Get 10 bonus yahtzees.",
+  },
+},];
+
 const gameCriteria = [{
   "id": 1005,
   "criteria": {
-    "g": 1000,
+    "totalGames": 1000,
   },
   "details": {
     "icon": "🍁",
@@ -163,7 +347,7 @@ const gameCriteria = [{
 }, {
   "id": 1004,
   "criteria": {
-    "g": 100,
+    "totalGames": 100,
   },
   "details": {
     "icon": "💊",
@@ -173,7 +357,7 @@ const gameCriteria = [{
 }, {
   "id": 1003,
   "criteria": {
-    "g": 50,
+    "totalGames": 50,
   },
   "details": {
     "icon": "🥜",
@@ -183,7 +367,7 @@ const gameCriteria = [{
 }, {
   "id": 1002,
   "criteria": {
-    "g": 20,
+    "totalGames": 20,
   },
   "details": {
     "icon": "🌳",
@@ -193,7 +377,7 @@ const gameCriteria = [{
 }, {
   "id": 1001,
   "criteria": {
-    "g": 10,
+    "totalGames": 10,
   },
   "details": {
     "icon": "🕹",
@@ -232,30 +416,53 @@ const subbingOut = [{
 
 export function generateData(history) {
   function getBestTrophy(category, historyItem) {
+    const criterionIsMet = ([criterion, goal]) => goal ? historyItem[criterion] >= goal : historyItem[criterion] == goal;
     for (const trophy of category) {
-      if (Object.entries(trophy.criteria).every(([criterion, value]) => criterion != "g" && value ? historyItem[criterion] >= value : historyItem[criterion] == value)) {
+      if (Object.entries(trophy.criteria).every(criterionIsMet)) {
+        if (oneTimeCategories.has(category)) {
+          if (unavailableTrophies.includes(trophy)) {
+            // Funny quirk that I'm leaving in: It's possible to skip a trophy if you play too well in one game
+            return;
+          }
+          unavailableTrophies.push(trophy);
+        }
         return trophy;
       }
     }
   }
   
   const categories = [
-    scoreCriteria,
     yahtzeeCriteria,
-    gameCriteria,
+    totalYahtzeeCriteria,
+    totalBonusYahtzeeCriteria,
+    scoreCriteria,
     yaouw,
     subbingOut,
+    gameCriteria,
   ]
   
   const trophyIds = []; // For order
   const trophyDetails = {};
   let gameCount = 0;
+  let yahtzeeCount = 0;
+  let bonusYahtzeeCount = 0;
+  
+  const oneTimeCategories = new Set([
+    gameCriteria,
+    totalYahtzeeCriteria,
+    totalBonusYahtzeeCriteria,
+  ]);
+  const unavailableTrophies = [];
   
   // Oldest first
   history.sort((a, b) => a.t - b.t);
   for (const historyItem of history) {
     gameCount += 1;
-    historyItem.g = gameCount;
+    historyItem.totalGames = gameCount;
+    yahtzeeCount += historyItem.y ?? 0;
+    historyItem.totalYahtzees = yahtzeeCount;
+    bonusYahtzeeCount += Math.max(0, historyItem.y - 1 ?? 0);
+    historyItem.totalBonusYahtzees = bonusYahtzeeCount;
     for (const category of categories) {
       const trophy = getBestTrophy(category, historyItem);
       if (!trophy) {

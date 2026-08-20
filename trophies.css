@@ -29,14 +29,14 @@
   color: #eb5757;
 }
 .trophy.mega {
-  background-color: #dee7ed;
+  background-color: #dee9ed;
 }
 
 .trophy.smega:hover .trophy-icon {
   color: #c1a000;
 }
 .trophy.smega {
-  background-color: #f4e1eb;
+  background-color: #f7e3e9;
 }
 
 .trophy.explosion:hover .trophy-icon {
@@ -44,6 +44,55 @@
 }
 .trophy.explosion {
   background-color: #f9d4bc;
+}
+
+.trophy.bone:hover .trophy-icon {
+  color: #c0c1bd;
+}
+.trophy.bone {
+  background-color: #e9eadc;
+}
+
+.trophy.skull:hover .trophy-icon {
+  color: #a0aca3;
+}
+.trophy.skull {
+  background-color: #e5e8e3;
+}
+
+.trophy.crossbones:hover .trophy-icon {
+  color: #879292;
+}
+.trophy.crossbones {
+  background-color: #e0e6e2;
+}
+
+.trophy.shamrock .trophy-icon {
+  color: #85c1a0;
+}
+.trophy.shamrock {
+  background-color: #d2efd2;
+}
+
+.trophy.bamboo .trophy-icon {
+  color: #959a42;
+}
+.trophy.bamboo {
+  background-color: #e6f0c2;
+}
+
+.trophy.devil .trophy-icon {
+  color: #9f81bb;
+}
+.trophy.devil {
+  background-color: #ecdfe5;
+}
+
+.trophy.shuriken .trophy-icon {
+  color: #8f8f8f;
+}
+.trophy.shuriken {
+  background-color: #f5e1db;
 }
 
 .trophy.yaouw .trophy-icon {
@@ -54,7 +103,7 @@
 }
 
 .trophy.submarine .trophy-icon {
-  color: #cbb64d;
+  color: #c9b854;
 }
 .trophy.submarine {
   background-color: #f1ecac;

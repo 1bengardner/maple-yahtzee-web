@@ -79,7 +79,7 @@ function prepareYahtzee() {
             backgroundColor: "floralwhite",
             filter: "saturate(1.5)",
           }, {
-            backgroundColor: "yaouw",
+            backgroundColor: "",
             filter: "saturate(1)",
           },
         ], 

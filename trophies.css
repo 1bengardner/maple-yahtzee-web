@@ -3,7 +3,7 @@
 }
 
 .trophy.shroom:hover .trophy-icon {
-  color: #ed9059;
+  color: #ef884d;
 }
 
 .trophy.pig:hover .trophy-icon {
@@ -29,14 +29,14 @@
   color: #eb5757;
 }
 .trophy.mega {
-  background-color: #d4e0ed;
+  background-color: #dee7ed;
 }
 
 .trophy.smega:hover .trophy-icon {
-  color: #c5a91e;
+  color: #c1a000;
 }
 .trophy.smega {
-  background-color: #f3ddec;
+  background-color: #f4e1eb;
 }
 
 .trophy.explosion:hover .trophy-icon {
@@ -47,15 +47,15 @@
 }
 
 .trophy.yaouw .trophy-icon {
-  color: #abb9b3;
+  color: #abbab4;
 }
 .trophy.yaouw {
   background-color: #dae7e2;
 }
 
 .trophy.submarine .trophy-icon {
-  color: #c7c782;
+  color: #cbb64d;
 }
 .trophy.submarine {
-  background-color: #ebebb5;
+  background-color: #f1ecac;
 }

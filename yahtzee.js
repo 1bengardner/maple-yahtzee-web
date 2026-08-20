@@ -255,6 +255,10 @@ function attachZoomHandler() {
     this.classList.add("stay");
     document.getElementById("mainframe").style.transformOrigin = "top";
     document.getElementById("mainframe").style.scale = document.getElementById("mainframe").style.scale == target ? "" : target;
+}
+function attachHelpHandler() {
+  document.querySelector(".help").addEventListener("click", () => {
+    modal.help(document.body);
   });
 }
 function createTrophiesButton() {
@@ -279,6 +283,7 @@ function attachTrophiesHandler() {
   });
 }
 attachZoomHandler();
+attachHelpHandler();
 let history = JSON.parse(localStorage.getItem(StorageKeys.HISTORY));
 createTrophiesButton();
 globalThis.yobject = prepareYahtzee();

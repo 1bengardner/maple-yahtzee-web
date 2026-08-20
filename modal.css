@@ -58,11 +58,16 @@
   font-size: 40px;
 }
 
+h1, h2, h3 {
+  font-weight: normal;
+}
 h1 {
   margin: 20px 0 10px;
   font-size: 28px;
-  font-weight: normal;
   text-transform: uppercase;
+}
+h2 {
+  font-size: 20px;
 }
 
 .subtitle {

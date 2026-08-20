@@ -18,7 +18,7 @@ button:disabled, input.hidden:disabled + label, #mainframe.loading {
 button.used:disabled, input.hidden.used:disabled + label {
   filter: contrast(0.25);
 }
-ol, ul {
+fieldset ol, fieldset ul {
   list-style-type: none;
   padding-left: 0;
 }
@@ -73,19 +73,26 @@ input.hidden:active:not(:disabled) + label.sel {
   display: flex;
   position: relative;
 }
-.zoom {
+.auxiliary {
+  display: inline-block;
   position: absolute;
   top: 0;
   right: 0;
+}
+.auxiliary button {
   border-radius: 50%;
   width: 28px;
   height: 28px;
   cursor: pointer;
+  margin-left: 4px;
 }
 @media (min-height: 500px) {
   .zoom:not(.stay) {
     display: none;
   }
+}
+.help-emphasis {
+  text-transform: uppercase;
 }
 #rollButton {
   color: whitesmoke;

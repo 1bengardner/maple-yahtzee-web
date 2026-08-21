@@ -87,6 +87,20 @@
   background-color: #e0e6e2;
 }
 
+.trophy.camel .trophy-icon {
+  color: sandybrown;
+}
+.trophy.camel {
+  background-color: bisque;
+}
+
+.trophy.cow .trophy-icon {
+  color: peru;
+}
+.trophy.cow {
+  background-color: wheat;
+}
+
 .trophy.shamrock .trophy-icon {
   color: #85c1a0;
 }
@@ -133,7 +147,7 @@
   color: #ccdfe0;
 }
 .trophy.diamond {
-  background-color: #e9edeb;
+  background-color: #e4ece8;
 }
 
 .trophy.comet .trophy-icon {

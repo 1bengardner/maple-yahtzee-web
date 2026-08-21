@@ -271,8 +271,9 @@ const yahtzeeCriteria = [{
   },
   "details": {
     "icon": "🐄",
-    "title": "Triple Nipple!",
+    "title": "Triple Nipple",
     "description": "Get a triple yahtzee.",
+    "glass": "cow",
   },
 }, {
   "id": 102,
@@ -281,8 +282,9 @@ const yahtzeeCriteria = [{
   },
   "details": {
     "icon": "🐫",
-    "title": "Double Trouble!",
+    "title": "Double Trouble",
     "description": "Get a double yahtzee.",
+    "glass": "camel",
   },
 }, {
   "id": 101,

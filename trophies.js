@@ -282,7 +282,7 @@ const yahtzeeCriteria = [{
   },
   "details": {
     "icon": "🐫",
-    "title": "Double Trouble",
+    "title": "Doubling Up",
     "description": "Get a double yahtzee.",
     "glass": "camel",
   },

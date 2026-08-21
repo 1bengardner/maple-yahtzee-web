@@ -15,7 +15,7 @@
 }
 
 .trophy.copper .trophy-icon {
-  outline: 1px solid sandybrown;
+  outline: 1px solid lightsalmon;
 }
 
 .trophy.snail:hover .trophy-icon {
@@ -109,7 +109,7 @@
 }
 
 .trophy.bamboo .trophy-icon {
-  color: #c0ba7c;
+  color: #a1a56f;
 }
 .trophy.bamboo {
   background-color: #e7efc3;
@@ -130,14 +130,14 @@
 }
 
 .trophy.envelope .trophy-icon {
-  color: #f6747f;
+  color: #ed6e85;
 }
 .trophy.envelope {
   background-color: #ffd8c2;
 }
 
 .trophy.dragon .trophy-icon {
-  color: #799358;
+  color: #8ba885;
 }
 .trophy.dragon {
   background-color: #dde9c4;

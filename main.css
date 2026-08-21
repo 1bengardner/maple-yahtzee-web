@@ -74,17 +74,21 @@ input.hidden:active:not(:disabled) + label.sel {
   position: relative;
 }
 .auxiliary {
-  display: inline-block;
+  display: inline-flex;
   position: absolute;
   top: 0;
-  right: 0;
+  left: calc(50% + 570px / 2 + 7px);
+  background: #00000064;
+  border-radius: 24px;
+  padding: 5px;
+  gap: 6px;
+  margin-left: 8px
 }
 .auxiliary button {
   border-radius: 50%;
   width: 28px;
   height: 28px;
   cursor: pointer;
-  margin-left: 4px;
 }
 @media (min-height: 500px) {
   .zoom:not(.stay) {

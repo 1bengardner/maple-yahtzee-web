@@ -175,6 +175,22 @@ input.hidden:active:not(:disabled) + label.sel {
   outline: 2px solid rebeccapurple;
   animation: pulse 1.5s steps(1) infinite;
 }
+#trophies {
+  height: 24px;
+  animation: enlarge 0.5s;
+}
+
+@keyframes enlarge {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.5;
+  }
+  100% {
+    scale: 1;
+  }
+}
 
 @keyframes spin {
   from {

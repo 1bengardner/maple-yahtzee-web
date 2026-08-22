@@ -77,7 +77,7 @@ input.hidden:active:not(:disabled) + label.sel {
   display: inline-flex;
   position: absolute;
   top: 0;
-  left: calc(50% + 570px / 2 + 7px);
+  left: max(570px - 32px, calc(50% + 570px / 2 + 7px));
   background: #00000064;
   border-radius: 24px;
   padding: 5px;

@@ -1,4 +1,8 @@
-import { generateData as generateTrophyData, getTopScore } from "./trophies.js";
+import {
+  getData as getTrophyData,
+  getTopScore,
+  getGameSound,
+} from "./trophies.js";
 
 const cache = {
   modals: {},
@@ -184,6 +188,11 @@ export function gameOver(parent, playAgain, { score, yahtzeeCount, gotBonus }) {
   document.getElementById("share")?.addEventListener("click", () => {
     share(score, yahtzeeCount);
   });
+  
+  const sound = getGameSound(score, yahtzeeCount, gotBonus);
+  if (sound) {
+    new Audio(`audio/${sound}`).play();
+  }
 }
 
 function createTrophyHtml({
@@ -215,7 +224,7 @@ export function trophies(parent, playHistory) {
     restoreModal(parent, cache.modals.trophies);
     return;
   }
-  const modalContent = generateTrophyData(playHistory).map(createTrophyHtml).reverse().join("");
+  const modalContent = getTrophyData(playHistory).map(createTrophyHtml).reverse().join("");
   const modalHeader = {
     htmlContent: `
       <div class="header">

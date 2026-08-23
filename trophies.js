@@ -497,7 +497,7 @@ const subbingOut = [{
   },
 },];
 
-export function generateData(history) {
+export function getData(history) {
   function getBestTrophy(category, historyItem) {
     const criterionIsMet = ([criterion, goal]) => goal ? historyItem[criterion] >= goal : historyItem[criterion] == goal;
     for (const trophy of category) {
@@ -565,6 +565,14 @@ export function generateData(history) {
   }
   
   return trophyIds.map(id => trophyDetails[id]);
+}
+
+export function getGameSound(score, yahtzeeCount, gotBonus) {
+  return getData([{
+    "p": score,
+    "y": yahtzeeCount,
+    "s": gotBonus,
+  }]).findLast(x => x.sound)?.sound;
 }
 
 export function getTopScore(history) {

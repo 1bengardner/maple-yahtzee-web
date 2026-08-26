@@ -230,6 +230,7 @@ const yahtzeeCriteria = [{
     "title": "Lucky Seven",
     "description": "Get seven yahtzees in one game.",
     "glass": "shuriken",
+    "flavour": "Words cannot express how lucky this is.",
   },
 }, {
   "id": 106,
@@ -241,6 +242,7 @@ const yahtzeeCriteria = [{
     "title": "Luck of the Devil",
     "description": "Get six yahtzees in one game.",
     "glass": "devil",
+    "flavour": "Did you sell your soul for this exceedingly rare occurrence?",
   },
 }, {
   "id": 105,
@@ -252,6 +254,7 @@ const yahtzeeCriteria = [{
     "title": "Five Stalks",
     "description": "Get five yahtzees in one game.",
     "glass": "bamboo",
+    "flavour": "What an extraordinary event!",
   },
 }, {
   "id": 104,
@@ -263,6 +266,7 @@ const yahtzeeCriteria = [{
     "title": "Four-Leaf",
     "description": "Get four yahtzees in one game.",
     "glass": "shamrock",
+    "flavour": "Incredible luck.",
   },
 }, {
   "id": 103,
@@ -422,6 +426,7 @@ const gameCriteria = [{
     "title": "True Mapler",
     "description": "Play 1000 games.",
     "glass": "platinum",
+    "flavour": "When people talked about utopia, this is what they had envisioned.",
   },
 }, {
   "id": 1004,
@@ -433,6 +438,7 @@ const gameCriteria = [{
     "title": "Addict",
     "description": "Play 100 games.",
     "glass": "gold",
+    "flavour": "&ldquo;We suggest you take a break from Mapling.&rdquo;",
   },
 }, {
   "id": 1003,

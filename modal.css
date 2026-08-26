@@ -203,8 +203,11 @@ h2 {
   align-items: end;
 }
 
-.trophy-footer .timestamp, .highlight-stat .preface {
+.trophy-footer .timestamp, .trophy-footer .flavour, .highlight-stat .preface {
   font-size: 12px;
+}
+.flavour {
+  font-style: italic;
 }
 
 .trophy-footer .count {

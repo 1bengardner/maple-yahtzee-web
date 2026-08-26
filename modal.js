@@ -205,7 +205,7 @@ function createTrophyHtml({
   count,
   flavour,
 }) {
-  const flavourHtml = flavour ? `<span class="flavour"> – ${flavour}</span>` : "";
+  const flavourHtml = flavour ? ` – <span class="flavour">${flavour}</span>` : "";
   const countHtml = count > 1 ? `<span class="count">×${count}</span>` : "";
   const onclickHtml = sound ? ` onclick="new Audio('audio/${sound}').play();"` : "";
   const classHtml = sound ? " grow" : "";

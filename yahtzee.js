@@ -307,6 +307,7 @@ async function adjustMode() {
   const viewMode = new URLSearchParams(window.location.search).get(VIEW_MODE_PARAM);
   const isMobile = navigator.userAgentData?.mobile || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   if (viewMode === ViewModes.MOBILE || viewMode === null && isMobile) {
+    const mobileContent = new DOMParser().parseFromString(await (await fetch("mobile.html")).text(), "text/html");
     document.head.appendChild(Object.assign(document.createElement("meta"), {
       name: "viewport",
       content: "width=device-width, initial-scale=1.0",
@@ -316,7 +317,6 @@ async function adjustMode() {
       type: "text/css",
       href: "mobile.css",
     }));
-    const mobileContent = new DOMParser().parseFromString(await (await fetch("mobile.html")).text(), "text/html");
     document.querySelector("main").replaceWith(mobileContent.querySelector("main"));
   } else if (viewMode === ViewModes.DESKTOP) {
     document.querySelector(".auxiliary").prepend(createNodeFromHtml(`
@@ -341,7 +341,11 @@ function attachTrophiesHandler() {
     modal.trophies(document.body, history);
   });
 }
-await adjustMode();
+try {
+  await adjustMode();
+} catch (error) {
+  console.warn(`Failed to load view mode!`, error);
+}
 attachMetaHandlers();
 let history = JSON.parse(localStorage.getItem(StorageKeys.HISTORY));
 createTrophiesButton();

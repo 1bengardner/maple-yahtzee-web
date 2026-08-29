@@ -23,19 +23,19 @@
 
 #arctualDiceFrame {
   min-height: 150px;
-  height: calc(100vh - 96px - 14px - 16px - 35px);
+  height: calc(100dvh - 96px - 14px - 16px - 35px);
   grid-column: 1;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(5, 1fr);
 }
 @media (max-height: 572px) {
   #arctualDiceFrame {
-    height: calc(100vh - 96px - 14px - 16px - 35px - 100vh + 573px);
+    height: calc(100dvh - 96px - 14px - 16px - 35px - 100dvh + 573px);
   }
 }
 @media (max-height: 538px) {
   #arctualDiceFrame {
-    height: calc(100vh - 96px - 14px - 16px);
+    height: calc(100dvh - 96px - 14px - 16px);
   }
 }
 

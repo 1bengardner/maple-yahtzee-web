@@ -200,6 +200,7 @@ input.hidden:active:not(:disabled) + label.sel {
   border: 4px ridge;
   margin: auto;
   margin-right: 8px;
+  grid-template-rows: 1fr 1fr;
 }
 
 #diceFrame {

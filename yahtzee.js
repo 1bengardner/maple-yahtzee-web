@@ -228,9 +228,9 @@ async function runYahtzee() {
   pyodide = await loadPyodide();
   document.title = oldTitle;
   await pyodide.runPython(await (await fetch("Yahtzee.py")).text());
-  attachHandlers();
+  attachGameHandlers();
 }
-function attachHandlers() {
+function attachGameHandlers() {
   document.getElementById("quitButton").addEventListener("click", () => {
     window.location = "/";
   });
@@ -262,6 +262,12 @@ function attachHandlers() {
     pyodide.globals.get(id.replace("Button", ""))();
   }));
 }
+function attachMetaHandlers() {
+  attachZoomHandler();
+  attachHelpHandler();
+  attachDesktopHandler();
+  attachMobileHandler();
+}
 function attachZoomHandler() {
   const target = document.querySelector("main");
   const targetValue = "0.8";
@@ -275,6 +281,48 @@ function attachHelpHandler() {
   document.querySelector(".help").addEventListener("click", () => {
     modal.help(document.body);
   });
+}
+const VIEW_MODE_PARAM = "view";
+const ViewModes = Object.freeze({
+  DESKTOP: "desktop",
+  MOBILE: "mobile",
+});
+function attachDesktopHandler() {
+  document.querySelector(".desktop")?.addEventListener("click", () => {
+    if (!confirm("Reload Maple Yahtzee in Desktop Mode?")) return;
+    const url = new URL("./", window.location.href);
+    url.searchParams.set(VIEW_MODE_PARAM, ViewModes.DESKTOP);
+    window.location.href = url.href;
+  });
+}
+function attachMobileHandler() {
+  document.querySelector(".mobile")?.addEventListener("click", () => {
+    if (!confirm("Reload Maple Yahtzee in Mobile Mode?")) return;
+    const url = new URL("./", window.location.href);
+    url.searchParams.set(VIEW_MODE_PARAM, ViewModes.MOBILE);
+    window.location.href = url.href;
+  });
+}
+async function adjustMode() {
+  const viewMode = new URLSearchParams(window.location.search).get(VIEW_MODE_PARAM);
+  const isMobile = navigator.userAgentData?.mobile || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if (viewMode === ViewModes.MOBILE || viewMode === null && isMobile) {
+    document.head.appendChild(Object.assign(document.createElement("meta"), {
+      name: "viewport",
+      content: "width=device-width, initial-scale=1.0",
+    }));
+    document.head.appendChild(Object.assign(document.createElement("link"), {
+      rel: "stylesheet",
+      type: "text/css",
+      href: "mobile.css",
+    }));
+    const mobileContent = new DOMParser().parseFromString(await (await fetch("mobile.html")).text(), "text/html");
+    document.querySelector("main").replaceWith(mobileContent.querySelector("main"));
+  } else if (viewMode === ViewModes.DESKTOP) {
+    document.querySelector(".auxiliary").prepend(createNodeFromHtml(`
+      <button class="mobile" title="Mobile Mode">📱</button>
+    `));
+  }
 }
 function createTrophiesButton() {
   if (!localStorage.getItem(StorageKeys.QUALIFIED_FOR_TROPHIES)) {
@@ -293,8 +341,8 @@ function attachTrophiesHandler() {
     modal.trophies(document.body, history);
   });
 }
-attachZoomHandler();
-attachHelpHandler();
+await adjustMode();
+attachMetaHandlers();
 let history = JSON.parse(localStorage.getItem(StorageKeys.HISTORY));
 createTrophiesButton();
 preloadAssets();

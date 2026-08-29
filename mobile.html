@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Maple Yahtzee!</title>
+  <title>Maple Yahtzee! Mobile</title>
   <meta charset="utf-8">
-  <meta name="description" content="Play Yahtzee!">
+  <meta name="description" content="Play Yahtzee! Mobile">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:title" content="Maple Yahtzee!">
   <meta property="og:description" content="Can you beat my score?">
   <meta property="og:image" content="https://bengardner.ca/games/yahtzee/extras/yahtzee-cup.png">
@@ -13,6 +14,7 @@
   <link rel="stylesheet" href="main.css">
   <link rel="stylesheet" href="modal.css">
   <link rel="stylesheet" href="trophies.css">
+  <link rel="stylesheet" href="mobile.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Emoji" rel="stylesheet">
@@ -21,7 +23,6 @@
 <body bgcolor="black" style="background-image: url('extras/bliss.png'); background-size: cover; background-repeat: no-repeat; image-rendering: pixelated;">
   <main style="position: relative;">
     <div id="mainframe">
-      <img src="yahtzee.gif">
       <div id="selectionFrame">
         <span class="container"><input type="radio" name="selection" id="sel1" class="hidden"></input><label for="sel1" id="onesButton" class="sel"></label></span>
         <span class="container"><input type="radio" name="selection" id="sel2" class="hidden"></input><label for="sel2" id="twosButton" class="sel"></label></span>
@@ -42,20 +43,28 @@
       
       <div id="diceFrame">
         <div id="arctualDiceFrame">
-          <img id="die1" class="die" src="cards.gif">
-          <img id="die2" class="die" src="cards.gif">
-          <img id="die3" class="die" src="cards.gif">
-          <img id="die4" class="die" src="cards.gif">
-          <img id="die5" class="die" src="cards.gif">
-          
-          <span class="container"><input type="checkbox" id="dieHold1" class="hidden"></input><label for="dieHold1" class="hold">Hold</label></span>
-          <span class="container"><input type="checkbox" id="dieHold2" class="hidden"></input><label for="dieHold2" class="hold">Hold</label></span>
-          <span class="container"><input type="checkbox" id="dieHold3" class="hidden"></input><label for="dieHold3" class="hold">Hold</label></span>
-          <span class="container"><input type="checkbox" id="dieHold4" class="hidden"></input><label for="dieHold4" class="hold">Hold</label></span>
-          <span class="container"><input type="checkbox" id="dieHold5" class="hidden"></input><label for="dieHold5" class="hold">Hold</label></span>
+          <span class="container"><img id="die1" class="die" src="cards.gif"><input type="checkbox" id="dieHold1" class="hidden"></input><label for="dieHold1" class="hold">Hold</label></span>
+          <span class="container"><img id="die2" class="die" src="cards.gif"><input type="checkbox" id="dieHold2" class="hidden"></input><label for="dieHold2" class="hold">Hold</label></span>
+          <span class="container"><img id="die3" class="die" src="cards.gif"><input type="checkbox" id="dieHold3" class="hidden"></input><label for="dieHold3" class="hold">Hold</label></span>
+          <span class="container"><img id="die4" class="die" src="cards.gif"><input type="checkbox" id="dieHold4" class="hidden"></input><label for="dieHold4" class="hold">Hold</label></span>
+          <span class="container"><img id="die5" class="die" src="cards.gif"><input type="checkbox" id="dieHold5" class="hidden"></input><label for="dieHold5" class="hold">Hold</label></span>
         </div>
         
         <div id="infoFrame">
+          <div style="text-align: center;">
+            <div style="position: relative; margin-bottom: 1em;">
+              <span id="scoreLabel">Score 0</span>
+            </div>
+            <button id="rollButton" class="action">Roll</button>
+          </div>
+          <fieldset>
+            <legend>Game Data</legend>
+            <ul>
+              <li id="rollCountLabel" style="margin-block: 8px;">Rolls Made: 0</li>
+              <li id="subTotalLabel" style="margin-block: 8px;">Sub Total: 0</li>
+              <li id="yahtzeeCountLabel" style="margin-block: 8px;">Yahtzees: 0</li>
+            </ul>
+          </fieldset>
           <fieldset>
             <legend>Values</legend>
             <ol>
@@ -67,21 +76,12 @@
               <li>Mano &ndash; 6</li>
             </ol>
           </fieldset>
-          <div style="position: relative;">
-            <span id="scoreLabel">Score 0</span>
-          </div>
-          <fieldset>
-            <legend>Game Data</legend>
-            <ul>
-              <li id="rollCountLabel" style="margin-block: 8px;">Rolls Made: 0</li>
-              <li id="subTotalLabel" style="margin-block: 8px;">Sub Total: 0</li>
-              <li id="yahtzeeCountLabel" style="margin-block: 8px;">Yahtzees: 0</li>
-            </ul>
-          </fieldset>
           
-          <button id="quitButton" class="action" style="justify-self: start;">Quit</button>
-          <button id="rollButton" class="action">Roll</button>
-          <button id="resetButton" class="action" style="justify-self: end;">Reset Game</button>
+          <div style="display: grid; gap: 1em; margin-left: auto; align-self: end; background: beige; border: 0.5em solid beige; border-radius: 4px;">
+            <img id="yahtzeeLogo" src="yahtzee.gif">
+            <button id="resetButton" class="action" style="justify-self: end;">Reset Game</button>
+            <button id="quitButton" class="action" style="justify-self: start;">Quit</button>
+          </div>
         </div>
       </div>
     </div>

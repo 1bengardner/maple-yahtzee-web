@@ -282,11 +282,7 @@ function createTrophiesButton() {
   }
   const firstSibling = document.getElementById("mainframe");
   firstSibling.parentNode.append(createNodeFromHtml(`
-    <div style="
-      margin: auto;
-      width: 570px;
-      margin-top: 1em;
-    ">
+    <div class="trophiesContainer">
       <button id="trophies">Trophies</button>
     </div>
   `));
@@ -301,8 +297,8 @@ attachZoomHandler();
 attachHelpHandler();
 let history = JSON.parse(localStorage.getItem(StorageKeys.HISTORY));
 createTrophiesButton();
+preloadAssets();
 globalThis.yobject = prepareYahtzee();
 var pyodide;
 showLoading();
-preloadAssets();
 runYahtzee().then(finishLoading);

@@ -98,6 +98,10 @@
   width: unset;
 }
 
+.die:has(+ input:checked) {
+  background-color: mistyrose;
+}
+
 /* Dynamic */
 
 #bonusYahtzee {

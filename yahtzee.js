@@ -89,7 +89,7 @@ function prepareYahtzee() {
       elem.animate(
         [
           {
-            backgroundColor: "floralwhite",
+            backgroundColor: "seashell",
             filter: "saturate(1.5)",
           }, {
             backgroundColor: "",

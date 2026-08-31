@@ -30,11 +30,16 @@ function createModal(parent, htmlContent, {
       </div>
     </div>
   `)
+  function clickClose() {
+    modal.remove();
+    new Audio("static/sfx/game/close.mp3").play();
+  }
   function esc(e) {
     if (e.key !== "Escape") {
       return;
     }
     modal.remove();
+    new Audio("static/sfx/game/close.mp3").play();
   }
   modal._remove = modal.remove;
   modal.remove = function() {
@@ -43,7 +48,7 @@ function createModal(parent, htmlContent, {
     console.debug("Modal closed.");
   }
   modal.addCloseListeners = function() {
-    document.querySelector(".modal .close").addEventListener("click", modal.remove);
+    document.querySelector(".modal .close").addEventListener("click", clickClose);
     document.addEventListener("keydown", esc);
   }
   
@@ -187,11 +192,12 @@ export function gameOver(parent, playAgain, { score, yahtzeeCount, gotBonus }) {
   });
   document.getElementById("share")?.addEventListener("click", () => {
     share(score, yahtzeeCount);
+    new Audio("static/sfx/game/bubbles.mp3").play();
   });
   
   const sound = getGameSound(score, yahtzeeCount, gotBonus);
   if (sound) {
-    new Audio(`static/sfx/${sound}`).play();
+    new Audio(`static/sfx/trophies/${sound}`).play();
   }
 }
 
@@ -207,7 +213,7 @@ function createTrophyHtml({
 }) {
   const flavourHtml = flavour ? ` – <span class="flavour">${flavour}</span>` : "";
   const countHtml = count > 1 ? `<span class="count">×${count}</span>` : "";
-  const onclickHtml = sound ? ` onclick="new Audio('static/sfx/${sound}').play();"` : "";
+  const onclickHtml = sound ? ` onclick="new Audio('static/sfx/trophies/${sound}').play();"` : "";
   const classHtml = sound ? " grow" : "";
   return `
     <div class="${["trophy", glass].filter(Boolean).join(" ")}">

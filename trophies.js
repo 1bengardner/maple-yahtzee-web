@@ -7,6 +7,7 @@ const scoreCriteria = [{
     "icon": "🪦",
     "title": "&ldquo;i cheated&rdquo;",
     "description": "Achieve an impossible score.",
+    "sound": "tombstone.mp3",
   },
 }, {
   "id": 12,

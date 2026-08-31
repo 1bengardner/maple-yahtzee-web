@@ -125,6 +125,9 @@ function prepareYahtzee() {
   ].map(id => document.getElementById(id));
   for (const elem of checkboxes) {
     elem.deselect = () => elem.checked = false;
+    elem.addEventListener("change", function() {
+      new Audio(`static/sfx/game/${this.checked ? "hold_on" : "hold_off"}.mp3`).play();
+    });
   }
   const flashyThings = [
     document.getElementById("subTotalLabel"),
@@ -144,12 +147,18 @@ function prepareYahtzee() {
       }
     );
   }
+  document.getElementById("subTotalLabel").oldFlash = document.getElementById("subTotalLabel").flash;
+  document.getElementById("subTotalLabel").flash = function() {
+    this.oldFlash();
+    navigator.vibrate?.(50);
+    new Audio("static/sfx/game/subtotal_bonus.mp3").play();
+  };
   document.getElementById("yahtzeeButton").celebrate = () => {
     navigator.vibrate?.(200);
-    new Audio("static/sfx/success.mp3").play();
+    new Audio("static/sfx/game/success.mp3").play();
   };
   document.getElementById("yahtzeeButton").fail = () => {
-    new Audio("static/sfx/failure.mp3").play();
+    new Audio("static/sfx/game/failure.mp3").play();
   };
   document.getElementById("subTotalLabel").setEmphasis = function(on) { this.style.fontStyle = on ? "italic" : "" };
   function gameOver(score, yahtzeeCount, gotBonus) {
@@ -252,15 +261,19 @@ async function runYahtzee() {
 function attachGameHandlers() {
   document.getElementById("quitButton").addEventListener("click", () => {
     window.location = "/";
+    new Audio("static/sfx/game/click.mp3").play();
   });
   document.getElementById("rollButton").addEventListener("click", () => {
     pyodide.globals.get("roll")();
+    new Audio("static/sfx/game/click.mp3").play();
   });
   document.getElementById("resetButton").addEventListener("click", () => {
     pyodide.globals.get("resetGame")();
+    new Audio("static/sfx/game/click.mp3").play();
   });
   document.getElementById("selectButton").addEventListener("click", () => {
     pyodide.globals.get("select")();
+    new Audio("static/sfx/game/plop.mp3").play();
   });
   
   [
@@ -279,6 +292,7 @@ function attachGameHandlers() {
     "yahtzeeButton",
   ].forEach(id => document.getElementById(id).previousElementSibling.addEventListener("click", () => {
     pyodide.globals.get(id.replace("Button", ""))();
+    new Audio("static/sfx/game/select.mp3").play();
   }));
 }
 function attachMetaHandlers() {
@@ -294,11 +308,13 @@ function attachZoomHandler() {
     this.classList.add("stay");
     target.style.transformOrigin = "top";
     target.style.scale = target.style.scale == targetValue ? "" : targetValue;
+    new Audio("static/sfx/game/plop.mp3").play();
   });
 }
 function attachHelpHandler() {
   document.querySelector(".help").addEventListener("click", () => {
     modal.help(document.body);
+    new Audio("static/sfx/game/bubbles.mp3").play();
   });
 }
 const VIEW_MODE_PARAM = "view";
@@ -308,6 +324,7 @@ const ViewModes = Object.freeze({
 });
 function attachDesktopHandler() {
   document.querySelector(".desktop")?.addEventListener("click", () => {
+    new Audio("static/sfx/game/click.mp3").play();
     if (!confirm("Reload Maple Yahtzee in Desktop Mode?")) return;
     const url = new URL("./", window.location.href);
     url.searchParams.set(VIEW_MODE_PARAM, ViewModes.DESKTOP);
@@ -316,6 +333,7 @@ function attachDesktopHandler() {
 }
 function attachMobileHandler() {
   document.querySelector(".mobile")?.addEventListener("click", () => {
+    new Audio("static/sfx/game/click.mp3").play();
     if (!confirm("Reload Maple Yahtzee in Mobile Mode?")) return;
     const url = new URL("./", window.location.href);
     url.searchParams.set(VIEW_MODE_PARAM, ViewModes.MOBILE);
@@ -358,6 +376,7 @@ function createTrophiesButton() {
 function attachTrophiesHandler() {
   document.getElementById("trophies").addEventListener("click", () => {
     modal.trophies(document.body, history);
+    new Audio("static/sfx/game/bubbles.mp3").play();
   });
 }
 try {

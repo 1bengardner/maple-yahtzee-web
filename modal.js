@@ -191,7 +191,7 @@ export function gameOver(parent, playAgain, { score, yahtzeeCount, gotBonus }) {
   
   const sound = getGameSound(score, yahtzeeCount, gotBonus);
   if (sound) {
-    new Audio(`audio/${sound}`).play();
+    new Audio(`static/sfx/${sound}`).play();
   }
 }
 
@@ -207,7 +207,7 @@ function createTrophyHtml({
 }) {
   const flavourHtml = flavour ? ` – <span class="flavour">${flavour}</span>` : "";
   const countHtml = count > 1 ? `<span class="count">×${count}</span>` : "";
-  const onclickHtml = sound ? ` onclick="new Audio('audio/${sound}').play();"` : "";
+  const onclickHtml = sound ? ` onclick="new Audio('static/sfx/${sound}').play();"` : "";
   const classHtml = sound ? " grow" : "";
   return `
     <div class="${["trophy", glass].filter(Boolean).join(" ")}">

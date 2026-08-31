@@ -362,11 +362,15 @@ def roll():
         die5value=number
     if die1value == die2value == die3value == die4value == die5value:
         if yahtzeeCount == 0:
-            if not usedYahtzee:
-                yobject.yahtzeeButton.flash()
+            if usedYahtzee:
+                yobject.yahtzeeButton2.fail()
+            else:
+                yobject.yahtzeeButton2.flash()
+                yobject.yahtzeeButton2.celebrate()
         else:
             bonusYahtzee = True
             yobject.bonusYahtzee(True)
+            yobject.yahtzeeButton2.celebrate()
     rollCount += 1
     yobject.rollCountLabel.setText("Rolls Made: "+str(rollCount))
     rollDisable()

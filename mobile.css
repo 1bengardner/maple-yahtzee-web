@@ -105,8 +105,10 @@
 /* Dynamic */
 
 #bonusYahtzee {
-  position: unset;
   translate: unset;
+  left: unset;
+  top: unset;
+  background-color: peachpuff;
 }
 
 /* Modal */

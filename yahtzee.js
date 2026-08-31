@@ -125,7 +125,7 @@ function prepareYahtzee() {
   }
   const flashyThings = [
     document.getElementById("subTotalLabel"),
-    document.getElementById("yahtzeeButton").previousElementSibling,
+    document.getElementById("yahtzeeButton"),
   ];
   for (const elem of flashyThings) {
     elem.flash = () => elem.animate(
@@ -141,6 +141,13 @@ function prepareYahtzee() {
       }
     );
   }
+  document.getElementById("yahtzeeButton").celebrate = () => {
+    navigator.vibrate?.(200);
+    new Audio("static/sfx/success.mp3").play();
+  };
+  document.getElementById("yahtzeeButton").fail = () => {
+    new Audio("static/sfx/failure.mp3").play();
+  };
   document.getElementById("subTotalLabel").setEmphasis = function(on) { this.style.fontStyle = on ? "italic" : "" };
   function gameOver(score, yahtzeeCount, gotBonus) {
     modal.gameOver(
@@ -198,6 +205,7 @@ function prepareYahtzee() {
     largeStraightButton: document.getElementById("largeStraightButton").previousElementSibling,
     chanceButton: document.getElementById("chanceButton").previousElementSibling,
     yahtzeeButton: document.getElementById("yahtzeeButton").previousElementSibling,
+    yahtzeeButton2: document.getElementById("yahtzeeButton"),
     selectButton: document.getElementById("selectButton"),
     quitButton: document.getElementById("quitButton"),
     rollButton: document.getElementById("rollButton"),

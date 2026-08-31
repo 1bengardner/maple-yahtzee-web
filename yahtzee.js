@@ -84,7 +84,7 @@ function prepareYahtzee() {
     "die5",
   ].map(id => document.getElementById(id));
   for (const elem of images) {
-    elem.setImage = image => {
+    elem.changeImage = image => {
       elem.src = image;
       elem.animate(
         [
@@ -101,6 +101,9 @@ function prepareYahtzee() {
           easing: "ease-in-out",
         }
       );
+    }
+    elem.setImage = image => {
+      elem.src = image;
     }
   }
   const labels = [
@@ -192,6 +195,14 @@ function prepareYahtzee() {
   }
   const yobject = {
     photoList: ["one.gif", "two.gif", "three.gif", "four.gif", "five.gif", "six.gif", "sel1.gif", "sel2.gif", "sel3.gif", "sel4.gif", "sel5.gif", "sel6.gif", "sel7.gif", "sel8.gif", "sel9.gif", "sel10.gif", "sel11.gif", "sel12.gif", "sel13.gif", "yahtzee.gif", "cards.gif"],
+    yPhotoList: [
+      "one_y.gif",
+      "two_y.gif",
+      "three_y.gif",
+      "four_y.gif",
+      "five_y.gif",
+      "six_y.gif",
+    ],
     onesButton: document.getElementById("onesButton").previousElementSibling,
     twosButton: document.getElementById("twosButton").previousElementSibling,
     threesButton: document.getElementById("threesButton").previousElementSibling,

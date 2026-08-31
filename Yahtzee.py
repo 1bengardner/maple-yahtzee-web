@@ -15,11 +15,11 @@ def diceReset():
     global die5value
     potentialScore = 0
     rollCount = 0
-    yobject.die1.setImage(yobject.photoList[20])
-    yobject.die2.setImage(yobject.photoList[20])
-    yobject.die3.setImage(yobject.photoList[20])
-    yobject.die4.setImage(yobject.photoList[20])
-    yobject.die5.setImage(yobject.photoList[20])
+    yobject.die1.changeImage(yobject.photoList[20])
+    yobject.die2.changeImage(yobject.photoList[20])
+    yobject.die3.changeImage(yobject.photoList[20])
+    yobject.die4.changeImage(yobject.photoList[20])
+    yobject.die5.changeImage(yobject.photoList[20])
     die1value=0
     die2value=0
     die3value=0
@@ -342,35 +342,40 @@ def roll():
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     if yobject.dieHold1.checked == False or die1value == 0:
         number = random.randrange(1,7)
-        yobject.die1.setImage(yobject.photoList[number-1])
+        yobject.die1.changeImage(yobject.photoList[number-1])
         die1value=number
     if yobject.dieHold2.checked == False or die2value == 0:
         number = random.randrange(1,7)
-        yobject.die2.setImage(yobject.photoList[number-1])
+        yobject.die2.changeImage(yobject.photoList[number-1])
         die2value=number
     if yobject.dieHold3.checked == False or die3value == 0:
         number = random.randrange(1,7)
-        yobject.die3.setImage(yobject.photoList[number-1])
+        yobject.die3.changeImage(yobject.photoList[number-1])
         die3value=number
     if yobject.dieHold4.checked == False or die4value == 0:
         number = random.randrange(1,7)
-        yobject.die4.setImage(yobject.photoList[number-1])
+        yobject.die4.changeImage(yobject.photoList[number-1])
         die4value=number
     if yobject.dieHold5.checked == False or die5value == 0:
         number = random.randrange(1,7)
-        yobject.die5.setImage(yobject.photoList[number-1])
+        yobject.die5.changeImage(yobject.photoList[number-1])
         die5value=number
     if die1value == die2value == die3value == die4value == die5value:
+        if not (yahtzeeCount == 0 and usedYahtzee):
+            yobject.die1.setImage(yobject.yPhotoList[die1value-1])
+            yobject.die2.setImage(yobject.yPhotoList[die1value-1])
+            yobject.die3.setImage(yobject.yPhotoList[die1value-1])
+            yobject.die4.setImage(yobject.yPhotoList[die1value-1])
+            yobject.die5.setImage(yobject.yPhotoList[die1value-1])
+            yobject.yahtzeeButton2.celebrate()
         if yahtzeeCount == 0:
             if usedYahtzee:
                 yobject.yahtzeeButton2.fail()
             else:
                 yobject.yahtzeeButton2.flash()
-                yobject.yahtzeeButton2.celebrate()
         else:
             bonusYahtzee = True
             yobject.bonusYahtzee(True)
-            yobject.yahtzeeButton2.celebrate()
     rollCount += 1
     yobject.rollCountLabel.setText("Rolls Made: "+str(rollCount))
     rollDisable()

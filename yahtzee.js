@@ -150,11 +150,11 @@ function prepareYahtzee() {
   document.getElementById("subTotalLabel").oldFlash = document.getElementById("subTotalLabel").flash;
   document.getElementById("subTotalLabel").flash = function() {
     this.oldFlash();
-    navigator.vibrate?.(50);
+    navigator.vibrate?.(100);
     new Audio("static/sfx/game/subtotal_bonus.mp3").play();
   };
   document.getElementById("yahtzeeButton").celebrate = () => {
-    navigator.vibrate?.(200);
+    navigator.vibrate?.([200, 50, 100]);
     new Audio("static/sfx/game/success.mp3").play();
   };
   document.getElementById("yahtzeeButton").fail = () => {

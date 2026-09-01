@@ -77,6 +77,8 @@ def select():
     elif rollUsed == 13:
         yobject.yahtzeeButton.setState("used")
         usedYahtzee = True
+        if potentialScore == 50:
+            yahtzeeCount += 1
     selectionCount += 1
     totalScore += potentialScore
     if bonusYahtzee:
@@ -319,7 +321,6 @@ def yahtzee():
     potentialScore = 0
     if die1value == die2value == die3value == die4value == die5value and die1value != 0:
         potentialScore = 50
-        yahtzeeCount += 1
     yobject.rollScore.setText("Roll Value: "+str(potentialScore))
     rollUsed = 13
     yobject.selectButton.setState("normal")

@@ -48,6 +48,7 @@ function preloadAssets() {
     "static/sfx/game/close.mp3",
     "static/sfx/game/bubbles.mp3",
     "static/sfx/game/hold_off.mp3",
+    "static/sfx/game/start.mp3",
     "static/sfx/game/subtotal_bonus.mp3",
     "static/sfx/game/success.mp3",
     "static/sfx/game/failure.mp3",
@@ -303,7 +304,7 @@ function attachGameHandlers() {
   });
   document.getElementById("resetButton").addEventListener("click", () => {
     pyodide.globals.get("resetGame")();
-    new Audio("static/sfx/game/click.mp3").play();
+    new Audio("static/sfx/game/start.mp3").play();
   });
   document.getElementById("selectButton").addEventListener("click", () => {
     pyodide.globals.get("select")();

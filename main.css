@@ -277,12 +277,12 @@ input.hidden:active:not(:disabled) + label.sel {
 @keyframes damage {
   0% {
     opacity: 1;
-    top: -3em;
+    transform: translateY(0);
   } 50% {
     opacity: 1;
-    top: -4em;
+    transform: translateY(-1em);
   } 100% {
     opacity: 0;
-    top: -5em;
+    transform: translateY(-2em);
   }
 }

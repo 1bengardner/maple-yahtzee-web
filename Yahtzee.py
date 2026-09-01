@@ -30,7 +30,7 @@ def diceReset():
     yobject.dieHold3.deselect()
     yobject.dieHold4.deselect()
     yobject.dieHold5.deselect()
-    yobject.rollScore.setText("Roll Value: "+str(potentialScore))
+    yobject.rollScore.setText("")
     yobject.rollButton.setState("normal")
     yobject.rollCountLabel.setText("Rolls Made: "+str(rollCount))
     selectionDisable()
@@ -339,7 +339,7 @@ def roll():
     rollUsed = 0
     bonusYahtzee = False
     yobject.bonusYahtzee(False)
-    yobject.rollScore.setText("Roll Value: "+str(potentialScore))
+    yobject.rollScore.setText("")
     if yobject.dieHold1.checked == False or die1value == 0:
         number = random.randrange(1,7)
         yobject.die1.changeImage(yobject.photoList[number-1])
@@ -456,7 +456,7 @@ def resetGame():
     usedYahtzee=False
     usedSelections.clear()
 
-    yobject.rollScore.setText("Roll Value: "+str(potentialScore))
+    yobject.rollScore.setText("")
     yobject.scoreLabel.setText("SCORE "+str(totalScore))
     yobject.yahtzeeCountLabel.setText("Yahtzees: "+str(yahtzeeCount))
     yobject.subTotalLabel.setText("Sub Total: "+str(subTotal))

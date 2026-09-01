@@ -30,9 +30,29 @@ function preloadAssets() {
     "four.gif",
     "five.gif",
     "six.gif",
+    "one_y.gif",
+    "two_y.gif",
+    "three_y.gif",
+    "four_y.gif",
+    "five_y.gif",
+    "six_y.gif",
   ]) {
     const img = new Image();
     img.src = src;
+  }
+  for (const src of [
+    "static/sfx/game/click.mp3",
+    "static/sfx/game/hold_on.mp3",
+    "static/sfx/game/select.mp3",
+    "static/sfx/game/plop.mp3",
+    "static/sfx/game/close.mp3",
+    "static/sfx/game/bubbles.mp3",
+    "static/sfx/game/hold_off.mp3",
+    "static/sfx/game/subtotal_bonus.mp3",
+    "static/sfx/game/success.mp3",
+    "static/sfx/game/failure.mp3",
+  ]) {
+    new Audio(src);
   }
 }
 function prepareYahtzee() {

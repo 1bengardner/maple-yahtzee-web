@@ -80,15 +80,18 @@ def select():
         if potentialScore == 50:
             yahtzeeCount += 1
     selectionCount += 1
-    totalScore += potentialScore
+    intermediateScore = potentialScore
     if bonusYahtzee:
-        totalScore += 100
+        intermediateScore += 100
         yahtzeeCount += 1
     if subTotal >= 63 and subTotalBonus == False:
-        totalScore += 35
+        intermediateScore += 35
         subTotalBonus = True
         yobject.subTotalLabel.flash();
         yobject.subTotalLabel.setEmphasis(True);
+    if intermediateScore:
+        yobject.showIncrement(intermediateScore)
+    totalScore += intermediateScore
     yobject.yahtzeeCountLabel.setText("Yahtzees: "+str(yahtzeeCount))
     yobject.subTotalLabel.setText("Sub Total: "+str(subTotal))
     yobject.scoreLabel.setText("SCORE "+str(totalScore))

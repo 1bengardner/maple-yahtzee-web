@@ -174,14 +174,25 @@ input.hidden:active:not(:disabled) + label.sel {
 #mainframe.loading {
   animation: spin 2s ease infinite;
 }
-#bonusYahtzee {
+#bonusYahtzee, .damageNumber {
   position: absolute;
   top: -3em;
   left: 50%;
   translate: -50%;
   text-align: center;
-  width: 140px;
   padding: 2px;
+  animation: damage 1.5s linear forwards;
+}
+.damageNumber > * {
+  font-style: italic;
+  color: orangered;
+  font-size: 32px;
+  text-shadow:
+  -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 0px -1px 0 #fff, 0px 1px 0 #fff, -1px 0px 0 #fff, 1px 0px 0 #fff,
+  -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -1px -2px 0 #000, 1px -2px 0 #000, -1px 2px 0 #000, 1px 2px 0 #000, -2px -1px 0 #000, 2px -1px 0 #000, -2px 1px 0 #000, 2px 1px 0 #000;
+}
+#bonusYahtzee {
+  width: 140px;
   color: indigo;
   outline: 2px solid rebeccapurple;
   animation: pulse 1.5s steps(1) infinite;
@@ -235,11 +246,9 @@ input.hidden:active:not(:disabled) + label.sel {
 @keyframes enlarge {
   0% {
     scale: 1;
-  }
-  50% {
+  } 50% {
     scale: 1.5;
-  }
-  100% {
+  } 100% {
     scale: 1;
   }
 }
@@ -247,8 +256,7 @@ input.hidden:active:not(:disabled) + label.sel {
 @keyframes spin {
   from {
     transform: rotate3d(1, 1, 1, 0deg);
-  }
-  to {
+  } to {
     transform: rotate3d(3, 8, 10, 360deg);
   }
 }
@@ -256,11 +264,22 @@ input.hidden:active:not(:disabled) + label.sel {
 @keyframes pulse {
   0% {
     outline-color: rebeccapurple;
-  }
-  50% {
+  } 50% {
+    outline-color: transparent;
+  } 100% {
     outline-color: transparent;
   }
-  100% {
-    outline-color: transparent;
+}
+
+@keyframes damage {
+  0% {
+    opacity: 1;
+    top: -3em;
+  } 50% {
+    opacity: 1;
+    top: -4em;
+  } 100% {
+    opacity: 0;
+    top: -5em;
   }
 }

@@ -191,16 +191,29 @@ function prepareYahtzee() {
   }
   function bonusYahtzee(on) {
     const target = document.getElementById("scoreLabel");
+    if (document.getElementById("bonusYahtzee")) {
+      document.getElementById("bonusYahtzee").remove();
+    }
     if (on) {
       target.before(createNodeFromHtml(`
         <div id="bonusYahtzee">
           <div style="font-style: italic;">Bonus Yahtzee!</div>
           <div>Joker Rules apply</div>
         </div>
-      `.trim()));
-    } else if (target.previousElementSibling) {
-      target.previousElementSibling.remove();
+      `));
     }
+  }
+  function damageNumber(damage) {
+    const target = document.getElementById("scoreLabel");
+    const dn = createNodeFromHtml(`
+      <div class="damageNumber">
+        <span>${damage}</span>
+      </div>
+    `);
+    target.before(dn);
+    setTimeout(() => {
+      dn.remove();
+    }, 2000);
   }
   const yobject = {
     photoList: ["one.gif", "two.gif", "three.gif", "four.gif", "five.gif", "six.gif", "sel1.gif", "sel2.gif", "sel3.gif", "sel4.gif", "sel5.gif", "sel6.gif", "sel7.gif", "sel8.gif", "sel9.gif", "sel10.gif", "sel11.gif", "sel12.gif", "sel13.gif", "yahtzee.gif", "cards.gif"],
@@ -247,6 +260,7 @@ function prepareYahtzee() {
     dieHold5: document.getElementById("dieHold5"),
     gameOver,
     bonusYahtzee,
+    showIncrement: damageNumber,
   };
   return yobject;
 }

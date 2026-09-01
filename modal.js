@@ -54,7 +54,7 @@ function createModal(parent, htmlContent, {
   
   parent.appendChild(modal);
   modal.addCloseListeners();
-  document.querySelector(".modal-content").style.maxHeight = `calc(100vh - 120px - ${height})`;
+  document.querySelector(".modal-content").style.maxHeight = `calc(100dvh - 106px - ${height})`;
   return modal;
 }
 function restoreModal(parent, modal) {
@@ -244,7 +244,7 @@ export function trophies(parent, playHistory) {
           <span aria-hidden="true">🕹</span>${playHistory.length}
         </span>
       </div>`,
-    height: "32px",
+    height: "21px",
   };
   const modal = createModal(parent, modalContent, modalHeader);
   document.querySelector(".modal").ariaLabel = "Trophy Case";

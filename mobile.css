@@ -105,8 +105,7 @@
 /* Dynamic */
 
 #bonusYahtzee {
-  translate: unset;
-  left: unset;
+  width: 100%;
   top: unset;
   background-color: peachpuff;
 }

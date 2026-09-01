@@ -4,6 +4,16 @@ import random
 def gameOver():
     yobject.rollButton.setState("disabled")
     yobject.gameOver(totalScore, yahtzeeCount, subTotalBonus)
+    if totalScore >= 500:
+        yobject.rollScore.setText("Wow!")
+    elif totalScore >= 400:
+        yobject.rollScore.setText("Very Nice!")
+    elif totalScore >= 300:
+        yobject.rollScore.setText("Well Done!")
+    elif totalScore >= 200:
+        yobject.rollScore.setText("Good Game!")
+    else:
+        yobject.rollScore.setText("Play Again?")
 
 def diceReset():
     global rollCount

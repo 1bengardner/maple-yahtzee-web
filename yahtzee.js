@@ -171,11 +171,11 @@ function prepareYahtzee() {
   document.getElementById("subTotalLabel").oldFlash = document.getElementById("subTotalLabel").flash;
   document.getElementById("subTotalLabel").flash = function() {
     this.oldFlash();
-    navigator.vibrate?.(75);
+    navigator.vibrate?.([5, 6, 5, 5, 5, 4, 5, 3, 5, 2, 5, 1, 5, 1, 5, 0, 5, 0, 5, 0, 5, 0, 5, 1, 5, 1, 5, 2, 5, 3, 5, 4, 5, 5, 5, 6, 5, 7, 5, 8, 5, 9, 5, 9, 5, 10, 5, 10, 5, 11, 5, 11, 5, 12, 5, 12, 5, 12, 5, 12, 5, 12, 5, 13, 5, 13, 5, 13, 5, 13, 5, 13, 5, 13, 5, 13, 5, 13, 5, 13, 5, 13, 5, 13, 5, 13, 5, 13, 5, 13, 5, 14, 5, 14, 5, 14, 5, 15, 5, 15, 5, 15, 5, 16, 5, 17, 5, 17, 5, 18, 5, 19, 5, 20, 5, 21, 5, 21, 5, 22, 5, 23, 5, 24, 5, 24, 5]);
     new Audio("static/sfx/game/subtotal_bonus.mp3").play();
   };
   document.getElementById("yahtzeeButton").celebrate = () => {
-    navigator.vibrate?.([200, 50, 125]);
+    navigator.vibrate?.([200, 50, 100]);
     new Audio("static/sfx/game/success.mp3").play();
   };
   document.getElementById("yahtzeeButton").fail = () => {

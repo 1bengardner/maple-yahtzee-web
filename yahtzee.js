@@ -24,18 +24,18 @@ function finishLoading() {
 }
 function preloadAssets() {
   for (const src of [
-    "one.gif",
-    "two.gif",
-    "three.gif",
-    "four.gif",
-    "five.gif",
-    "six.gif",
-    "one_y.gif",
-    "two_y.gif",
-    "three_y.gif",
-    "four_y.gif",
-    "five_y.gif",
-    "six_y.gif",
+    "static/img/one.gif",
+    "static/img/two.gif",
+    "static/img/three.gif",
+    "static/img/four.gif",
+    "static/img/five.gif",
+    "static/img/six.gif",
+    "static/img/one_y.gif",
+    "static/img/two_y.gif",
+    "static/img/three_y.gif",
+    "static/img/four_y.gif",
+    "static/img/five_y.gif",
+    "static/img/six_y.gif",
   ]) {
     const img = new Image();
     img.src = src;
@@ -236,16 +236,26 @@ function prepareYahtzee() {
       dn.remove();
     }, 2000);
   }
+  const photoList = ["static/img/one.gif", "static/img/two.gif", "static/img/three.gif", "static/img/four.gif", "static/img/five.gif", "static/img/six.gif", "static/img/sel1.gif", "static/img/sel2.gif", "static/img/sel3.gif", "static/img/sel4.gif", "static/img/sel5.gif", "static/img/sel6.gif", "static/img/sel7.gif", "static/img/sel8.gif", "static/img/sel9.gif", "static/img/sel10.gif", "static/img/sel11.gif", "static/img/sel12.gif", "static/img/sel13.gif", "static/img/yahtzee.gif", "static/img/cards.gif"];
+  const yPhotoList = [
+    "static/img/one_y.gif",
+    "static/img/two_y.gif",
+    "static/img/three_y.gif",
+    "static/img/four_y.gif",
+    "static/img/five_y.gif",
+    "static/img/six_y.gif",
+  ];
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    console.info("Reduced motion preferred. Using still images.");
+    for (let i = 0; i <= 5; i++) {
+      for (const list of [photoList, yPhotoList]) {
+        list[i] = list[i].replace(".gif", "_still.gif");
+      }
+    }
+  }
   const yobject = {
-    photoList: ["one.gif", "two.gif", "three.gif", "four.gif", "five.gif", "six.gif", "sel1.gif", "sel2.gif", "sel3.gif", "sel4.gif", "sel5.gif", "sel6.gif", "sel7.gif", "sel8.gif", "sel9.gif", "sel10.gif", "sel11.gif", "sel12.gif", "sel13.gif", "yahtzee.gif", "cards.gif"],
-    yPhotoList: [
-      "one_y.gif",
-      "two_y.gif",
-      "three_y.gif",
-      "four_y.gif",
-      "five_y.gif",
-      "six_y.gif",
-    ],
+    photoList,
+    yPhotoList,
     onesButton: document.getElementById("onesButton").previousElementSibling,
     twosButton: document.getElementById("twosButton").previousElementSibling,
     threesButton: document.getElementById("threesButton").previousElementSibling,

@@ -113,44 +113,44 @@ input.hidden:active:not(:disabled) + label.sel {
   background-color: gold;
 }
 #onesButton {
-  background-image: url("sel1.gif");
+  background-image: url("static/img/sel1.gif");
 }
 #twosButton {
-  background-image: url("sel2.gif");
+  background-image: url("static/img/sel2.gif");
 }
 #threesButton {
-  background-image: url("sel3.gif");
+  background-image: url("static/img/sel3.gif");
 }
 #foursButton {
-  background-image: url("sel4.gif");
+  background-image: url("static/img/sel4.gif");
 }
 #fivesButton {
-  background-image: url("sel5.gif");
+  background-image: url("static/img/sel5.gif");
 }
 #sixesButton {
-  background-image: url("sel6.gif");
+  background-image: url("static/img/sel6.gif");
 }
 #threeOfAKindButton {
-  background-image: url("sel7.gif");
+  background-image: url("static/img/sel7.gif");
 }
 #fourOfAKindButton {
-  background-image: url("sel8.gif");
+  background-image: url("static/img/sel8.gif");
 }
 #fullHouseButton {
-  background-image: url("sel9.gif");
+  background-image: url("static/img/sel9.gif");
 }
 #smallStraightButton {
-  background-image: url("sel10.gif");
+  background-image: url("static/img/sel10.gif");
 }
 #largeStraightButton {
-  background-image: url("sel11.gif");
+  background-image: url("static/img/sel11.gif");
 }
 #chanceButton {
-  background-image: url("sel12.gif");
+  background-image: url("static/img/sel12.gif");
 }
 #yahtzeeButton {
   width: 80px;
-  background-image: url("sel13.gif");
+  background-image: url("static/img/sel13.gif");
 }
 #scoreLabel {
   text-transform: uppercase;

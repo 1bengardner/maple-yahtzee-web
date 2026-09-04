@@ -12,7 +12,7 @@ button, input.hidden + label {
 button:active:not(:disabled), input.hidden:checked + label {
   border: 2px inset;
 }
-button:disabled, input.hidden:disabled + label, #mainframe.loading {
+button:disabled, input.hidden:disabled + label {
   filter: contrast(0.5);
 }
 button.used:disabled, input.hidden.used:disabled + label {
@@ -188,6 +188,7 @@ input.hidden:active:not(:disabled) + label.sel {
 }
 #mainframe.loading {
   animation: spin 2s ease infinite;
+  filter: contrast(0.25);
 }
 #bonusYahtzee, .damageNumber {
   position: absolute;

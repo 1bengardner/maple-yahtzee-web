@@ -1,7 +1,6 @@
 #mainframe {
   width: unset;
   max-width: 800px;
-  position: relative;
   grid-template-columns: 1fr auto;
 }
 

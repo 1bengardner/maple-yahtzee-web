@@ -103,6 +103,20 @@ input.hidden:active:not(:disabled) + label.sel {
 .help-emphasis {
   text-transform: uppercase;
 }
+.overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  background-color: #ffdab9dd;
+  backdrop-filter: blur(1px);
+}
+.load {
+  font-size: 28px;
+}
 #rollButton {
   color: whitesmoke;
 }
@@ -170,6 +184,7 @@ input.hidden:active:not(:disabled) + label.sel {
   width: 570px;
   margin: auto;
   image-rendering: auto;
+  position: relative;
 }
 #mainframe.loading {
   animation: spin 2s ease infinite;

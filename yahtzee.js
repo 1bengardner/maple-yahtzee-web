@@ -424,6 +424,14 @@ function attachTrophiesHandler() {
     new Audio("static/sfx/game/bubbles.mp3").play();
   });
 }
+function loadGame() {
+  document.getElementById("rollScore").textContent = "Loading…";
+  new Audio("static/sfx/game/wizet.mp3").play();
+  
+  globalThis.yobject = prepareYahtzee();
+  showLoading();
+  runYahtzee().then(finishLoading);
+}
 try {
   await adjustMode();
 } catch (error) {
@@ -433,7 +441,11 @@ attachMetaHandlers();
 let history = JSON.parse(localStorage.getItem(StorageKeys.HISTORY));
 createTrophiesButton();
 preloadAssets();
-globalThis.yobject = prepareYahtzee();
 var pyodide;
-showLoading();
-runYahtzee().then(finishLoading);
+document.getElementById("loadGame").addEventListener("click", function() {
+  new Audio("static/sfx/game/click.mp3").play();
+});
+document.getElementById("loadOverlay").addEventListener("click", function() {
+  this.remove();
+  loadGame();
+});

@@ -1,3 +1,15 @@
+.trophy.blood:hover .trophy-icon {
+  color: tomato;
+  background-color: brown;
+}
+.trophy.blood .trophy-icon {
+  transition-property: color, background-color;
+  transition-duration: 0.6s;
+}
+.trophy.blood {
+  background-color: #f3c1bb;
+}
+
 .trophy.platinum .trophy-icon {
   outline: 5px solid aliceblue;
 }
@@ -168,7 +180,7 @@
   color: #9e8ac7;
 }
 .trophy.fortune {
-  background-color: #eeddf4;
+  background-color: #efe9f1;
 }
 
 .trophy.yaouw .trophy-icon {

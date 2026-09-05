@@ -165,6 +165,7 @@ const yahtzeeCriteria = [{
     "title": "Cassandra",
     "description": "Get 13 yahtzees in one game.",
     "glass": "fortune",
+    "flavour": "How did you do that?",
   },
 }, {
   "id": 112,
@@ -176,6 +177,7 @@ const yahtzeeCriteria = [{
     "title": "Spirit of the Zodiac",
     "description": "Get 12 yahtzees in one game.",
     "glass": "phoenix",
+    "flavour": "This is the Year of the Yahtzee.",
   },
 }, {
   "id": 111,
@@ -187,6 +189,7 @@ const yahtzeeCriteria = [{
     "title": "Make a Wish",
     "description": "Get 11 yahtzees in one game.",
     "glass": "comet",
+    "flavour": "Anything can happen now.",
   },
 }, {
   "id": 110,
@@ -198,6 +201,7 @@ const yahtzeeCriteria = [{
     "title": "Lab-Grown",
     "description": "Get 10 yahtzees in one game.",
     "glass": "diamond",
+    "flavour": "Was that real?",
   },
 }, {
   "id": 109,
@@ -209,6 +213,7 @@ const yahtzeeCriteria = [{
     "title": "Long Wang",
     "description": "Get nine yahtzees in one game.",
     "glass": "dragon",
+    "flavour": "Impressive beyond measure.",
   },
 }, {
   "id": 108,
@@ -220,6 +225,7 @@ const yahtzeeCriteria = [{
     "title": "Red Envelope",
     "description": "Get eight yahtzees in one game.",
     "glass": "envelope",
+    "flavour": "You have a gift.",
   },
 }, {
   "id": 107,
@@ -306,12 +312,12 @@ const yahtzeeCriteria = [{
 const totalYahtzeeCriteria = [{
   "id": 505,
   "criteria": {
-    "totalYahtzees": 1000,
+    "totalYahtzees": 500,
   },
   "details": {
     "icon": "🥞",
     "title": "Stack Stacker",
-    "description": "Get 1000 yahtzees.",
+    "description": "Get 500 yahtzees.",
     "glass": "platinum",
   },
 }, {
@@ -361,14 +367,27 @@ const totalYahtzeeCriteria = [{
 },];
 
 const totalBonusYahtzeeCriteria = [{
+  "id": 606,
+  "criteria": {
+    "totalBonusYahtzees": 1260,
+  },
+  "details": {
+    "icon": "🧛",
+    "title": "Dracular",
+    "description": "Get 1260 bonus yahtzees.",
+    "glass": "blood",
+    "sound": "laugh.mp3",
+    "flavour": "&ldquo;Run from the sun.&rdquo;",
+  },
+}, {
   "id": 605,
   "criteria": {
-    "totalBonusYahtzees": 1000,
+    "totalBonusYahtzees": 500,
   },
   "details": {
     "icon": "🌊",
     "title": "Tubular",
-    "description": "Get 1000 bonus yahtzees.",
+    "description": "Get 500 bonus yahtzees.",
     "glass": "platinum",
   },
 }, {

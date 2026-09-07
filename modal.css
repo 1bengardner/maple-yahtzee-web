@@ -181,7 +181,7 @@ h2 {
 
 .header {
   text-align: left;
-  margin-inline: calc(80px / 2);
+  margin-inline: calc(42px);
   position: relative;
 }
 

@@ -506,6 +506,7 @@ const yaouw = [{
     "title": "Yaouw!",
     "description": "Achieve a score of 250 with no yahtzee.",
     "glass": "yaouw",
+    "sound": "yaouw.mp3",
   },
 },];
 
@@ -520,6 +521,7 @@ const subbingOut = [{
     "title": "Subbing Out",
     "description": "Achieve a score of 250 with no subtotal bonus.",
     "glass": "submarine",
+    "sound": "yellow_submarine.mp3",
   },
 },];
 

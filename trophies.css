@@ -186,12 +186,18 @@
 .trophy.yaouw .trophy-icon {
   color: #abbab4;
 }
+.trophy.yaouw:hover .trophy-icon {
+  color: #799fab;
+}
 .trophy.yaouw {
   background-color: #dae7e2;
 }
 
 .trophy.submarine .trophy-icon {
-  color: #c9b854;
+  color: #c3b365;
+}
+.trophy.submarine:hover .trophy-icon {
+  color: #cab920;
 }
 .trophy.submarine {
   background-color: #f1ecac;

@@ -547,8 +547,8 @@ export function getData(history) {
     totalYahtzeeCriteria,
     totalBonusYahtzeeCriteria,
     scoreCriteria,
-    yaouw,
     subbingOut,
+    yaouw,
     gameCriteria,
   ]
   

@@ -112,7 +112,7 @@ const scoreCriteria = [{
   },
   "details": {
     "icon": "🫚",
-    "title": "Getting to the root of it",
+    "title": "Get to the root of it",
     "description": "Achieve a score of 250.",
     "glass": "root",
     "sound": "root.mp3",
@@ -293,7 +293,7 @@ const yahtzeeCriteria = [{
   },
   "details": {
     "icon": "🐫",
-    "title": "Doubling Up",
+    "title": "Double Up",
     "description": "Get a double yahtzee.",
     "glass": "camel",
   },
@@ -518,7 +518,7 @@ const subbingOut = [{
   },
   "details": {
     "icon": "🚢",
-    "title": "Subbing Out",
+    "title": "Sub Out",
     "description": "Achieve a score of 250 with no subtotal bonus.",
     "glass": "submarine",
     "sound": "yellow_submarine.mp3",

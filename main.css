@@ -116,6 +116,7 @@ input.hidden:active:not(:disabled) + label.sel {
 }
 .load {
   font-size: 28px;
+  box-shadow: 0px 0px 12px 8px peachpuff;
 }
 #rollButton {
   color: whitesmoke;

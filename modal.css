@@ -25,13 +25,13 @@
   background: beige;
   border: 3px solid peachpuff;
   border-radius: 8px;
-  padding: 30px;
-  margin: 8px;
+  padding: 18px;
+  margin-inline: 12px;
   margin-top: 20px;
   margin-bottom: auto;
   text-align: center;
   animation: pop 0.4s cubic-bezier(0.3, 2, 0.7, 1);
-  scrollbar-color: peachpuff transparent;
+  scrollbar-color: bisque transparent;
 }
 
 @keyframes pop {
@@ -161,6 +161,7 @@ h2 {
 
 .modal-content {
   overflow-y: auto;
+  padding: 8px;
 }
 
 .highlight-stat {
@@ -182,7 +183,8 @@ h2 {
 
 .header {
   text-align: left;
-  margin-inline: calc(42px);
+  margin-top: 6px;
+  margin-inline: 48px;
   position: relative;
 }
 

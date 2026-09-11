@@ -3,6 +3,7 @@ import * as modal from "./modal.js";
 const StorageKeys = {
   HISTORY: "yahtzee/history",
   QUALIFIED_FOR_TROPHIES: "yahtzee/unlocked trophies",
+  PLAYER_ID: "yahtzee/player id"
 }
 
 function createNodeFromHtml(html) {
@@ -424,10 +425,17 @@ function attachTrophiesHandler() {
     new Audio("static/sfx/game/bubbles.mp3").play();
   });
 }
+function createPlayerId() {
+  if (localStorage.getItem(StorageKeys.PLAYER_ID)) return;
+  localStorage.setItem(StorageKeys.PLAYER_ID, crypto.randomUUID?.() ?? "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+    (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
+  )); // https://stackoverflow.com/a/2117523
+}
 function loadGame() {
   document.getElementById("rollScore").textContent = "Loading…";
   new Audio("static/sfx/game/wizet.mp3").play();
   
+  createPlayerId();
   globalThis.yobject = prepareYahtzee();
   showLoading();
   runYahtzee().then(finishLoading);

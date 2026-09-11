@@ -21,7 +21,7 @@
 .modal {
   position: relative;
   font-size: 16px;
-  width: 280px;
+  width: 300px;
   background: beige;
   border: 3px solid peachpuff;
   border-radius: 8px;
@@ -230,4 +230,5 @@ h2 {
 .trophy-footer .count {
   font-style: italic;
   font-size: 16px;
+  margin-left: 1em;
 }

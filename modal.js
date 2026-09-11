@@ -248,7 +248,7 @@ export function trophies(parent, playHistory) {
   };
   const modal = createModal(parent, modalContent, modalHeader);
   document.querySelector(".modal").ariaLabel = "Trophy Case";
-  document.querySelector(".modal").style.width = "680px";
+  document.querySelector(".modal").style.width = "72ch";
   
   cache.history = playHistory;
   cache.modals.trophies = modal;

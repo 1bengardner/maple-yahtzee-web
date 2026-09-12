@@ -14,16 +14,19 @@ function createNodeFromHtml(html) {
   return template.content.firstElementChild;
 }
 
-function createModal(parent, htmlContent, {
-  htmlContent: preHtmlContent,
-  height = "0px",
-} = {}) {
+const Outfits = Object.freeze({
+  ORIGINAL: undefined,
+  CLASSIC: "classic",
+  EVENT: "event",
+});
+function createModal(parent, htmlContent, header = {}, options = {}) {
   console.debug("Creating new modal.");
+  header.height ??= "0px";
   const modal = createNodeFromHtml(`
     <div class="modal-overlay">
-      <div class="modal" role="dialog" aria-modal="true">
-        <button class="close">❌</button>
-        ${preHtmlContent ? preHtmlContent.trim() : ""}
+      <div class="modal${options.outfit !== Outfits.ORIGINAL ? " " + options.outfit : ""}" role="dialog" aria-modal="true">
+        <button class="close">${options.outfit === Outfits.EVENT ? "🎲" : "❌"}</button>
+        ${header.htmlContent ? header.htmlContent.trim() : ""}
         <div class="modal-content">
           ${htmlContent.trim()}
         </div>
@@ -54,7 +57,7 @@ function createModal(parent, htmlContent, {
   
   parent.appendChild(modal);
   modal.addCloseListeners();
-  document.querySelector(".modal-content").style.maxHeight = `calc(100dvh - 98px - ${height})`;
+  document.querySelector(".modal-content").style.maxHeight = `calc(100dvh - 98px - ${header.height})`;
   return modal;
 }
 function restoreModal(parent, modal) {

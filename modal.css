@@ -34,6 +34,44 @@
   scrollbar-color: bisque transparent;
 }
 
+.classic.modal {
+  background: lightsteelblue;
+  border-color: snow;
+  scrollbar-color: steelblue transparent;
+}
+
+.event.modal {
+  background: whitesmoke;
+  border-color: powderblue;
+  scrollbar-color: orange transparent;
+}
+
+.classic.modal .modal-content, .event.modal .modal-content {
+  background: whitesmoke;
+  border-radius: 8px;
+}
+
+.event.modal .modal-content {
+  background: cornflowerblue;
+  color: snow;
+  text-shadow: 0 0 3px midnightblue;
+}
+
+.classic.modal button.close, .event.modal button.close {
+  color: snow;
+  background: deepskyblue;
+  border-color: lightsteelblue;
+}
+
+.event.modal button.close {
+  border-color: powderblue;
+}
+
+.classic.modal button.close:hover, .event.modal button.close:hover {
+  background: lightsteelblue;
+  border-color: snow;
+}
+
 @keyframes pop {
   from {
     transform: scale(.8);
@@ -159,7 +197,7 @@ h2 {
   color: whitesmoke;
 }
 
-.modal-content {
+.modal .modal-content {
   overflow-y: auto;
   padding: 8px;
 }

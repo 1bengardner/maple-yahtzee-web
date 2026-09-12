@@ -13,6 +13,7 @@ function createNodeFromHtml(html) {
 }
 
 function showLoading() {
+  document.getElementById("rollScore").textContent = "Loading…";
   document.getElementById("mainframe").classList.add("loading");
 }
 function finishLoading() {
@@ -432,7 +433,6 @@ function createPlayerId() {
   )); // https://stackoverflow.com/a/2117523
 }
 function loadGame() {
-  document.getElementById("rollScore").textContent = "Loading…";
   new Audio("static/sfx/game/wizet.mp3").play();
   
   createPlayerId();

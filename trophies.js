@@ -603,6 +603,14 @@ export function getGameSound(score, yahtzeeCount, gotBonus) {
   }]).findLast(x => x.sound)?.sound;
 }
 
+function removeCheatedScores(history) {
+  return history.filter(x => x.p <= 1575);
+}
+
 export function getTopScore(history) {
-  return Math.max(...history.map(x => x.p));
+  return Math.max(...removeCheatedScores(history).map(x => x.p));
+}
+
+export function getAverageScore(history) {
+  return Math.round(removeCheatedScores(history).reduce((accumulator, historyItem) => accumulator + historyItem.p, 0) / history.length);
 }

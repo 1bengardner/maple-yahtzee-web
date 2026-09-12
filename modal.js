@@ -1,6 +1,7 @@
 import {
   getData as getTrophyData,
   getTopScore,
+  getAverageScore,
   getGameSound,
 } from "./trophies.js";
 
@@ -236,15 +237,21 @@ export function trophies(parent, playHistory) {
     return;
   }
   const modalContent = getTrophyData(playHistory).map(createTrophyHtml).reverse().join("");
+  const avgScoreHtml = playHistory.length >= 5 ? `
+    <span class="badge-stat${getTopScore(playHistory) > 999 ? " cramped" : ""}" title="Average score">
+      <span>${getAverageScore(playHistory)}</span>
+      <span class="qualifier">Avg</span>
+    </span>`.trim() : "";
   const modalHeader = {
     htmlContent: `
       <div class="header">
-        <span class="highlight-stat">
+        <span class="highlight-stat${getTopScore(playHistory) > 999 ? " cramped" : ""}">
           <span class="preface">Top score</span>
           ${getTopScore(playHistory)}
         </span>
-        <span class="games-played" title="Games played">
-          <span aria-hidden="true">🕹</span>${playHistory.length}
+        ${avgScoreHtml}
+        <span class="games-played${playHistory.length > 999 ? " cramped" : ""}" title="Games played">
+          <span aria-hidden="true" class="games-played-icon"${playHistory.length > 9999 ? " cramped" : ""}>🕹</span>${playHistory.length}
         </span>
       </div>`,
     height: "27px",

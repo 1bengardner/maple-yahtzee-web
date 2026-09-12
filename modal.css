@@ -185,7 +185,7 @@ h2 {
   border-color: peachpuff;
 }
 
-.primary {
+.primary, .highlight-stat {
   background: gold;
   color: saddlebrown;
   outline: 1px solid goldenrod;
@@ -203,14 +203,38 @@ h2 {
 }
 
 .highlight-stat {
-  text-transform: uppercase;
-  background: salmon;
-  color: whitesmoke;
   border-radius: 24px;
   padding: 6px 12px;
   font-style: italic;
   font-size: 18px;
   margin-left: calc(-24px / 2);
+}
+
+.badge-stat {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  background: salmon;
+  color: snow;
+  text-align: center;
+  position: absolute;
+  top: calc(-36px / 2 + 9px);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px dashed beige;
+  border-bottom: none;
+  margin-left: 1em;
+  font-size: 13px;
+}
+
+.highlight-stat .preface, .badge-stat .qualifier {
+  font-size: 0.66em;
+  text-transform: uppercase;
+}
+
+.highlight-stat .preface {
+  font-size: 12px;
 }
 
 .games-played {
@@ -222,7 +246,7 @@ h2 {
 .header {
   text-align: left;
   margin-top: 6px;
-  margin-inline: 48px;
+  margin-inline: clamp(1em, calc(50dvw - 145px), 48px);
   position: relative;
 }
 
@@ -258,7 +282,7 @@ h2 {
   align-items: end;
 }
 
-.trophy-footer .timestamp, .trophy-footer .flavour, .highlight-stat .preface {
+.trophy-footer .timestamp, .trophy-footer .flavour {
   font-size: 12px;
 }
 .flavour {
@@ -269,4 +293,25 @@ h2 {
   font-style: italic;
   font-size: 16px;
   margin-left: 1em;
+}
+
+@media (max-width: 400px) {
+  .highlight-stat.cramped {
+    font-size: 16px;
+  }
+  .badge-stat.cramped {
+    font-size: 12px;
+    top: calc(-30px / 2 + 8px);
+    width: 30px;
+    height: 30px;
+  }
+  .games-played.cramped {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .games-played-icon.cramped {
+    display: none;
+  }
 }

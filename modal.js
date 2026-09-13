@@ -21,6 +21,15 @@ const Outfits = Object.freeze({
   EVENT: "event",
 });
 function createModal(parent, htmlContent, header = {}, options = {}) {
+  class ModalError extends Error {
+    constructor(message) {
+      super(message);
+      this.name = "ModalError";
+    }
+  }
+  if (!parent) {
+    throw new ModalError("Missing parent.");
+  }
   console.debug("Creating new modal.");
   header.height ??= "0px";
   const modal = createNodeFromHtml(`
@@ -154,16 +163,15 @@ function createShareHtml() {
   `;
 }
 
-function share(score, yahtzeeCount) {
-  const yahtzeeString = yahtzeeCount > 0 ? `, including ${yahtzeeCount == 1 ? "a" : yahtzeeCount} ${yahtzeeCount == 1 ? "yahtzee" : "yahtzees"}${"!".repeat(Math.max(yahtzeeCount - 1, 0))}` : "";
-  const body = `${createShareEmoji(score)} I got ${score} POINTS in Maple Yahtzee${yahtzeeString}!\u00A0🍁\n\nhttps://bengardner.ca/games/yahtzee/`.trim();
-  navigator.share({
-    title: "Maple Yahtzee!",
-    text: body,
-  });
-}
-
 export function gameOver(parent, playAgain, { score, yahtzeeCount, gotBonus }) {
+  function share(score, yahtzeeCount) {
+    const yahtzeeString = yahtzeeCount > 0 ? `, including ${yahtzeeCount == 1 ? "a" : yahtzeeCount} ${yahtzeeCount == 1 ? "yahtzee" : "yahtzees"}${"!".repeat(Math.max(yahtzeeCount - 1, 0))}` : "";
+    const body = `${createShareEmoji(score)} I got ${score} POINTS in Maple Yahtzee${yahtzeeString}!\u00A0🍁\n\nhttps://bengardner.ca/games/yahtzee/`.trim();
+    navigator.share({
+      title: "Maple Yahtzee!",
+      text: body,
+    });
+  }
   const modal = createModal(parent, `
     <div class="icon">${createIcon(score)}</div>
 
@@ -185,7 +193,7 @@ export function gameOver(parent, playAgain, { score, yahtzeeCount, gotBonus }) {
 
     ${navigator.canShare ? createShareHtml() : ""}
 
-    <button id="play-again" class="secondary">
+    <button id="play-again" class="continue">
       Play Again
     </button>
   `);
@@ -318,4 +326,94 @@ export function help(parent) {
   document.querySelector(".modal").style.width = "72ch";
   
   cache.modals.help = modal;
+}
+
+export function upcomingEvent(parent, eventId, start, end) {
+  // TODO check if eventId has been hidden and return if so
+  function share(date, startTime, endTime) {
+    const body = `🎲 The *Double YZ* event is almost here! Maple Yahtzee will double your chances of getting a yahtzee on ${date} between ${startTime} and ${endTime} with the magic of Markov chains! Yes, that's just a buzzword to get your attention, but it's also true!\u00A0🍁\n\nhttps://bengardner.ca/games/yahtzee/`.trim();
+    navigator.share({
+      title: "Maple Yahtzee! Upcoming Event",
+      text: body,
+    });
+  }
+  const dateFormat = {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  };
+  const timeFormat = {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  };
+  const date = start.toLocaleDateString("en-CA", dateFormat);
+  const startTime = start.toLocaleTimeString("en-US", timeFormat);
+  const endTime = end.toLocaleTimeString("en-US", timeFormat);
+  const modal = createModal(parent, `
+    <h1>Upcoming Event</h1>
+    <p>The <em>Double YZ</em> event is almost here!</p>
+    <p>Play Maple Yahtzee on ${date} between ${startTime} and ${endTime} for double the chances of getting a yahtzee!</p>
+
+    <div class="single-row">
+      ${navigator.canShare ? createShareHtml() : ""}
+
+      <button id="hide" class="cancel">
+        Hide
+      </button>
+    </div>
+  `, undefined, { outfit: Outfits.CLASSIC });
+  document.querySelector(".modal").style.width = "400px";
+  
+  document.getElementById("hide").addEventListener("click", () => {
+    // TODO localstorage -> add "hidden events".push(eventId)
+    modal.remove();
+    new Audio("static/sfx/game/close.mp3").play();
+  });
+  document.getElementById("share")?.addEventListener("click", () => {
+    share(date, startTime, endTime);
+    new Audio("static/sfx/game/bubbles.mp3").play();
+  });
+  new Audio("static/sfx/game/notice.mp3").play();
+}
+
+export function eventNotice(parent, start, end) {
+  function share() {
+    const body = `⏰ *It's Double YZ time!* Play now for 2x yahtzees!!\u00A0🍁\n\nhttps://bengardner.ca/games/yahtzee/`.trim();
+    navigator.share({
+      title: "Maple Yahtzee! Double YZ Event",
+      text: body,
+    });
+  }
+  const timeFormat = {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  };
+  const startTime = start.toLocaleTimeString("en-US", timeFormat);
+  const endTime = end.toLocaleTimeString("en-US", timeFormat);
+  const modal = createModal(parent, `
+    <h1>Double YZ</h1>
+    <p><em>It's Double YZ time!</em></p>
+    <p>Go big or go home! Between ${startTime} and ${endTime} today, your chances of getting a Yahtzee are doubled. Be bold and go for the gold.</p>
+
+    <div class="single-row">
+      ${navigator.canShare ? createShareHtml() : ""}
+
+      <button id="dismiss" class="continue">
+        Dismiss
+      </button>
+    </div>
+  `, undefined, { outfit: Outfits.EVENT });
+  document.querySelector(".modal").style.width = "400px";
+  
+  document.getElementById("dismiss").addEventListener("click", () => {
+    modal.remove();
+    new Audio("static/sfx/game/click.mp3").play();
+  });
+  document.getElementById("share")?.addEventListener("click", () => {
+    share();
+    new Audio("static/sfx/game/bubbles.mp3").play();
+  });
+  new Audio("static/sfx/game/invite.mp3").play();
 }

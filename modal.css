@@ -152,7 +152,7 @@ h2 {
   font-size: 16px;
 }
 
-.modal .stats ~ button {
+.modal .modal-content button {
   width: 100%;
   padding: 12px;
   margin-top: 12px;
@@ -160,7 +160,7 @@ h2 {
   border-radius: 8px;
 }
 
-.modal .stats ~ button:hover {
+.modal .modal-content button:hover {
   cursor: pointer;
   opacity: 0.9;
 }
@@ -192,9 +192,14 @@ h2 {
   outline-offset: -1px;
 }
 
-.secondary {
+.continue {
   background: firebrick;
   color: whitesmoke;
+}
+
+.cancel {
+  background: palevioletred;
+  color: snow;
 }
 
 .modal .modal-content {
@@ -293,6 +298,11 @@ h2 {
   font-style: italic;
   font-size: 16px;
   margin-left: 1em;
+}
+
+.single-row {
+  display: flex;
+  gap: 8px;
 }
 
 @media (max-width: 400px) {

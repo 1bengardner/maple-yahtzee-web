@@ -5,6 +5,12 @@ import {
   getGameSound,
 } from "./trophies.js";
 
+const StorageKeys = {
+  DISMISSED_EVENTS: "yahtzee/dismissed",
+  QUALIFIED_FOR_TROPHIES: "yahtzee/unlocked trophies",
+  PLAYER_ID: "yahtzee/player id"
+}
+
 const cache = {
   modals: {},
 };
@@ -13,6 +19,38 @@ const state = {
   isDisplaying: false,
   queuedModal: null,
 }
+
+const dismissedEvents = (function() {
+  function load() {
+    try {
+      return JSON.parse(localStorage.getItem(StorageKeys.DISMISSED_EVENTS)) ?? [];
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  }
+  function save(events) {
+    try {
+      localStorage.setItem(StorageKeys.DISMISSED_EVENTS, JSON.stringify(events));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  function add(event) {
+    const events = load();
+    events.push(event);
+    save(events);
+  }
+  function has(event) {
+    const events = load();
+    return events.includes(event);
+  }
+  
+  return {
+    add,
+    has,
+  }
+})();
 
 function createNodeFromHtml(html) {
   const template = document.createElement("template");
@@ -397,7 +435,9 @@ export function help(parent) {
 }
 
 export function upcomingEvent(parent, eventId, start, end) {
-  // TODO check if eventId has been hidden and return if so
+  if (dismissedEvents.has(eventId)) {
+    return;
+  }
   function share(date, startTime, endTime) {
     const body = `🎲 The *Double YZ* event is almost here! Maple Yahtzee will double your chances of getting a yahtzee on ${date} between ${startTime} and ${endTime} with the magic of Markov chains! Yes, that's just a buzzword to get your attention, but it's also true!\u00A0🍁\n\nhttps://bengardner.ca/games/yahtzee/`.trim();
     navigator.share({
@@ -441,7 +481,7 @@ export function upcomingEvent(parent, eventId, start, end) {
         document.querySelector(".modal").style.width = "400px";
         
         document.getElementById("dismiss").addEventListener("click", () => {
-          // TODO localstorage -> add "hidden events".push(eventId)
+          dismissedEvents.add(eventId);
           modal.remove();
           new Audio("static/sfx/game/close.mp3").play();
         });

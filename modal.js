@@ -110,6 +110,7 @@ function restoreModal(parent, modal) {
   if (gotQueued(() => restoreModal(parent, modal))) {
     return;
   }
+  console.debug("Restoring existing modal.");
   parent.appendChild(modal);
   modal.addCloseListeners();
 }
@@ -285,7 +286,6 @@ function createTrophyHtml({
 
 export function trophies(parent, playHistory) {
   if (playHistory === cache.history) {
-    console.debug("Showing cached trophies modal.");
     restoreModal(parent, cache.modals.trophies);
     return;
   }
@@ -327,7 +327,6 @@ export function trophies(parent, playHistory) {
 
 export function help(parent) {
   if (cache.modals.help) {
-    console.debug("Showing cached help modal.");
     restoreModal(parent, cache.modals.help);
     return;
   }

@@ -106,13 +106,14 @@ function createModal(parent, htmlContent, {
   document.querySelector(".modal-content").style.maxHeight = `calc(100dvh - 98px - ${header.height})`;
   callback(modal);
 }
-function restoreModal(parent, modal) {
-  if (gotQueued(() => restoreModal(parent, modal))) {
+function restoreModal(parent, modal, { callback }) {
+  if (gotQueued(() => restoreModal(parent, modal, { callback }))) {
     return;
   }
   console.debug("Restoring existing modal.");
   parent.appendChild(modal);
   modal.addCloseListeners();
+  callback();
 }
 
 function createIcon(score) {
@@ -285,8 +286,11 @@ function createTrophyHtml({
 }
 
 export function trophies(parent, playHistory) {
+  const playSound = () => new Audio("static/sfx/game/bubbles.mp3").play();
   if (playHistory === cache.history) {
-    restoreModal(parent, cache.modals.trophies);
+    restoreModal(parent, cache.modals.trophies, {
+      callback: playSound,
+    });
     return;
   }
   const modalContent = getTrophyData(playHistory).map(createTrophyHtml).reverse().join("");
@@ -321,15 +325,18 @@ export function trophies(parent, playHistory) {
         cache.history = playHistory;
         cache.modals.trophies = modal;
         
-        new Audio("static/sfx/game/bubbles.mp3").play();
+        playSound();
       },
     }
   );
 }
 
 export function help(parent) {
+  const playSound = () => new Audio("static/sfx/game/bubbles.mp3").play();
   if (cache.modals.help) {
-    restoreModal(parent, cache.modals.help);
+    restoreModal(parent, cache.modals.help, {
+      callback: playSound,
+    });
     return;
   }
   
@@ -383,7 +390,8 @@ export function help(parent) {
       callback: (modal) => {
         document.querySelector(".modal").style.width = "72ch";
         cache.modals.help = modal;
-        new Audio("static/sfx/game/bubbles.mp3").play();
+        
+        playSound();
       },
     });
 }

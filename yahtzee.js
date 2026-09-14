@@ -361,7 +361,6 @@ function attachZoomHandler() {
 function attachHelpHandler() {
   document.querySelector(".help").addEventListener("click", () => {
     modal.help(document.body);
-    new Audio("static/sfx/game/bubbles.mp3").play();
   });
 }
 const VIEW_MODE_PARAM = "view";
@@ -423,7 +422,6 @@ function createTrophiesButton() {
 function attachTrophiesHandler() {
   document.getElementById("trophies").addEventListener("click", () => {
     modal.trophies(document.body, history);
-    new Audio("static/sfx/game/bubbles.mp3").play();
   });
 }
 function createPlayerId() {

@@ -320,6 +320,8 @@ export function trophies(parent, playHistory) {
         
         cache.history = playHistory;
         cache.modals.trophies = modal;
+        
+        new Audio("static/sfx/game/bubbles.mp3").play();
       },
     }
   );
@@ -381,6 +383,7 @@ export function help(parent) {
       callback: (modal) => {
         document.querySelector(".modal").style.width = "72ch";
         cache.modals.help = modal;
+        new Audio("static/sfx/game/bubbles.mp3").play();
       },
     });
 }
@@ -438,6 +441,7 @@ export function upcomingEvent(parent, eventId, start, end) {
           share(date, startTime, endTime);
           new Audio("static/sfx/game/bubbles.mp3").play();
         });
+        
         new Audio("static/sfx/game/notice.mp3").play();
       },
     }
@@ -489,6 +493,7 @@ export function eventNotice(parent, start, end) {
           share();
           new Audio("static/sfx/game/bubbles.mp3").play();
         });
+        
         new Audio("static/sfx/game/invite.mp3").play();
       },
     }

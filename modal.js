@@ -9,10 +9,25 @@ const cache = {
   modals: {},
 };
 
+const state = {
+  isDisplaying: false,
+  queuedModal: null,
+}
+
 function createNodeFromHtml(html) {
   const template = document.createElement("template");
   template.innerHTML = html.trim();
   return template.content.firstElementChild;
+}
+
+function gotQueued(modal) {
+  if (state.isDisplaying) {
+    console.debug("Queueing modal.");
+    state.queuedModal = modal; // overwrite; queue has max 1 modal
+    return true;
+  }
+  state.queuedModal = null;
+  state.isDisplaying = true;
 }
 
 const Outfits = Object.freeze({
@@ -20,7 +35,20 @@ const Outfits = Object.freeze({
   CLASSIC: "classic",
   EVENT: "event",
 });
-function createModal(parent, htmlContent, header = {}, options = {}) {
+function createModal(parent, htmlContent, {
+  header = {
+    height: undefined,
+    htmlContent: undefined,
+  },
+  options = {
+    outfit: undefined,
+  },
+  callback = () => {},
+} = {
+  header: {},
+  options: {},
+  callback: () => {},
+}) {
   class ModalError extends Error {
     constructor(message) {
       super(message);
@@ -29,6 +57,9 @@ function createModal(parent, htmlContent, header = {}, options = {}) {
   }
   if (!parent) {
     throw new ModalError("Missing parent.");
+  }
+  if (gotQueued(() => createModal(parent, htmlContent, { header, options, callback }))) {
+    return;
   }
   console.debug("Creating new modal.");
   header.height ??= "0px";
@@ -56,9 +87,14 @@ function createModal(parent, htmlContent, header = {}, options = {}) {
   }
   modal._remove = modal.remove;
   modal.remove = function() {
+    state.isDisplaying = false;
     document.removeEventListener("keydown", esc);
     modal._remove();
     console.debug("Modal closed.");
+    if (state.queuedModal) {
+      console.debug("Serving queued modal.");
+      state.queuedModal();
+    }
   }
   modal.addCloseListeners = function() {
     document.querySelector(".modal .close").addEventListener("click", clickClose);
@@ -68,9 +104,12 @@ function createModal(parent, htmlContent, header = {}, options = {}) {
   parent.appendChild(modal);
   modal.addCloseListeners();
   document.querySelector(".modal-content").style.maxHeight = `calc(100dvh - 98px - ${header.height})`;
-  return modal;
+  callback(modal);
 }
 function restoreModal(parent, modal) {
+  if (gotQueued(() => restoreModal(parent, modal))) {
+    return;
+  }
   parent.appendChild(modal);
   modal.addCloseListeners();
 }
@@ -172,45 +211,51 @@ export function gameOver(parent, playAgain, { score, yahtzeeCount, gotBonus }) {
       text: body,
     });
   }
-  const modal = createModal(parent, `
-    <div class="icon">${createIcon(score)}</div>
+  createModal(
+    parent,
+    `
+      <div class="icon">${createIcon(score)}</div>
 
-    <h1>Game Over</h1>
-    <div class="subtitle">
-      ${createDescriptionString(score, yahtzeeCount, gotBonus)}
-    </div>
-
-    <div class="stats">
-      <div class="stat">
-        <span class="value">${score}</span>
-        <span class="content">Score</span>
+      <h1>Game Over</h1>
+      <div class="subtitle">
+        ${createDescriptionString(score, yahtzeeCount, gotBonus)}
       </div>
 
-      ${gotBonus ? createStatHtml("✓", "Bonus") : ""}
+      <div class="stats">
+        <div class="stat">
+          <span class="value">${score}</span>
+          <span class="content">Score</span>
+        </div>
 
-      ${yahtzeeCount > 0 ? createStatHtml(yahtzeeCount, yahtzeeCount == 1 ? "Yahtzee" : "Yahtzees") : ""}
-    </div>
+        ${gotBonus ? createStatHtml("✓", "Bonus") : ""}
 
-    ${navigator.canShare ? createShareHtml() : ""}
+        ${yahtzeeCount > 0 ? createStatHtml(yahtzeeCount, yahtzeeCount == 1 ? "Yahtzee" : "Yahtzees") : ""}
+      </div>
 
-    <button id="play-again" class="continue">
-      Play Again
-    </button>
-  `);
-  
-  document.getElementById("play-again").addEventListener("click", () => {
-    playAgain();
-    modal.remove();
-  });
-  document.getElementById("share")?.addEventListener("click", () => {
-    share(score, yahtzeeCount);
-    new Audio("static/sfx/game/bubbles.mp3").play();
-  });
-  
-  const sound = getGameSound(score, yahtzeeCount, gotBonus);
-  if (sound) {
-    new Audio(`static/sfx/trophies/${sound}`).play();
-  }
+      ${navigator.canShare ? createShareHtml() : ""}
+
+      <button id="play-again" class="continue">
+        Play Again
+      </button>
+    `,
+    {
+      callback: (modal) => {
+        document.getElementById("play-again").addEventListener("click", () => {
+          playAgain();
+          modal.remove();
+        });
+        document.getElementById("share")?.addEventListener("click", () => {
+          share(score, yahtzeeCount);
+          new Audio("static/sfx/game/bubbles.mp3").play();
+        });
+        
+        const sound = getGameSound(score, yahtzeeCount, gotBonus);
+        if (sound) {
+          new Audio(`static/sfx/trophies/${sound}`).play();
+        }
+      },
+    }
+  );
 }
 
 function createTrophyHtml({
@@ -264,12 +309,20 @@ export function trophies(parent, playHistory) {
       </div>`,
     height: "27px",
   };
-  const modal = createModal(parent, modalContent, modalHeader);
-  document.querySelector(".modal").ariaLabel = "Trophy Case";
-  document.querySelector(".modal").style.width = "72ch";
-  
-  cache.history = playHistory;
-  cache.modals.trophies = modal;
+  createModal(
+    parent,
+    modalContent,
+    {
+      header: modalHeader,
+      callback: (modal) => {
+        document.querySelector(".modal").ariaLabel = "Trophy Case";
+        document.querySelector(".modal").style.width = "72ch";
+        
+        cache.history = playHistory;
+        cache.modals.trophies = modal;
+      },
+    }
+  );
 }
 
 export function help(parent) {
@@ -279,53 +332,58 @@ export function help(parent) {
     return;
   }
   
-  const modal = createModal(parent, `
-    <h1>How to Play</h1>
-    <div style="text-align: left;">
-      <ol>
-        <li><span class="help-emphasis">Roll</span>.</li>
-        <li><span class="help-emphasis">Hold</span> onto one, two, three, four, five or none of the guys you rolled.</li>
-        <li><span class="help-emphasis">Roll</span> again for new guys.</li>
-        <li><span class="help-emphasis">Hold</span> any of them.</li>
-        <li><span class="help-emphasis">Roll</span> a third time.</li>
-        <li>From the top, <span class="help-emphasis">select</span> a category to use up.</li>
-        <li>Repeat, until each category has been used up and the game is over.</li>
-        <li>Your final score is the total of all the points you got from each category.</li>
-      </ol>
-      <details style="margin-bottom: 1px;"><summary>Yahtzee Categories…</summary>
-        <h2>First Row</h2>
-        <ul>
-          <li>Snails: Score 1 point for each snail.</li>
-          <li>Shrooms: Score 2 points for each shroom.</li>
-          <li>Pigs: Score 3 points for each pig.</li>
-          <li>Roots: Score 4 points for each root.</li>
-          <li>Pandas: Score 5 points for each panda.</li>
-          <li>Manos: Score 6 points for each mano (big snail).</li>
-        </ul>
-        <h2>Second Row</h2>
-        <ul>
-          <li>Three of a Kind: If you have at least three of the same guy, add up all your guys.</li>
-          <li>Four of a Kind: If you have at least four of the same guy, add up all your guys.</li>
-          <li>Full House: If you have three of one guy and two of another, score 25 points.</li>
-          <li>Small Straight: If you have at least four guys in sequence, score 30 points.</li>
-          <li>Large Straight: If you have five guys in sequence, score 40 points.</li>
-          <li>Chance: Add up all your guys.</li>
-          <li>Yahtzee: If you have five of the same guy, score 50 points.</li>
-        </ul>
-        <h2>Subtotal Bonus</h2>
-        <p>
-          You get 35 extra points if your score is 63 or more in the first row of categories.
-        </p>
-        <h2>Bonus Yahtzee: Joker Rules</h2>
-        <p>
-          You get 100 extra points if you get another yahtzee. You must select the first-row category that corresponds with your roll. If that category was already used up, you can select any second-row category for points, even if your roll doesn't qualify. If those were already used up, you get 0 points for the category but keep the 100-point bonus.
-        </p>
-      </details>
-    </div>
-  `);
-  document.querySelector(".modal").style.width = "72ch";
-  
-  cache.modals.help = modal;
+  createModal(
+    parent,
+    `
+      <h1>How to Play</h1>
+      <div style="text-align: left;">
+        <ol>
+          <li><span class="help-emphasis">Roll</span>.</li>
+          <li><span class="help-emphasis">Hold</span> onto one, two, three, four, five or none of the guys you rolled.</li>
+          <li><span class="help-emphasis">Roll</span> again for new guys.</li>
+          <li><span class="help-emphasis">Hold</span> any of them.</li>
+          <li><span class="help-emphasis">Roll</span> a third time.</li>
+          <li>From the top, <span class="help-emphasis">select</span> a category to use up.</li>
+          <li>Repeat, until each category has been used up and the game is over.</li>
+          <li>Your final score is the total of all the points you got from each category.</li>
+        </ol>
+        <details style="margin-bottom: 1px;"><summary>Yahtzee Categories…</summary>
+          <h2>First Row</h2>
+          <ul>
+            <li>Snails: Score 1 point for each snail.</li>
+            <li>Shrooms: Score 2 points for each shroom.</li>
+            <li>Pigs: Score 3 points for each pig.</li>
+            <li>Roots: Score 4 points for each root.</li>
+            <li>Pandas: Score 5 points for each panda.</li>
+            <li>Manos: Score 6 points for each mano (big snail).</li>
+          </ul>
+          <h2>Second Row</h2>
+          <ul>
+            <li>Three of a Kind: If you have at least three of the same guy, add up all your guys.</li>
+            <li>Four of a Kind: If you have at least four of the same guy, add up all your guys.</li>
+            <li>Full House: If you have three of one guy and two of another, score 25 points.</li>
+            <li>Small Straight: If you have at least four guys in sequence, score 30 points.</li>
+            <li>Large Straight: If you have five guys in sequence, score 40 points.</li>
+            <li>Chance: Add up all your guys.</li>
+            <li>Yahtzee: If you have five of the same guy, score 50 points.</li>
+          </ul>
+          <h2>Subtotal Bonus</h2>
+          <p>
+            You get 35 extra points if your score is 63 or more in the first row of categories.
+          </p>
+          <h2>Bonus Yahtzee: Joker Rules</h2>
+          <p>
+            You get 100 extra points if you get another yahtzee. You must select the first-row category that corresponds with your roll. If that category was already used up, you can select any second-row category for points, even if your roll doesn't qualify. If those were already used up, you get 0 points for the category but keep the 100-point bonus.
+          </p>
+        </details>
+      </div>
+    `,
+    {
+      callback: (modal) => {
+        document.querySelector(".modal").style.width = "72ch";
+        cache.modals.help = modal;
+      },
+    });
 }
 
 export function upcomingEvent(parent, eventId, start, end) {
@@ -350,31 +408,41 @@ export function upcomingEvent(parent, eventId, start, end) {
   const date = start.toLocaleDateString("en-CA", dateFormat);
   const startTime = start.toLocaleTimeString("en-US", timeFormat);
   const endTime = end.toLocaleTimeString("en-US", timeFormat);
-  const modal = createModal(parent, `
-    <h1>Upcoming Event</h1>
-    <p>The <em>Double YZ</em> event is almost here!</p>
-    <p>Play Maple Yahtzee on ${date} between ${startTime} and ${endTime} for double the chances of getting a yahtzee!</p>
+  createModal(
+    parent,
+    `
+      <h1>Upcoming Event</h1>
+      <p>The <em>Double YZ</em> event is almost here!</p>
+      <p>Play Maple Yahtzee on ${date} between ${startTime} and ${endTime} for double the chances of getting a yahtzee!</p>
 
-    <div class="single-row">
-      ${navigator.canShare ? createShareHtml() : ""}
+      <div class="single-row">
+        ${navigator.canShare ? createShareHtml() : ""}
 
-      <button id="hide" class="cancel">
-        Hide
-      </button>
-    </div>
-  `, undefined, { outfit: Outfits.CLASSIC });
-  document.querySelector(".modal").style.width = "400px";
-  
-  document.getElementById("hide").addEventListener("click", () => {
-    // TODO localstorage -> add "hidden events".push(eventId)
-    modal.remove();
-    new Audio("static/sfx/game/close.mp3").play();
-  });
-  document.getElementById("share")?.addEventListener("click", () => {
-    share(date, startTime, endTime);
-    new Audio("static/sfx/game/bubbles.mp3").play();
-  });
-  new Audio("static/sfx/game/notice.mp3").play();
+        <button id="dismiss" class="cancel">
+          Dismiss
+        </button>
+      </div>
+    `,
+    {
+      options: {
+        outfit: Outfits.CLASSIC,
+      },
+      callback: (modal) => {
+        document.querySelector(".modal").style.width = "400px";
+        
+        document.getElementById("dismiss").addEventListener("click", () => {
+          // TODO localstorage -> add "hidden events".push(eventId)
+          modal.remove();
+          new Audio("static/sfx/game/close.mp3").play();
+        });
+        document.getElementById("share")?.addEventListener("click", () => {
+          share(date, startTime, endTime);
+          new Audio("static/sfx/game/bubbles.mp3").play();
+        });
+        new Audio("static/sfx/game/notice.mp3").play();
+      },
+    }
+  );
 }
 
 export function eventNotice(parent, start, end) {
@@ -392,28 +460,38 @@ export function eventNotice(parent, start, end) {
   };
   const startTime = start.toLocaleTimeString("en-US", timeFormat);
   const endTime = end.toLocaleTimeString("en-US", timeFormat);
-  const modal = createModal(parent, `
-    <h1>Double YZ</h1>
-    <p><em>It's Double YZ time!</em></p>
-    <p>Go big or go home! Between ${startTime} and ${endTime} today, your chances of getting a Yahtzee are doubled. Be bold and go for the gold.</p>
+  createModal(
+    parent,
+    `
+      <h1>Double YZ</h1>
+      <p><em>It's Double YZ time!</em></p>
+      <p>Go big or go home! Between ${startTime} and ${endTime} today, your chances of getting a Yahtzee are doubled. Be bold and go for the gold.</p>
 
-    <div class="single-row">
-      ${navigator.canShare ? createShareHtml() : ""}
+      <div class="single-row">
+        ${navigator.canShare ? createShareHtml() : ""}
 
-      <button id="dismiss" class="continue">
-        Dismiss
-      </button>
-    </div>
-  `, undefined, { outfit: Outfits.EVENT });
-  document.querySelector(".modal").style.width = "400px";
-  
-  document.getElementById("dismiss").addEventListener("click", () => {
-    modal.remove();
-    new Audio("static/sfx/game/click.mp3").play();
-  });
-  document.getElementById("share")?.addEventListener("click", () => {
-    share();
-    new Audio("static/sfx/game/bubbles.mp3").play();
-  });
-  new Audio("static/sfx/game/invite.mp3").play();
+        <button id="close" class="continue">
+          Let's Roll!
+        </button>
+      </div>
+    `,
+    {
+      options: {
+        outfit: Outfits.EVENT,
+      },
+      callback: (modal) => {
+        document.querySelector(".modal").style.width = "400px";
+        
+        document.getElementById("close").addEventListener("click", () => {
+          modal.remove();
+          new Audio("static/sfx/game/click.mp3").play();
+        });
+        document.getElementById("share")?.addEventListener("click", () => {
+          share();
+          new Audio("static/sfx/game/bubbles.mp3").play();
+        });
+        new Audio("static/sfx/game/invite.mp3").play();
+      },
+    }
+  );
 }

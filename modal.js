@@ -29,7 +29,7 @@ const dismissedEvents = (function() {
     try {
       return JSON.parse(localStorage.getItem(StorageKeys.DISMISSED_EVENTS)) ?? [];
     } catch (error) {
-      console.error(error);
+      console.warn(error);
       return [];
     }
   }
@@ -37,7 +37,7 @@ const dismissedEvents = (function() {
     try {
       localStorage.setItem(StorageKeys.DISMISSED_EVENTS, JSON.stringify(events));
     } catch (error) {
-      console.error(error);
+      console.warn(error);
     }
   }
   function add(event) {

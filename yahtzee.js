@@ -438,6 +438,13 @@ function loadGame() {
   showLoading();
   runYahtzee().then(finishLoading);
 }
+function makeAvailableOffline() {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("offline.js").catch(
+      error => console.warn("Failed to register offline mode.", error)
+    );
+  }
+}
 try {
   await adjustMode();
 } catch (error) {
@@ -446,6 +453,7 @@ try {
 attachMetaHandlers();
 let history = JSON.parse(localStorage.getItem(StorageKeys.HISTORY));
 createTrophiesButton();
+makeAvailableOffline();
 preloadAssets();
 var pyodide;
 document.getElementById("loadGame").addEventListener("click", function() {

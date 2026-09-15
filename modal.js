@@ -335,8 +335,8 @@ export function trophies(parent, playHistory) {
     });
     return;
   }
-  function share(topScore) {
-    const body = `My top score in Maple Yahtzee is ${topScore}. ${chooseRandomly([
+  function shareScore(score, name) {
+    const body = `My ${name} in Maple Yahtzee is ${score}. ${chooseRandomly([
       "Can you beat that?",
       "What's yours?",
       "Let's play!",
@@ -348,7 +348,7 @@ export function trophies(parent, playHistory) {
   }
   const modalContent = getTrophyData(playHistory).map(createTrophyHtml).reverse().join("");
   const avgScoreHtml = playHistory.length >= 5 ? `
-    <span class="badge-stat${getTopScore(playHistory) > 999 ? " cramped" : ""}" title="Average score">
+    <span id="average-score" class="badge-stat${getTopScore(playHistory) > 999 ? " cramped" : ""}" title="Average score">
       <span>${getAverageScore(playHistory)}</span>
       <span class="qualifier">Avg</span>
     </span>`.trim() : "";
@@ -378,7 +378,12 @@ export function trophies(parent, playHistory) {
         if (navigator.canShare) {
           document.getElementById("top-score").style.cursor = "pointer";
           document.getElementById("top-score").addEventListener("click", () => {
-            share(getTopScore(playHistory));
+            shareScore(getTopScore(playHistory), "top score");
+            new Audio("static/sfx/game/bubbles.mp3").play();
+          });
+          document.getElementById("average-score").style.cursor = "pointer";
+          document.getElementById("average-score").addEventListener("click", () => {
+            shareScore(getAverageScore(playHistory), "average score");
             new Audio("static/sfx/game/bubbles.mp3").play();
           });
         }

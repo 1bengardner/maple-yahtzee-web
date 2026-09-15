@@ -5,6 +5,10 @@ import {
   getGameSound,
 } from "./trophies.js";
 
+function chooseRandomly(choices) {
+  return choices.length === 0 ? undefined : choices[Math.floor(Math.random() * choices.length)];
+}
+
 const StorageKeys = {
   DISMISSED_EVENTS: "yahtzee/dismissed",
   QUALIFIED_FOR_TROPHIES: "yahtzee/unlocked trophies",
@@ -331,6 +335,17 @@ export function trophies(parent, playHistory) {
     });
     return;
   }
+  function share(topScore) {
+    const body = `My top score in Maple Yahtzee is ${topScore}. ${chooseRandomly([
+      "Can you beat that?",
+      "What's yours?",
+      "Let's play!",
+    ])} https://bengardner.ca/games/yahtzee/`.trim();
+    navigator.share({
+      title: "Maple Yahtzee!",
+      text: body,
+    });
+  }
   const modalContent = getTrophyData(playHistory).map(createTrophyHtml).reverse().join("");
   const avgScoreHtml = playHistory.length >= 5 ? `
     <span class="badge-stat${getTopScore(playHistory) > 999 ? " cramped" : ""}" title="Average score">
@@ -340,7 +355,7 @@ export function trophies(parent, playHistory) {
   const modalHeader = {
     htmlContent: `
       <div class="header">
-        <span class="highlight-stat${getTopScore(playHistory) > 999 ? " cramped" : ""}">
+        <span id="top-score" class="highlight-stat${getTopScore(playHistory) > 999 ? " cramped" : ""}">
           <span class="preface">Top score</span>
           ${getTopScore(playHistory)}
         </span>
@@ -359,6 +374,14 @@ export function trophies(parent, playHistory) {
       callback: (modal) => {
         document.querySelector(".modal").ariaLabel = "Trophy Case";
         document.querySelector(".modal").style.width = "72ch";
+        
+        if (navigator.canShare) {
+          document.getElementById("top-score").style.cursor = "pointer";
+          document.getElementById("top-score").addEventListener("click", () => {
+            share(getTopScore(playHistory));
+            new Audio("static/sfx/game/bubbles.mp3").play();
+          });
+        }
         
         cache.history = playHistory;
         cache.modals.trophies = modal;

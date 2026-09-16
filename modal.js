@@ -249,7 +249,7 @@ function createShareHtml() {
 export function gameOver(parent, playAgain, { score, yahtzeeCount, gotBonus }) {
   function share(score, yahtzeeCount) {
     const yahtzeeString = yahtzeeCount > 0 ? `, including ${yahtzeeCount == 1 ? "a" : yahtzeeCount} ${yahtzeeCount == 1 ? "yahtzee" : "yahtzees"}${"!".repeat(Math.max(yahtzeeCount - 1, 0))}` : "";
-    const body = `${createShareEmoji(score)} I got ${score} POINTS in Maple Yahtzee${yahtzeeString}!\u00A0🍁\n\nhttps://bengardner.ca/games/yahtzee/`.trim();
+    const body = `${createShareEmoji(score)} I got ${score} POINTS in Maple Yahtzee${yahtzeeString}!\u00A0🍁\n\nhttps://bengardner.ca/yz`.trim();
     navigator.share({
       title: "Maple Yahtzee!",
       text: body,
@@ -340,7 +340,7 @@ export function trophies(parent, playHistory) {
       "Can you beat that?",
       "What's yours?",
       "Let's play!",
-    ])} https://bengardner.ca/games/yahtzee/`.trim();
+    ])} https://bengardner.ca/yz`.trim();
     navigator.share({
       title: "Maple Yahtzee!",
       text: body,
@@ -467,7 +467,7 @@ export function upcomingEvent(parent, eventId, start, end) {
     return;
   }
   function share(date, startTime, endTime) {
-    const body = `🎲 The *Double YZ* event is almost here! Maple Yahtzee will double your chances of getting a yahtzee on ${date} between ${startTime} and ${endTime} with the magic of Markov chains! Yes, that's just a buzzword to get your attention, but it's also true!\u00A0🍁\n\nhttps://bengardner.ca/games/yahtzee/`.trim();
+    const body = `🎲 The *Double YZ* event is almost here! Maple Yahtzee will double your chances of getting a yahtzee on ${date} between ${startTime} and ${endTime} with the magic of Markov chains! Yes, that's just a buzzword to get your attention, but it's also true!\u00A0🍁\n\nhttps://bengardner.ca/yz`.trim();
     navigator.share({
       title: "Maple Yahtzee! Upcoming Event",
       text: body,
@@ -526,7 +526,7 @@ export function upcomingEvent(parent, eventId, start, end) {
 
 export function eventNotice(parent, start, end) {
   function share() {
-    const body = `⏰ *It's Double YZ time!* Play now for 2x yahtzees!!\u00A0🍁\n\nhttps://bengardner.ca/games/yahtzee/`.trim();
+    const body = `⏰ *It's Double YZ time!* Play now for 2x yahtzees!!\u00A0🍁\n\nhttps://bengardner.ca/yz`.trim();
     navigator.share({
       title: "Maple Yahtzee! Double YZ Event",
       text: body,

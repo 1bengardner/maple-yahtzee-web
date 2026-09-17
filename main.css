@@ -88,7 +88,6 @@ input.hidden:active:not(:disabled) + label.sel {
   border-radius: 50%;
   width: 28px;
   height: 28px;
-  cursor: pointer;
 }
 .trophiesContainer {
   margin: auto;

@@ -12,6 +12,11 @@ function createNodeFromHtml(html) {
   return template.content.firstElementChild;
 }
 
+function showLoadGame() {
+  document.getElementById("loadButtonTarget").before(createNodeFromHtml(`
+    <button id="loadGame" class="load">Load Game</button>
+  `));
+}
 function showLoading() {
   document.getElementById("rollScore").textContent = "Loading…";
   document.getElementById("mainframe").classList.add("loading");
@@ -450,6 +455,7 @@ try {
 } catch (error) {
   console.warn(`Failed to load view mode!`, error);
 }
+showLoadGame();
 attachMetaHandlers();
 let history = JSON.parse(localStorage.getItem(StorageKeys.HISTORY));
 createTrophiesButton();

@@ -115,8 +115,15 @@ input.hidden:active:not(:disabled) + label.sel {
   backdrop-filter: blur(1px);
 }
 .load {
+  width: 200px;
   font-size: 28px;
   box-shadow: 0px 0px 12px 8px peachpuff;
+  animation: fade-in 0.2s linear;
+}
+.overlayNotice {
+  background: peachpuff;
+  padding: 0.5em;
+  border-radius: 1em;
 }
 #rollButton {
   color: whitesmoke;
@@ -301,5 +308,13 @@ input.hidden:active:not(:disabled) + label.sel {
   } 100% {
     opacity: 0;
     transform: translateY(-2em);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  } 100% {
+    opacity: 1;
   }
 }

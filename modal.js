@@ -11,8 +11,7 @@ function chooseRandomly(choices) {
 
 const StorageKeys = {
   DISMISSED_EVENTS: "yahtzee/dismissed",
-  QUALIFIED_FOR_TROPHIES: "yahtzee/unlocked trophies",
-  PLAYER_ID: "yahtzee/player id"
+  HISTORY: "yahtzee/history",
 }
 
 const cache = {
@@ -405,7 +404,6 @@ export function help(parent) {
     });
     return;
   }
-  
   createModal(
     parent,
     `
@@ -571,6 +569,91 @@ export function eventNotice(parent, start, end) {
         });
         
         new Audio("static/sfx/game/invite.mp3").play();
+      },
+    }
+  );
+}
+
+export function gameData(parent, history, importCallback = () => {}) {
+  function share(score, yahtzeeCount) {
+    const yahtzeeString = yahtzeeCount > 0 ? `, including ${yahtzeeCount == 1 ? "a" : yahtzeeCount} ${yahtzeeCount == 1 ? "yahtzee" : "yahtzees"}${"!".repeat(Math.max(yahtzeeCount - 1, 0))}` : "";
+    const body = `${createShareEmoji(score)} I got ${score} POINTS in Maple Yahtzee${yahtzeeString}!\u00A0🍁\n\nhttps://bengardner.ca/yz`.trim();
+    navigator.share({
+      title: "Maple Yahtzee!",
+      text: body,
+    });
+  }
+  createModal(
+    parent,
+    `
+      <h1>Game Data</h1>
+      <p>
+        Take your data with you!
+      </p>
+      <button id="export" class="continue"${!Array.isArray(history) || history.length === 0 ? "disabled" : ""}>
+        Export
+      </button>
+      <button id="import" class="continue">
+        Import
+      </button>
+    `,
+    {
+      callback: (modal) => {
+        document.getElementById("export").addEventListener("click", () => {
+          const url = URL.createObjectURL(new Blob([JSON.stringify({
+            version: "1",
+            history,
+          })], { type: "application/json" }));
+          Object.assign(document.createElement("a"), {
+            href: url,
+            download: `maple_yahtzee_game_data-${Date.now()}.json`,
+          }).click();
+          URL.revokeObjectURL(url);
+          
+          new Audio("static/sfx/game/click.mp3").play();
+        });
+        document.getElementById("import").addEventListener("click", () => {
+          function backUp(history) {
+            localStorage.setItem(`yahtzee/history backup @ ${Date.now()}`, JSON.stringify(history));
+          }
+          function processImport(event) {
+            try {
+              JSON.parse(event.target.result);
+            } catch (error) {
+              alert("Could not parse the file as JSON.");
+              throw error;
+            }
+            const importedData = JSON.parse(event.target.result);
+            if (!Array.isArray(importedData.history)) {
+              const errorText = "Data is in an unreadable format.";
+              alert(errorText);
+              throw Error(errorText);
+            }
+            try {
+              localStorage.setItem(StorageKeys.HISTORY, JSON.stringify(importedData.history));
+            } catch (error) {
+              alert("Could not write to localStorage.");
+              throw error;
+            }
+            backUp(history);
+            importCallback(importedData.history);
+          }
+          function importData(event) {
+            if (event.target.files.length !== 1) return;
+            const reader = new FileReader();
+            reader.addEventListener("load", processImport);
+            reader.readAsText(event.target.files[0]);
+          }
+          const input = Object.assign(document.createElement("input"), {
+            type: "file",
+            accept: ".json",
+          })
+          input.addEventListener("change", importData);
+          input.click();
+          
+          new Audio("static/sfx/game/bubbles.mp3").play();
+        });
+        new Audio("static/sfx/game/bubbles.mp3").play();
       },
     }
   );

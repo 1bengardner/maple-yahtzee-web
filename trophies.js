@@ -525,7 +525,7 @@ const subbingOut = [{
   },
 },];
 
-export function getData(history) {
+export function getData(originalHistory) {
   function getBestTrophy(category, historyItem) {
     const criterionIsMet = ([criterion, goal]) => goal ? historyItem[criterion] >= goal : historyItem[criterion] == goal;
     for (const trophy of category) {
@@ -552,6 +552,7 @@ export function getData(history) {
     gameCriteria,
   ]
   
+  const history = structuredClone(originalHistory);
   const trophyIds = []; // For order
   const trophyDetails = {};
   let gameCount = 0;

@@ -148,8 +148,11 @@ h2 {
 }
 
 .modal button {
-  cursor: pointer;
   font-size: 16px;
+}
+
+.modal button:not(:disabled) {
+  cursor: pointer;
 }
 
 .modal .modal-content button {
@@ -160,7 +163,7 @@ h2 {
   border-radius: 8px;
 }
 
-.modal .modal-content button:hover {
+.modal .modal-content button:hover:not(:disabled) {
   cursor: pointer;
   opacity: 0.9;
 }
@@ -303,6 +306,14 @@ h2 {
 .single-row {
   display: flex;
   gap: 8px;
+}
+
+#export {
+  background: royalblue;
+}
+
+#import {
+  background: seagreen;
 }
 
 @media (max-width: 400px) {

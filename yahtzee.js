@@ -2,8 +2,12 @@ import * as modal from "./modal.js";
 
 const StorageKeys = {
   HISTORY: "yahtzee/history",
-  QUALIFIED_FOR_TROPHIES: "yahtzee/unlocked trophies",
-  PLAYER_ID: "yahtzee/player id"
+  PLAYER_ID: "yahtzee/player id",
+}
+
+function qualifyForTrophies() {
+  if (history.find(game => game.p >= 100 || game.y > 0)) return true;
+  return false;
 }
 
 function createNodeFromHtml(html) {
@@ -200,11 +204,7 @@ function prepareYahtzee() {
       }
     );
     saveHistory(score, yahtzeeCount, gotBonus);
-    const qualified = score >= 100 || yahtzeeCount > 0;
-    if (qualified && !document.getElementById("trophies")) {
-      localStorage.setItem(StorageKeys.QUALIFIED_FOR_TROPHIES, "true story");
-      createTrophiesButton();
-    }
+    createTrophiesButtonIfEligible();
   }
   function saveHistory(score, yahtzeeCount, gotBonus) {
     const saved = JSON.parse(localStorage.getItem(StorageKeys.HISTORY));
@@ -349,6 +349,7 @@ function attachGameHandlers() {
 }
 function attachMetaHandlers() {
   attachZoomHandler();
+  attachGameDataHandler();
   attachHelpHandler();
   attachDesktopHandler();
   attachMobileHandler();
@@ -361,6 +362,14 @@ function attachZoomHandler() {
     target.style.transformOrigin = "top";
     target.style.scale = target.style.scale == targetValue ? "" : targetValue;
     new Audio("static/sfx/game/plop.mp3").play();
+  });
+}
+function attachGameDataHandler() {
+  document.querySelector(".gameData").addEventListener("click", () => {
+    modal.gameData(document.body, history, (newHistory) => {
+      history = newHistory;
+      createTrophiesButtonIfEligible();
+    });
   });
 }
 function attachHelpHandler() {
@@ -412,8 +421,9 @@ async function adjustMode() {
     `));
   }
 }
-function createTrophiesButton() {
-  if (!localStorage.getItem(StorageKeys.QUALIFIED_FOR_TROPHIES)) {
+function createTrophiesButtonIfEligible() {
+  const ineligible = document.getElementById("trophies") || !qualifyForTrophies();
+  if (ineligible) {
     return;
   }
   const firstSibling = document.getElementById("mainframe");
@@ -458,7 +468,10 @@ try {
 showLoadGame();
 attachMetaHandlers();
 let history = JSON.parse(localStorage.getItem(StorageKeys.HISTORY));
-createTrophiesButton();
+if (!Array.isArray(history)) {
+  history = [];
+}
+createTrophiesButtonIfEligible();
 makeAvailableOffline();
 preloadAssets();
 var pyodide;

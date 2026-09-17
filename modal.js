@@ -613,6 +613,25 @@ export function gameData(parent, history, importCallback = () => {}) {
           new Audio("static/sfx/game/click.mp3").play();
         });
         document.getElementById("import").addEventListener("click", () => {
+          const States = Object.freeze({
+            GOOD: 0,
+            BAD: 1,
+            IN_PROGRESS: 2,
+          });
+          function updateText(text, state) {
+            const id = "import-status";
+            const className = {
+              [States.GOOD]: "good",
+              [States.BAD]: "bad",
+              [States.IN_PROGRESS]: "in-progress",
+            }[state];
+            document.getElementById(id)?.remove();
+            document.getElementById("import").after(Object.assign(document.createElement("span"), {
+              id,
+              className,
+              textContent: text,
+            }));
+          }
           function backUp(history) {
             localStorage.setItem(`yahtzee/history backup @ ${Date.now()}`, JSON.stringify(history));
           }
@@ -620,26 +639,28 @@ export function gameData(parent, history, importCallback = () => {}) {
             try {
               JSON.parse(event.target.result);
             } catch (error) {
-              alert("Could not parse the file as JSON.");
+              updateText("Could not parse the file as JSON.", States.BAD);
               throw error;
             }
             const importedData = JSON.parse(event.target.result);
             if (!Array.isArray(importedData.history)) {
               const errorText = "Data is in an unreadable format.";
-              alert(errorText);
+              updateText(errorText, States.BAD);
               throw Error(errorText);
             }
             try {
               localStorage.setItem(StorageKeys.HISTORY, JSON.stringify(importedData.history));
             } catch (error) {
-              alert("Could not write to localStorage.");
+              updateText("Could not write to localStorage.", States.BAD);
               throw error;
             }
             backUp(history);
             importCallback(importedData.history);
+            updateText("Imported.", States.GOOD);
           }
           function importData(event) {
             if (event.target.files.length !== 1) return;
+            updateText("Importing…", States.IN_PROGRESS);
             const reader = new FileReader();
             reader.addEventListener("load", processImport);
             reader.readAsText(event.target.files[0]);

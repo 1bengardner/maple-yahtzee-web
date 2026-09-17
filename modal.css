@@ -316,6 +316,23 @@ h2 {
   background: seagreen;
 }
 
+#import-status {
+  font-style: italic;
+  font-size: 12px;
+}
+
+.good {
+  color: green;
+}
+
+.bad {
+  color: red;
+}
+
+.in-progress {
+  color: gray;
+}
+
 @media (max-width: 400px) {
   .highlight-stat.cramped {
     font-size: 16px;
